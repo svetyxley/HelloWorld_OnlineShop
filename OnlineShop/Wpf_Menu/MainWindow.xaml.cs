@@ -20,5 +20,10 @@ namespace Wpf_Menu
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
