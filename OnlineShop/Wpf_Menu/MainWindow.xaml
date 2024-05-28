@@ -28,10 +28,10 @@
         <Label Content="Заказ покупателем" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
         <Label Content="Заказ продуктов" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4"/>
         <Label Content="Складские запасы" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"/>
-        <Button Content="Add&#xD;&#xA;Manufacturer" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
-        <Button Content="Show all&#xD;&#xA;Manufacturers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
-        <Button Content="Add&#xA;Supplier" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
-        <Button Content="Show all&#xA;Suppliers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
+        <Button Content="Add&#xD;&#xA;Manufacturer" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click_AddManuracturer" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
+        <Button Content="Show all&#xD;&#xA;Manufacturers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click_ShowAllManufacturer" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
+        <Button Content="Add&#xA;Supplier" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click_AddSupplier" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
+        <Button Content="Show all&#xA;Suppliers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click_ShowAllSuppliers" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
         <Button Content="Add&#xA;Category" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>
         <Button Content="Show all&#xA;Category" HorizontalAlignment="Left" Margin="112,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>
         <Button Content="Modify&#xA;Category" HorizontalAlignment="Left" Margin="210,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>

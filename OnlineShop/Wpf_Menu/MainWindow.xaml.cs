@@ -25,5 +25,10 @@ namespace Wpf_Menu
         {
 
         }
+
+        private void Button_Click_AddManuracturer(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
