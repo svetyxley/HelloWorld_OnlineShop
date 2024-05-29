@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OnlineShop;
 
 namespace Wpf_Menu
 {
@@ -34,6 +35,8 @@ namespace Wpf_Menu
         {
 
         }
+
+
 
         private void Button_Click_AddCategory(object sender, RoutedEventArgs e)
         {
