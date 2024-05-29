@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf_Menu"
         mc:Ignorable="d"
         Title="OnlineShop" Height="400" Width="600" WindowStyle="ThreeDBorderWindow">
-    <Grid Margin="0,0,0,2">
+    <Grid Margin="0,0,0,2" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -28,30 +28,30 @@
         <Label Content="Заказ покупателем" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
         <Label Content="Заказ продуктов" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4"/>
         <Label Content="Складские запасы" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"/>
-        <Button Content="Add&#xD;&#xA;Manufacturer" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click_AddManuracturer" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
-        <Button Content="Show all&#xD;&#xA;Manufacturers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click_ShowAllManufacturer" Height="30" Width="80" FontSize="10" VerticalAlignment="Center"/>
-        <Button Content="Add&#xA;Supplier" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click_AddSupplier" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
-        <Button Content="Show all&#xA;Suppliers" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click_ShowAllSuppliers" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="1"/>
-        <Button Content="Add&#xA;Category" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>
-        <Button Content="Show all&#xA;Category" HorizontalAlignment="Left" Margin="112,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>
-        <Button Content="Modify&#xA;Category" HorizontalAlignment="Left" Margin="210,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="2"/>
-        <Button Content="Add&#xA;Products order" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="4"/>
-        <Button Content="Show all&#xA;orders" HorizontalAlignment="Left" Margin="150,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="4"/>
-        <Button Content="Add&#xA;Product" HorizontalAlignment="Left" Margin="10,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="3"/>
-        <Button Content="Show all&#xA;Product" HorizontalAlignment="Left" Margin="112,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="3"/>
-        <Button Content="Modify&#xA;Product" HorizontalAlignment="Left" Margin="210,0,0,0" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Row="3"/>
-        <Button Content="Add&#xA;Employee" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0"/>
-        <Button Content="Show all&#xA;Employees" HorizontalAlignment="Center" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1"/>
-        <Button Content="Modify&#xA;Employee" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="210,0,0,0"/>
-        <Button Content="Add&#xA;Buyer" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Grid.Row="1"/>
-        <Button Content="Show all&#xA;Buers" HorizontalAlignment="Center" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
-        <Button Content="Modify&#xA;Buer" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="210,0,0,0" Grid.Row="1"/>
-        <Button Content="Add&#xA;Buyer" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Grid.Row="2"/>
-        <Button Content="Show all&#xA;Buers" HorizontalAlignment="Center" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
-        <Button Content="Modify&#xA;Buer" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="210,0,0,0" Grid.Row="2"/>
-        <Button Content="Add&#xA;Order" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="14,0,0,0" Grid.Row="3"/>
-        <Button Content="Add&#xD;&#xA;Payment" HorizontalAlignment="Center" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3"/>
-        <Button Content="Change &#xD;&#xA;Delivery Satus" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="210,0,0,0" Grid.Row="3"/>
-        <Button Content="Show&#xD;&#xA;Stock" HorizontalAlignment="Left" Click="Button_Click" Height="30" Width="80" FontSize="10" VerticalAlignment="Center" Grid.Column="1" Margin="17,0,0,0" Grid.Row="4"/>
+        <Button x:Name="AddManufacturer" Content="Add&#xD;&#xA;Manufacturer" Margin="10,0,0,0" Click="Button_Click_AddManuracturer"/>
+        <Button x:Name="ShowAllManufacturer" Content="Show all&#xD;&#xA;Manufacturers"  Margin="150,0,0,0" Click="Button_Click_ShowAllManufacturer" />
+        <Button x:Name="AddSupplier" Content="Add&#xA;Supplier"  Margin="10,0,0,0" Click="Button_Click_AddSupplier" Grid.Row="1"/>
+        <Button x:Name="ShowAllSuppliers" Content="Show all&#xA;Suppliers"  Margin="150,0,0,0" Click="Button_Click_ShowAllSuppliers"  Grid.Row="1"/>
+        <Button x:Name="AddCategory" Content="Add&#xA;Category"  Margin="10,0,0,0" Click="Button_Click_AddCategory" Grid.Row="2"/>
+        <Button x:Name="ShowAllCategory" Content="Show all&#xA;Category"  Margin="112,0,0,0" Click="Button_Click_ShowAllCategory" Grid.Row="2"/>
+        <Button x:Name="ModifyCategory" Content="Modify&#xA;Category" Margin="210,0,0,0" Click="Button_Click_ModifyCategory"  Grid.Row="2"/>
+        <Button x:Name="AddProductOrder" Content="Add&#xA;Products order"  Margin="10,0,0,0" Click="Button_Click_AddProductOrder"  Grid.Row="4"/>
+        <Button x:Name="ShowAllOrders" Content="Show all&#xA;orders"  Margin="150,0,0,0" Click="Button_Click_ShowAllOrders"  Grid.Row="4"/>
+        <Button x:Name="AddProduct" Content="Add&#xA;Product"  Margin="10,0,0,0" Click="Button_Click_AddProduct"  Grid.Row="3"/>
+        <Button x:Name="ShowAllProducts" Content="Show all&#xA;Product"  Margin="112,0,0,0" Click="Button_Click_ShowAllProducts"  Grid.Row="3"/>
+        <Button x:Name="ModifyProduct" Content="Modify&#xA;Product"  Margin="210,0,0,0" Click="Button_Click_ModifyProduct"  Grid.Row="3"/>
+        <Button x:Name="AddEmployee" Content="Add&#xA;Employee"  Click="Button_Click_AddEmployee" Grid.Column="1" Margin="10,0,0,0"/>
+        <Button x:Name="ShowAllEmployees" Content="Show all&#xA;Employees" HorizontalAlignment="Center" Click="Button_Click_ShowAllEmployees"  Grid.Column="1"/>
+        <Button x:Name="ModifyEmployee" Content="Modify&#xA;Employee"  Click="Button_Click_ModifyEmployee" Grid.Column="1" Margin="210,0,0,0"/>
+        <Button x:Name="AddBuyer" Content="Add&#xA;Buyer"  Click="Button_Click_AddBuyer"  Grid.Column="1" Margin="10,0,0,0" Grid.Row="1"/>
+        <Button x:Name="ShowAllBuyers" Content="Show all&#xA;Buers" HorizontalAlignment="Center" Click="Button_Click_ShowAllBuyers" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="ModifyBuyer" Content="Modify&#xA;Buer"  Click="Button_Click_ModifyBuyer"  Grid.Column="1" Margin="210,0,0,0" Grid.Row="1"/>
+        <Button x:Name="AddDiscountCard" Content="Add&#xA;Discount Card"  Click="Button_Click_AddDiscountCard" Grid.Column="1" Margin="10,0,0,0" Grid.Row="2"/>
+        <Button x:Name="ShowAllCards" Content="Show all&#xA;Cards" HorizontalAlignment="Center" Click="Button_Click_ShowAllCards" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="ModifyCard" Content="Modify&#xA;Card"  Click="Button_Click_ModifyCard" Grid.Column="1" Margin="210,0,0,0" Grid.Row="2"/>
+        <Button x:Name="AddOrder" Content="Add&#xA;Order"  Click="Button_Click_AddOrder" Grid.Column="1" Margin="14,0,0,0" Grid.Row="3"/>
+        <Button x:Name="AddPayment" Content="Add&#xD;&#xA;Payment" HorizontalAlignment="Center" Click="Button_Click_AddPayment" Grid.Column="1" Grid.Row="3"/>
+        <Button x:Name="ChangeDeliveryStatus" Content="Change &#xD;&#xA;Delivery Satus"  Click="Button_Click_ChangeDeliveryStatus"  Grid.Column="1" Margin="210,0,0,0" Grid.Row="3"/>
+        <Button x:Name="ShowStock" Content="Show&#xD;&#xA;Stock"  Click="Button_Click_ShowStock" Grid.Column="1" Margin="17,0,0,0" Grid.Row="4"/>
     </Grid>
 </Window>

@@ -1,0 +1,18 @@
+﻿<Page x:Class="Wpf_Menu.Manufacturer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Wpf_Menu"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Manufacturer">
+
+    <Grid UseLayoutRounding="False" Background="White">
+        <Label Content="Производители товаров" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="AddManufacturer" Content="Add&#xA;Manufacturer" Margin="635,23,0,0" Click="Button_Click_AddManuracturer" VerticalAlignment="Top"/>
+        <Button x:Name="ShowAllManufacturer" Content="Show all&#xA;Manufacturers"  Margin="150,23,0,0" Click="Button_Click_ShowAllManufacturer" VerticalAlignment="Top" />
+        <ListBox x:Name="AllManufacturesListBox" Margin="10,71,293,25" Background="#FFB7B1B1"/>
+
+    </Grid>
+</Page>
