@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OnlineShop;
 
 namespace Wpf_Menu
 {
@@ -23,6 +24,12 @@ namespace Wpf_Menu
         public Manufacturer()
         {
             InitializeComponent();
+            
+        }
+
+        private void Button_Click_AddManuracturer(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Wpf_Menu"
         mc:Ignorable="d"
         Title="OnlineShop" Height="400" Width="600" WindowStyle="ThreeDBorderWindow">
-    <Grid Margin="0,0,0,2" Background="White">
+    <Grid x:Name="MainFrame" Margin="0,0,0,2" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -28,8 +28,7 @@
         <Label Content="Заказ покупателем" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
         <Label Content="Заказ продуктов" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4"/>
         <Label Content="Складские запасы" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"/>
-        <Button x:Name="AddManufacturer" Content="Add&#xD;&#xA;Manufacturer" Margin="10,0,0,0" Click="Button_Click_AddManuracturer"/>
-        <Button x:Name="ShowAllManufacturer" Content="Show all&#xD;&#xA;Manufacturers"  Margin="150,0,0,0" Click="Button_Click_ShowAllManufacturer" />
+        <Button x:Name="Manufacturer" Content="Manufacturers" Margin="10,0,0,0" Click="Button_Click_Manuracturer"/>
         <Button x:Name="AddSupplier" Content="Add&#xA;Supplier"  Margin="10,0,0,0" Click="Button_Click_AddSupplier" Grid.Row="1"/>
         <Button x:Name="ShowAllSuppliers" Content="Show all&#xA;Suppliers"  Margin="150,0,0,0" Click="Button_Click_ShowAllSuppliers"  Grid.Row="1"/>
         <Button x:Name="AddCategory" Content="Add&#xA;Category"  Margin="10,0,0,0" Click="Button_Click_AddCategory" Grid.Row="2"/>

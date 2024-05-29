@@ -13,6 +13,12 @@
         <Button x:Name="AddManufacturer" Content="Add&#xA;Manufacturer" Margin="635,23,0,0" Click="Button_Click_AddManuracturer" VerticalAlignment="Top"/>
         <Button x:Name="ShowAllManufacturer" Content="Show all&#xA;Manufacturers"  Margin="150,23,0,0" Click="Button_Click_ShowAllManufacturer" VerticalAlignment="Top" />
         <ListBox x:Name="AllManufacturesListBox" Margin="10,71,293,25" Background="#FFB7B1B1"/>
+        <TextBlock x:Name="ManufacturerName" HorizontalAlignment="Left" Margin="565,174,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="198" Background="#FFD0C8C8"/>
+        <Label Content="ManufacturerName" HorizontalAlignment="Left" Margin="607,143,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="565,248,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="198" Background="#FFD0C8C8"/>
+        <Label Content="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="600,222,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="ManufacturerID" HorizontalAlignment="Left" Margin="565,107,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="22" Width="198" Background="#FFD0C8C8"/>
+        <Label Content="ManufacturerID" HorizontalAlignment="Left" Margin="607,76,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
