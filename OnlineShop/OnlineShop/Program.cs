@@ -1,26 +1,22 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using OnlineShop;
+using OnlineShop.Items;
+using OnlineShop.Services;
 
-ManufacturerList manufacturersList = new ManufacturerList();
-SupplierList suppliersList = new SupplierList();
-ProductCategoryList productCategoryList = new ProductCategoryList();
-ProductsList productsList = new ProductsList();
+ProductsService productsService = new ProductsService();
+productsService.Add(new Product(1, "Product1"));
+productsService.Add(new Product(2, "Product2"));
 
-manufacturersList.AddManufacturer(new Manufacturer(1, "Manufacturer1", "Manufacturer1"));
-manufacturersList.AddManufacturer(new Manufacturer(2, "Manufacturer2", "Manufacturer2"));
-Console.WriteLine(manufacturersList.ToString());
 
-suppliersList.AddSupplier(new Supplier(1, "Supplier1", "Supplier1"));
-suppliersList.AddSupplier(new Supplier(2, "Supplier2", "Supplier2"));
-Console.WriteLine(suppliersList.ToString());
+ManufacturesService manufactureService = new ManufacturesService();
+manufactureService.Add(new Manufacturer(1, "Manufacturer1", "Manufacturer1"));
+manufactureService.Add(new Manufacturer(2, "Manufacturer2", "Manufacturer2"));
 
-productCategoryList.AddProductCategory(new ProductCategory(1, "ProductCategory1"));
-productCategoryList.AddProductCategory(new ProductCategory(2, "ProductCategory2"));
-Console.WriteLine(productCategoryList.ToString());
 
-productsList.AddProduct(new Product(1, "Product1"));
-productsList.AddProduct(new Product(2, "Product2"));
-Console.WriteLine(productsList.ToString());
+SuppliersService suppliersService = new SuppliersService();
+suppliersService.Add(new Supplier(1, "Supplier1", "Supplier1"));
+suppliersService.Add(new Supplier(2, "Supplier2", "Supplier2"));
+
+
 
 
 
