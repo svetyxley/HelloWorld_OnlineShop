@@ -6,51 +6,44 @@
         xmlns:local="clr-namespace:Wpf_Menu"
         mc:Ignorable="d"
         Title="OnlineShop" Height="400" Width="600" WindowStyle="ThreeDBorderWindow">
-    <Grid x:Name="MainFrame" Margin="0,0,0,2" Background="White">
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <!-- Labels -->
         <Label Content="Производители товаров" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Content="Поставщики товаров" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Категории товаров" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2"/>
         <Label Content="Продукты" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3"/>
-        <Label Content="Работники" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1"/>
+        <Label Content="Заказ продуктов" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4"/>
+        <Label Content="Работники" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Покупатели" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1"/>
         <Label Content="Дисконтные карты" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"/>
         <Label Content="Заказ покупателем" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"/>
-        <Label Content="Заказ продуктов" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4"/>
         <Label Content="Складские запасы" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"/>
-        <Button x:Name="Manufacturer" Content="Manufacturers" Margin="10,0,0,0" Click="Button_Click_Manuracturer"/>
-        <Button x:Name="AddSupplier" Content="Add&#xA;Supplier"  Margin="10,0,0,0" Click="Button_Click_AddSupplier" Grid.Row="1"/>
-        <Button x:Name="ShowAllSuppliers" Content="Show all&#xA;Suppliers"  Margin="150,0,0,0" Click="Button_Click_ShowAllSuppliers"  Grid.Row="1"/>
-        <Button x:Name="AddCategory" Content="Add&#xA;Category"  Margin="10,0,0,0" Click="Button_Click_AddCategory" Grid.Row="2"/>
-        <Button x:Name="ShowAllCategory" Content="Show all&#xA;Category"  Margin="112,0,0,0" Click="Button_Click_ShowAllCategory" Grid.Row="2"/>
-        <Button x:Name="ModifyCategory" Content="Modify&#xA;Category" Margin="210,0,0,0" Click="Button_Click_ModifyCategory"  Grid.Row="2"/>
-        <Button x:Name="AddProductOrder" Content="Add&#xA;Products order"  Margin="10,0,0,0" Click="Button_Click_AddProductOrder"  Grid.Row="4"/>
-        <Button x:Name="ShowAllOrders" Content="Show all&#xA;orders"  Margin="150,0,0,0" Click="Button_Click_ShowAllOrders"  Grid.Row="4"/>
-        <Button x:Name="AddProduct" Content="Add&#xA;Product"  Margin="10,0,0,0" Click="Button_Click_AddProduct"  Grid.Row="3"/>
-        <Button x:Name="ShowAllProducts" Content="Show all&#xA;Product"  Margin="112,0,0,0" Click="Button_Click_ShowAllProducts"  Grid.Row="3"/>
-        <Button x:Name="ModifyProduct" Content="Modify&#xA;Product"  Margin="210,0,0,0" Click="Button_Click_ModifyProduct"  Grid.Row="3"/>
-        <Button x:Name="AddEmployee" Content="Add&#xA;Employee"  Click="Button_Click_AddEmployee" Grid.Column="1" Margin="10,0,0,0"/>
-        <Button x:Name="ShowAllEmployees" Content="Show all&#xA;Employees" HorizontalAlignment="Center" Click="Button_Click_ShowAllEmployees"  Grid.Column="1"/>
-        <Button x:Name="ModifyEmployee" Content="Modify&#xA;Employee"  Click="Button_Click_ModifyEmployee" Grid.Column="1" Margin="210,0,0,0"/>
-        <Button x:Name="AddBuyer" Content="Add&#xA;Buyer"  Click="Button_Click_AddBuyer"  Grid.Column="1" Margin="10,0,0,0" Grid.Row="1"/>
-        <Button x:Name="ShowAllBuyers" Content="Show all&#xA;Buers" HorizontalAlignment="Center" Click="Button_Click_ShowAllBuyers" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name="ModifyBuyer" Content="Modify&#xA;Buer"  Click="Button_Click_ModifyBuyer"  Grid.Column="1" Margin="210,0,0,0" Grid.Row="1"/>
-        <Button x:Name="AddDiscountCard" Content="Add&#xA;Discount Card"  Click="Button_Click_AddDiscountCard" Grid.Column="1" Margin="10,0,0,0" Grid.Row="2"/>
-        <Button x:Name="ShowAllCards" Content="Show all&#xA;Cards" HorizontalAlignment="Center" Click="Button_Click_ShowAllCards" Grid.Column="1" Grid.Row="2"/>
-        <Button x:Name="ModifyCard" Content="Modify&#xA;Card"  Click="Button_Click_ModifyCard" Grid.Column="1" Margin="210,0,0,0" Grid.Row="2"/>
-        <Button x:Name="AddOrder" Content="Add&#xA;Order"  Click="Button_Click_AddOrder" Grid.Column="1" Margin="14,0,0,0" Grid.Row="3"/>
-        <Button x:Name="AddPayment" Content="Add&#xD;&#xA;Payment" HorizontalAlignment="Center" Click="Button_Click_AddPayment" Grid.Column="1" Grid.Row="3"/>
-        <Button x:Name="ChangeDeliveryStatus" Content="Change &#xD;&#xA;Delivery Satus"  Click="Button_Click_ChangeDeliveryStatus"  Grid.Column="1" Margin="210,0,0,0" Grid.Row="3"/>
-        <Button x:Name="ShowStock" Content="Show&#xD;&#xA;Stock"  Click="Button_Click_ShowStock" Grid.Column="1" Margin="17,0,0,0" Grid.Row="4"/>
+
+        <!-- Buttons -->
+        <Button x:Name="Suppliers" Margin="112,0,0,0" Content="Suppliers" Grid.Row="1" Click="Button_Click_Suppliers"/>
+        <Button x:Name="Manufacturer" Margin="112,0,0,0" Content="Manufacturers" Click="Button_Click_Manufacturer"/>
+        <Button x:Name="Category" Margin="112,0,0,0" Content="Category" Grid.Row="2" Click="Button_Click_Category"/>
+        <Button x:Name="Products" Margin="112,0,0,0" Content="Product" Grid.Row="3" Click="Button_Click_Products"/>
+        <Button x:Name="Orders" Margin="112,0,0,0" Content="Orders" Grid.Row="4" Click="Button_Click_Orders"/>
+        <Button x:Name="Employees" HorizontalAlignment="Center" Content="Employees" Grid.Column="1" Click="Button_Click_Employees"/>
+        <Button x:Name="Buyers" HorizontalAlignment="Center" Content="Buyers" Grid.Row="1" Grid.Column="1" Click="Button_Click_Buyers"/>
+        <Button x:Name="Cards" HorizontalAlignment="Center" Content="Cards" Grid.Row="2" Grid.Column="1" Click="Button_Click_Cards"/>
+        <Button x:Name="Payment" HorizontalAlignment="Center" Content="Payment" Grid.Row="3" Grid.Column="1" Click="Button_Click_Payment"/>
+        <Button x:Name="Stock" HorizontalAlignment="Center" Content="Stock" Grid.Row="4" Grid.Column="1" Click="Button_Click_Stock"/>
+
+        <!-- Frame for pages -->
+        <Frame Name="MainFrame"  NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Grid.RowSpan="5" />
     </Grid>
 </Window>

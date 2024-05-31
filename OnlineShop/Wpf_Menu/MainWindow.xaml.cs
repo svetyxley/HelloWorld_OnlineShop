@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OnlineShop;
+using Wpf_Menu.Level2_pages;
 
 namespace Wpf_Menu
 {
@@ -27,7 +28,26 @@ namespace Wpf_Menu
         {
             InitializeComponent();
             this.pages = new Dictionary<string, Page>();
+
+            this.pages.Add("Buyers", new Buyers());
+            this.pages.Add("Card", new Card());
+            this.pages.Add("Category", new Category());
+            this.pages.Add("Employee", new Employee());
             this.pages.Add("Manufacturer", new Manufacturer());
+            this.pages.Add("Order", new Order());
+            this.pages.Add("Payment", new Payment());
+            this.pages.Add("Product", new Product());
+            this.pages.Add("Stock", new Stock());
+            this.pages.Add("Supplier", new Supplier());
+
+        }
+
+        private void NavigateToPage(string pageKey)
+        {
+            if (this.pages.ContainsKey(pageKey))
+            {
+                .Navigate(this.pages[pageKey]);
+            }
         }
 
 
@@ -41,6 +61,51 @@ namespace Wpf_Menu
             {
                 MessageBox.Show("Страница не найдена.");
             }
+        }
+
+        private void Button_Click_Suppliers(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Category(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Products(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Orders(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Employees(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Buyers(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Cards(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Payment(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Stock(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -12,24 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OnlineShop;
 
 namespace Wpf_Menu
 {
     /// <summary>
-    /// Interaction logic for Manufacturer.xaml
+    /// Interaction logic for Supplier.xaml
     /// </summary>
-    public partial class Manufacturer : Page
+    public partial class Supplier : Page
     {
-        public Manufacturer()
+        public Supplier()
         {
             InitializeComponent();
-            
         }
 
-        private void Button_Click_AddManuracturer(object sender, RoutedEventArgs e)
+        private void Button_Click_ShowAllSupplier(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
