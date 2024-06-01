@@ -21,12 +21,13 @@ namespace Wpf_Menu
     /// </summary>
     public partial class Manufacturer : Page
     {
-        
 
-        public Manufacturer()
+        private MainWindow mainWindow;
+
+        public Manufacturer(MainWindow mainWindow)
         {
             InitializeComponent();
-            
+            this.mainWindow = mainWindow;
         }
 
         private void Button_Click_AddManuracturer(object sender, RoutedEventArgs e)
@@ -51,6 +52,9 @@ namespace Wpf_Menu
             //AllManufacturesListBox.ItemsSource = обращение к свойству дбконтекста
         }
 
-
+        private void Button_Click_Back_to_Main_Menu(object sender, RoutedEventArgs e)
+        {
+            this.mainWindow.NavigateToPage("MainPage");
+        }
     }
 }

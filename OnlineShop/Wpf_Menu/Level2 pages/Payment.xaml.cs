@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Menu.Level2_pages
+namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Payment.xaml
     /// </summary>
     public partial class Payment : Page
     {
-        public Payment()
+        private MainWindow mainWindow;
+
+        public Payment(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

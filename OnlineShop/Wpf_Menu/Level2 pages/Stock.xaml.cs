@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Menu.Level2_pages
+namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Stock.xaml
     /// </summary>
     public partial class Stock : Page
     {
-        public Stock()
+        private MainWindow mainWindow;
+
+        public Stock(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

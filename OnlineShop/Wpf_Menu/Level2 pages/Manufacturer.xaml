@@ -9,16 +9,23 @@
       Title="Manufacturer">
 
     <Grid UseLayoutRounding="False" Background="White">
-        <Label Content="Производители товаров" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button x:Name="AddManufacturer" Content="Add&#xA;Manufacturer" Margin="635,23,0,0" Click="Button_Click_AddManuracturer" VerticalAlignment="Top"/>
-        <Button x:Name="ShowAllManufacturer" Content="Show all&#xA;Manufacturers"  Margin="150,23,0,0" Click="Button_Click_ShowAllManufacturer" VerticalAlignment="Top" />
-        <ListBox x:Name="AllManufacturesListBox" Margin="10,71,293,25" Background="#FFB7B1B1"/>
-        <Label Content="ManufacturerName" HorizontalAlignment="Left" Margin="607,143,0,0" VerticalAlignment="Top"/>
-        <Label Content="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="600,222,0,0" VerticalAlignment="Top"/>
-        <Label Content="ManufacturerID" HorizontalAlignment="Left" Margin="607,76,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ManufacturerID" HorizontalAlignment="Left" Margin="555,102,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="23" TextChanged="ManufacturerID_TextChanged"/>
-        <TextBox x:Name="ManufacturerName" HorizontalAlignment="Left" Margin="555,174,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="23"/>
-        <TextBox x:Name="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="555,248,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="23" TextChanged="TextBox_TextChanged"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="499*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Производители товаров" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="145"/>
+        <ListBox x:Name="AllManufacturesListBox" Margin="26,58,25,38" Background="#FFB7B1B1"/>
+        <Label Content="ManufacturerName" HorizontalAlignment="Left" Margin="25,143,0,20" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <Label Content="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="25,222,0,20" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <Label Content="ManufacturerID" HorizontalAlignment="Left" Margin="25,76,0,20" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <TextBox x:Name="ManufacturerID" HorizontalAlignment="Left" Margin="25,102,0,20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="23" Grid.Column="1" />
+        <TextBox x:Name="ManufacturerName" HorizontalAlignment="Left" Margin="25,174,0,20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="23" Grid.Column="1"/>
+        <TextBox x:Name="ManufacturerEDRPOU" HorizontalAlignment="Left" Margin="25,248,0,20" TextWrapping="Wrap"  VerticalAlignment="Top" Width="196" Height="23" Grid.Column="1"/>
+        <Button x:Name="Back_to_Main_Menu" Content="Back to Main Menu" Margin="25,369,0,20" Click="Button_Click_Back_to_Main_Menu" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="196"/>
+        <Button x:Name="AddManufacturer" Content="Add&#xA;Manufacturer" Margin="25,23,0,20" Click="Button_Click_AddManuracturer" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="196"/>
+        <Button x:Name="ShowAllManufacturer" Content="Show all&#xA;Manufacturers"  Margin="150,23,0,0" Click="Button_Click_ShowAllManufacturer" VerticalAlignment="Top" Height="30" Width="212" />
     </Grid>
 </Page>

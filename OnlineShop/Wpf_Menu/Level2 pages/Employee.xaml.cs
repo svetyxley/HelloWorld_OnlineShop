@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Menu.Level2_pages
+namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Employee.xaml
     /// </summary>
     public partial class Employee : Page
     {
-        public Employee()
+        private MainWindow mainWindow;
+
+        public Employee(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

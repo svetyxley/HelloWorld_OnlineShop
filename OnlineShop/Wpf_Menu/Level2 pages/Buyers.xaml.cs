@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Menu.Level2_pages
+namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Buyers.xaml
     /// </summary>
     public partial class Buyers : Page
     {
-        public Buyers()
+        private MainWindow mainWindow;
+
+        public Buyers(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

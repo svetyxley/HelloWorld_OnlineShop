@@ -20,9 +20,12 @@ namespace Wpf_Menu
     /// </summary>
     public partial class Product : Page
     {
-        public Product()
+        private MainWindow mainWindow;
+
+        public Product(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

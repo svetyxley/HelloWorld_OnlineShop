@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wpf_Menu.Level2_pages
+namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Card.xaml
     /// </summary>
     public partial class Card : Page
     {
-        public Card()
+        private MainWindow mainWindow;
+
+        public Card(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

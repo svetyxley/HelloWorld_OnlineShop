@@ -20,9 +20,13 @@ namespace Wpf_Menu
     /// </summary>
     public partial class Order : Page
     {
-        public Order()
+
+        private MainWindow mainWindow;
+
+        public Order(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

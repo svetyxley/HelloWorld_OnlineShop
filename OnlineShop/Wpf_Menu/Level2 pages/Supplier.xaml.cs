@@ -20,12 +20,20 @@ namespace Wpf_Menu
     /// </summary>
     public partial class Supplier : Page
     {
-        public Supplier()
+        private MainWindow mainWindow;
+
+        public Supplier(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
 
         private void Button_Click_ShowAllSupplier(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_AddSupplier(object sender, RoutedEventArgs e)
         {
 
         }
