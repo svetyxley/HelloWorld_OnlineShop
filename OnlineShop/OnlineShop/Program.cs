@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using OnlineShop.Items;
+using OnlineShop.Entities;
 using OnlineShop.Services;
 
 ProductsService productsService = new ProductsService();
@@ -16,7 +16,13 @@ SuppliersService suppliersService = new SuppliersService();
 suppliersService.Add(new Supplier(1, "Supplier1", "Supplier1"));
 suppliersService.Add(new Supplier(2, "Supplier2", "Supplier2"));
 
+productsService.AddNewProduct();
+Console.WriteLine(productsService.ToString());
 
+manufactureService.AddNewSupplier();
+Console.WriteLine(productsService.ToString());
 
+suppliersService.AddNewSupplier();
+Console.WriteLine(productsService.ToString());
 
 
