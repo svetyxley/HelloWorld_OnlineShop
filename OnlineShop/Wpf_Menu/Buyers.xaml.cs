@@ -30,7 +30,7 @@ namespace Wpf_Menu
 
         private void Button_Click_Back_to_Main_Menu(object sender, RoutedEventArgs e)
         {
-
+            this.mainWindow.NavigateToPage("MainPage");
         }
 
         private void Button_Click_ChangeBuyerByID(object sender, RoutedEventArgs e)

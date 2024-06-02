@@ -7,8 +7,54 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Employee">
+    <Grid UseLayoutRounding="False" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="499*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Работники" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="145"/>
+        <ListBox x:Name="AllListBox" Margin="26,58,25,81" Background="#FFB7B1B1"/>
 
-    <Grid Background="White">
-        
+        <Button x:Name="Back_to_Main_Menu" Content="Back to Main Menu" Margin="25,354,0,0" Click="Button_Click_Back_to_Main_Menu" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="98"/>
+        <Button x:Name="Add" Content="Add&#xD;&#xA;Employee" Margin="25,23,20,20" Click="Button_Click_Add" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="196"/>
+        <Button x:Name="ShowAll" Content="Show all&#xA;Employees"  Margin="150,23,20,0" Click="Button_Click_ShowAll" VerticalAlignment="Top" Height="30" Width="212" />
+        <Button x:Name="Change_by_ID" Content="Change&#xA;Employee by ID" Margin="25,318,0,0" Click="Button_Click_ChangeByID" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="74"/>
+
+        <Label Content="ID" HorizontalAlignment="Left" Margin="25,58,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="ID" HorizontalAlignment="Left" Margin="25,84,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" />
+
+        <Label Content="Name" HorizontalAlignment="Left" Margin="25,112,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="25,138,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="Surname" HorizontalAlignment="Left" Margin="25,161,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <TextBox x:Name="Surname" HorizontalAlignment="Left" Margin="25,187,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" RenderTransformOrigin="0.446,1.681"/>
+
+        <Label Content="INN" HorizontalAlignment="Left" Margin="25,210,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <TextBox x:Name="INN" HorizontalAlignment="Left" Margin="25,236,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="25,259,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="196"/>
+        <TextBox x:Name="Date_of_birth" HorizontalAlignment="Left" Margin="25,290,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="ContactsID" HorizontalAlignment="Left" Margin="172,58,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="ContactsID" HorizontalAlignment="Left" Margin="172,84,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" />
+
+        <Label Content="Address" HorizontalAlignment="Left" Margin="172,107,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="Address" HorizontalAlignment="Left" Margin="172,138,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="PhoneNumber" HorizontalAlignment="Left" Margin="172,161,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="PhoneNumber" HorizontalAlignment="Left" Margin="172,187,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" RenderTransformOrigin="0.446,1.681"/>
+
+        <Label Content="email" HorizontalAlignment="Left" Margin="172,207,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="email" HorizontalAlignment="Left" Margin="172,231,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="Position" HorizontalAlignment="Left" Margin="172,259,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="position" HorizontalAlignment="Left" Margin="172,290,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
+        <Label Content="Salary" HorizontalAlignment="Left" Margin="172,328,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <TextBox x:Name="salary" HorizontalAlignment="Left" Margin="172,354,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
+
     </Grid>
 </Page>

@@ -27,5 +27,15 @@ namespace Wpf_Menu
             InitializeComponent();
             this.mainWindow = mainWindow;
         }
+
+        private void Button_Click_Back_to_Main_Menu(object sender, RoutedEventArgs e)
+        {
+            this.mainWindow.NavigateToPage("MainPage");
+        }
+
+        private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
