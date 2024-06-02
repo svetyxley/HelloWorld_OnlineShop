@@ -27,5 +27,25 @@ namespace Wpf_Menu
             InitializeComponent();
             this.mainWindow = mainWindow;
         }
+
+        private void Button_Click_Back_to_Main_Menu(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_ChangeBuyerByID(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_AddBuyer(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_ShowAllBuyers(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
