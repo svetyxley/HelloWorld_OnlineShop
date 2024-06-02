@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop
 {
-    internal class IDGenerator
+    public class IDGenerator
     {
         public int InputID<T>(List<T> items)
         {

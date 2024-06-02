@@ -1,38 +1,38 @@
 ﻿namespace OnlineShop
 {
-    internal class InputConsoleManager
+    public class InputConsoleManager
     {
-        public string InputName(InputValidator inputValidator)
+        public string InputName(InputValidator inputValidator, string type)
         {
             string name;
             //Input Name
             do
             {
-                Console.Write("Enter Name: ");
+                Console.Write($"Enter {type} name: ");
                 name = Console.ReadLine();
-                if (!inputValidator.IsValidData(name))
+                if (!inputValidator.IsValidDataName(name))
                 {
-                    Console.WriteLine("Invalid input. Please enter name.");
+                    Console.WriteLine($"Invalid input. Enter {type} name");
                     Console.WriteLine();
                 }
-            } while (!inputValidator.IsValidData(name));
+            } while (!inputValidator.IsValidDataName(name));
             return name;
         }
-        public string InputEDRPU(InputValidator inputValidator)
+        public string InputEDRPU(InputValidator inputValidator, string type)
         {
-            string codeEDRPU;
+            string codeEDRPOU;
             //Input Name
             do
             {
-                Console.Write("Enter code EDRPU: ");
-                codeEDRPU = Console.ReadLine();
-                if (!inputValidator.IsValidData(codeEDRPU))
+                Console.Write($"Enter {type} code EDRPOU: ");
+                codeEDRPOU = Console.ReadLine();
+                if (!inputValidator.IsValidDataEDRPOU(codeEDRPOU))
                 {
-                    Console.WriteLine("Invalid input. Please enter name.");
+                    Console.WriteLine($"Invalid input. Enter {type} code EDRPU.");
                     Console.WriteLine();
                 }
-            } while (!inputValidator.IsValidData(codeEDRPU));
-            return codeEDRPU;
+            } while (!inputValidator.IsValidDataEDRPOU(codeEDRPOU));
+            return codeEDRPOU;
         }
     }
 }

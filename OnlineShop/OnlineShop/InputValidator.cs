@@ -2,25 +2,25 @@
 
 namespace OnlineShop
 {
-    internal class InputValidator
+    public class InputValidator
     {
-        public bool IsValidData(string name)
+        public bool IsValidDataName(string name)
         {
-            // regular expression that checks whether the entered name contains only letters and allowed characters
-            string pattern = @"^[A-Za-z]*${1,25}";
+            // regular expression that checks whether the entered name contains letters, digits and simbols: -_.@
+            // length required from 3 to 25
+            string pattern = @"^[A-Za-z0-9\-_.@]{3,25}$";
 
             // Validate input using a regular expression
             return Regex.IsMatch(name, pattern);
         }
 
-        public bool IsValidData(int id)
+        public bool IsValidDataEDRPOU(string codeEDRPOU)
         {
-            string idString = id.ToString();
-            // regular expression that checks whether the entered name contains only letters and allowed characters
-            string pattern = @"^\d+$${1,10}";
+            // regular expression that checks whether the entered name contains only ten digits
+            string pattern = @"^\d+$${10}";
 
             // Validate input using a regular expression
-            return Regex.IsMatch(idString, pattern);
+            return Regex.IsMatch(codeEDRPOU, pattern);
         }
     }
 }
