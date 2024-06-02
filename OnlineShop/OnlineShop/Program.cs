@@ -1,28 +1,25 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using OnlineShop.Entities;
-using OnlineShop.Services;
+using OnlineShop.EntityServices;
 
-ProductsService productsService = new ProductsService();
-productsService.Add(new Product(1, "Product1"));
-productsService.Add(new Product(2, "Product2"));
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        ProductsService productsService = new ProductsService();
+        ManufacturesService manufactureService = new ManufacturesService();
+        SuppliersService suppliersService = new SuppliersService();
 
+        productsService.AddToProducts();
+        Console.WriteLine(productsService.ToString());
 
-ManufacturesService manufactureService = new ManufacturesService();
-manufactureService.Add(new Manufacturer(1, "Manufacturer1", "Manufacturer1"));
-manufactureService.Add(new Manufacturer(2, "Manufacturer2", "Manufacturer2"));
+        manufactureService.AddToManufacturers();
+        Console.WriteLine(manufactureService.ToString());
 
+        suppliersService.AddToSuppliers();
+        Console.WriteLine(suppliersService.ToString());
 
-SuppliersService suppliersService = new SuppliersService();
-suppliersService.Add(new Supplier(1, "Supplier1", "Supplier1"));
-suppliersService.Add(new Supplier(2, "Supplier2", "Supplier2"));
+        suppliersService.DeleteSupplierByID(1);
 
-productsService.AddNewProduct();
-Console.WriteLine(productsService.ToString());
-
-manufactureService.AddNewSupplier();
-Console.WriteLine(productsService.ToString());
-
-suppliersService.AddNewSupplier();
-Console.WriteLine(productsService.ToString());
-
-
+        Console.WriteLine(suppliersService.ToString());
+    }
+}

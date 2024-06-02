@@ -4,9 +4,9 @@
     {
         public int SupplierID { get; init; }
         public string SupplierName { get; set; }
-        public string SupplierEDRPOU { get; set; }
+        public string? SupplierEDRPOU { get; set; }
 
-        public Supplier(int supplierID, string supplierName, string supplierEDRPOU) 
+        public Supplier(int supplierID, string supplierName, string supplierEDRPOU)
         {
             SupplierID = supplierID;
             SupplierName = supplierName;

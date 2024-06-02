@@ -2,7 +2,7 @@
 {
     public class Manufacturer
     {
-        public  int ManufacturerID { get; init; }
+        public int ManufacturerID { get; init; }
         public string ManufacturerName { get; set; }
         public string ManufacturerEDRPOU { get; set; }
 

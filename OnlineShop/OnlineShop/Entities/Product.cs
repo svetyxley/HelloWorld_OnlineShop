@@ -1,16 +1,16 @@
 ﻿namespace OnlineShop.Entities
 {
-    internal class Product
+    public class Product
     {
-        public int ProductId { get; set; }
+        public int ProductID { get; init; }
         public string ProductName { get; set; }
-        public Manufacturer ProductManufacturer { get; set; }
-        public Supplier ProductSupplier { get; set; }
-        public double ProductPrice { get; set; }
+        public Manufacturer? ProductManufacturer { get; set; }
+        public Supplier? ProductSupplier { get; set; }
+        public double? ProductPrice { get; set; }
 
-        public Product(int productId, string productName)
+        public Product(int productID, string productName)
         {
-            ProductId = productId;
+            ProductID = productID;
             ProductName = productName;
         }
 
@@ -19,7 +19,7 @@
         }
         public override string ToString()
         {
-            return $"ProductId: {ProductId}, ProductName: {ProductName}, ProductManufacturer: {ProductManufacturer}, ProductSupplier: {ProductSupplier}, ProductPrice: {ProductPrice}";
+            return $"ProductID: {ProductID}, ProductName: {ProductName}, ProductManufacturer: {ProductManufacturer}, ProductSupplier: {ProductSupplier}, ProductPrice: {ProductPrice}";
         }
     }
 }
