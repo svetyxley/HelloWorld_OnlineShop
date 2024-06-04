@@ -54,7 +54,7 @@ namespace Wpf_Menu
 
         private void Payment_type_combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            paymentType = 
         }
     }
 }
