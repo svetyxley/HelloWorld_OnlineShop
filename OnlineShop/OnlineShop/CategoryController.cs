@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OnlineShop
 {
-    internal class PaymentTypeController
+    internal class CategoryController
     {
-        
+       
     }
 }

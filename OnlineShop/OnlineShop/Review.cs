@@ -9,17 +9,24 @@ namespace OnlineShop
     internal class Review
     {
         public int PaymentType_Id;
-        public paymnetTypes paymnetType;
-
+        public PaymnetTypes paymnetType;
+        
         public Review()
         {
-                
+            
+        }
+
+        public Review(PaymnetTypes type)
+        {
+            PaymentType_Id = (int)type;
+
+            paymnetType = type;
         }
 
 
     }
 
-    enum paymnetTypes
+    enum PaymnetTypes
     {
         cash_on_delivery,
         on_bank_account,
