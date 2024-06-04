@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop
 {
-    internal class PaymentType
+    public class PaymentType 
     {
         private static int indexer = 0;
 

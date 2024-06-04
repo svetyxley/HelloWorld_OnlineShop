@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OnlineShop;
 
 namespace Wpf_Menu
 {
@@ -22,6 +23,8 @@ namespace Wpf_Menu
     {
 
         private MainWindow mainWindow;
+
+        private PaymentType paymentType;
 
         public Order(MainWindow mainWindow)
         {
@@ -45,6 +48,11 @@ namespace Wpf_Menu
         }
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Payment_type_combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

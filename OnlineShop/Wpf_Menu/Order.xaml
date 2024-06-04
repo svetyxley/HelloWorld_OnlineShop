@@ -23,7 +23,6 @@
         <Button x:Name="AddOrder" Content="Add&#xA;Order" Margin="25,23,20,20" Click="Button_Click_AddOrder" VerticalAlignment="Top" Grid.Column="1" Height="30" Width="196"/>
         <Button x:Name="ShowAll" Content="Show all&#xA;Orders"  Margin="150,23,20,0" Click="Button_Click_ShowAll" VerticalAlignment="Top" Height="30" Width="212" />
 
-        <!-- Order Details -->
         <Label Content="Order Id" HorizontalAlignment="Left" Margin="25,58,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
         <TextBox x:Name="OrderIdTextBox" HorizontalAlignment="Left" Margin="25,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" />
 
@@ -33,13 +32,17 @@
         <Label Content="Managers Id" HorizontalAlignment="Left" Margin="172,58,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
         <TextBox x:Name="ManagerIdTextBox" HorizontalAlignment="Left" Margin="172,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1" />
 
-        <!-- Product Details -->
+ 
         <Label Content="Product Id" HorizontalAlignment="Left" Margin="25,164,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
         <TextBox x:Name="ProductIdTextBox" HorizontalAlignment="Left" Margin="25,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
 
         <Label Content="Product amount" HorizontalAlignment="Left" Margin="25,222,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
         <TextBox x:Name="ProductAmountTextBox" HorizontalAlignment="Left" Margin="25,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="23" Grid.Column="1"/>
 
-        <Button x:Name="AddProduct" Content="Add&#xA;Product" Margin="151,195,0,0" Click="Button_Click_AddProduct" Grid.Column="1" Height="30" Width="108" VerticalAlignment="Top"/>
+        <Button x:Name="AddProduct" Content="Add&#xA;Product" Margin="159,220,0,0" Click="Button_Click_AddProduct" Grid.Column="1" Height="30" Width="108" VerticalAlignment="Top"/>
+       
+        
+        <Label Content="Payment type" HorizontalAlignment="Left" Margin="160,108,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="108"/>
+        <ComboBox x:Name="Payment_type_combo_box" Grid.Column="1" HorizontalAlignment="Left" Margin="160,139,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Payment_type_combo_box_SelectionChanged"/>
     </Grid>
 </Page>
