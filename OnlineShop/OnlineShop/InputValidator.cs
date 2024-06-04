@@ -17,10 +17,18 @@ namespace OnlineShop
         public bool IsValidDataEDRPOU(string codeEDRPOU)
         {
             // regular expression that checks whether the entered name contains only ten digits
-            string pattern = @"^\d+$${10}";
+            string pattern = @"^\d{10}$";
 
             // Validate input using a regular expression
             return Regex.IsMatch(codeEDRPOU, pattern);
+        }
+        public bool IsValidDataPrice(string price)
+        {
+            // regular expression that checks whether the entered name contains only ten digits
+            string pattern = @"^\d+(\.\d{1,2})?$";
+
+            // Validate input using a regular expression
+            return Regex.IsMatch(price, pattern);
         }
     }
 }
