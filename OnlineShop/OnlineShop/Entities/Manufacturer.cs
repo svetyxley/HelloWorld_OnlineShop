@@ -3,8 +3,8 @@
     public class Manufacturer
     {
         public int ManufacturerID { get; init; }
-        public string ManufacturerName { get; set; }
-        public string ManufacturerEDRPOU { get; set; }
+        public string? ManufacturerName { get; set; } = "";
+        public string? ManufacturerEDRPOU { get; set; } = "";
 
         public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
 

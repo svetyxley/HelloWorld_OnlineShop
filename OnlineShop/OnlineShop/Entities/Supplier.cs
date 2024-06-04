@@ -3,8 +3,8 @@
     public class Supplier
     {
         public int SupplierID { get; init; }
-        public string SupplierName { get; set; }
-        public string? SupplierEDRPOU { get; set; }
+        public string? SupplierName { get; set; } = string.Empty;
+        public string? SupplierEDRPOU { get; set; } = string.Empty;
 
         public Supplier(int supplierID, string supplierName, string supplierEDRPOU)
         {

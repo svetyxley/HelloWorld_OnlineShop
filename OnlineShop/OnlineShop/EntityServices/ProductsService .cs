@@ -1,12 +1,15 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.Constants;
+using OnlineShop.Entities;
 
 namespace OnlineShop.EntityServices
 {
-     public class ProductsService
+    public class ProductsService
     {
-        private InputConsoleManager inputManager = new();
+        private InputManager inputManager = new();
         private InputValidator inputValidator = new();
-        private IDGenerator IDGenerator = new();
+        private IDGenerator idGenerator = new();
+        private OutputManager outputManager = new();
+        private CommonEntityService<Product> commonEntityService = new();
 
         private List<Product> products = new List<Product>()
         {         
@@ -18,22 +21,29 @@ namespace OnlineShop.EntityServices
 
         public Product CreateProduct()
         {
-            int productId = IDGenerator.InputID(products);
-            string productName = inputManager.InputName(inputValidator, GetListType());
-            return new Product(productId, productName);
+            int productId = idGenerator.InputID(products);
+            string productName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+//            string productManufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+//            string productSupplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            double productPrice = inputManager.InputPrice(inputValidator, commonEntityService.GetListType());
+            return new Product(productId, productName,productPrice);
         }
-        public bool AddToProducts()
+        public void AddToProducts()
         {
             products.Add(CreateProduct());
-            return true;
+            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
 
-        public Product GetProduct(int productID)
+        public Product GetProductByID(int productID)
         {
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
-                throw new InvalidOperationException($"Product with ID {productID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+            }
+            else
+            {
+                outputManager.Write(product.ToString(), commonEntityService.GetListType());
             }
             return product;
         }
@@ -42,39 +52,27 @@ namespace OnlineShop.EntityServices
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
-                throw new InvalidOperationException($"Product with ID {productID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return product;
         }
 
-        public bool DeleteProductbyID(int productID)
+        public void DeleteProductByID(int productID)
         {
             var product = products.FirstOrDefault(product => product.ProductID == productID);
             if (product != null)
             {
-                return products.Remove(product);
+                products.Remove(product);
+                outputManager.Write(NotificationConstants.DELETED, commonEntityService.GetListType());
             }
-            return false;
-        }
-
-        public string GetListType()
-        {
-            return products.AsQueryable().ElementType.Name;
-        }
-
-        // Override the ToString method
-        public override string ToString()
-        {
-            if (products.Count == 0)
-                return "No products in the list.";
-
-            string result = "Products:\n";
-            foreach (var product in products)
-            {
-                result += product.ToString() + "\n";
+            else
+            { 
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType()); 
             }
-            return result;
         }
-
+        public void OutputProducts()
+        {
+            outputManager.Write(commonEntityService.OutputList(products), commonEntityService.GetListType());
+        }
     }
 }

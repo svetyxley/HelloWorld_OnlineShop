@@ -1,12 +1,15 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.Constants;
+using OnlineShop.Entities;
 
 namespace OnlineShop.EntityServices
 {
     public class ManufacturesService
     {
-        private InputConsoleManager inputManager = new();
+        private InputManager inputManager = new();
         private InputValidator inputValidator = new();
-        private IDGenerator IDGenerator = new();
+        private IDGenerator idGenerator = new();
+        private OutputManager outputManager = new();
+        private CommonEntityService<Manufacturer> commonEntityService = new();
 
         private List<Manufacturer> manufacturers = new List<Manufacturer>() 
         {
@@ -16,23 +19,33 @@ namespace OnlineShop.EntityServices
         };
         public Manufacturer CreateManufacturer()
         {
-            int manufacturerID = IDGenerator.InputID(manufacturers);
-            string manufacturerName = inputManager.InputName(inputValidator, GetListType());
-            string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, GetListType());
+            int manufacturerID = idGenerator.InputID(manufacturers);
+            string manufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
             return new Manufacturer(manufacturerID, manufacturerName, manufacturerEDRPOU);
         }
 
-        public bool AddToManufacturers()
+        public void AddToManufacturers()
         {
             manufacturers.Add(CreateManufacturer());
-            return true;
+            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
-        public Manufacturer GetManufacturer(int manufacturerID)
+        public Manufacturer GetManufacturerByID(int manufacturerID)
         {
             var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);
             if (manufacturer == null)
             {
-                throw new InvalidOperationException($"Manufacturer with ID {manufacturerID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+            }
+            return manufacturer;
+        }
+
+        public Manufacturer GetManufacturerByName(string  manufacturerName)
+        {
+            var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerName == manufacturerName);
+            if (manufacturer == null)
+            {
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return manufacturer;
         }
@@ -42,38 +55,28 @@ namespace OnlineShop.EntityServices
             var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.ManufacturerID == manufacturerID);
             if (manufacturer == null)
             {
-                throw new InvalidOperationException($"Manufacturer with ID {manufacturerID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return manufacturer;
         }
 
-        public bool DeleteManufacturerByID(int manufacturerID)
+        public void DeleteManufacturerByID(int manufacturerID)
         {
             var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.ManufacturerID == manufacturerID);
             if (manufacturer != null)
             {
-                return manufacturers.Remove(manufacturer);
+                manufacturers.Remove(manufacturer);
+                outputManager.Write(NotificationConstants.DELETED, commonEntityService.GetListType());
             }
-            return false;
-        }
-
-        public string GetListType()
-        {
-            return manufacturers.AsQueryable().ElementType.Name;
-        }
-
-        // Override the ToString method
-        public override string ToString()
-        {
-            if (manufacturers.Count == 0)
-                return $"No manufacturers in the list.";
-
-            string result = "Manufacturers:\n";
-            foreach (var manufacturer in manufacturers)
+            else
             {
-                result += manufacturer.ToString() + "\n";
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
-            return result;
+        }
+
+        public void OutputManufacturers()
+        {
+            outputManager.Write(commonEntityService.OutputList(manufacturers), commonEntityService.GetListType());
         }
     }
 }

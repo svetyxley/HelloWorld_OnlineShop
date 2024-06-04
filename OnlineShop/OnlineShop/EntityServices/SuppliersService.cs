@@ -1,12 +1,15 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.Constants;
+using OnlineShop.Entities;
 
 namespace OnlineShop.EntityServices
 {
     public class SuppliersService
     {
-        private InputConsoleManager inputManager = new();
+        private InputManager inputManager = new();
         private InputValidator inputValidator = new();
-        private IDGenerator IDGenerator = new();
+        private IDGenerator idGenerator = new();
+        private OutputManager outputManager = new();
+        private CommonEntityService<Supplier> commonEntityService = new();
 
         private List<Supplier> suppliers = new List<Supplier>()
         {
@@ -17,24 +20,24 @@ namespace OnlineShop.EntityServices
 
         public Supplier CreateSupplier()
         {
-            int supplierID = IDGenerator.InputID(suppliers);
-            string supplierName = inputManager.InputName(inputValidator, GetListType());
-            string supplierEDRPOU = inputManager.InputEDRPU(inputValidator, GetListType());
+            int supplierID = idGenerator.InputID(suppliers);
+            string supplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            string supplierEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
             return new Supplier(supplierID, supplierName, supplierEDRPOU);
         }
 
-        public bool AddToSuppliers()
+        public void AddToSuppliers()
         {
             suppliers.Add(CreateSupplier());
-            return true;
+            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
 
-        public Supplier GetSupplier(int supplierID)
+        public Supplier GetSupplierByID(int supplierID)
         {
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)
             {
-                throw new InvalidOperationException($"Supplier with ID {supplierID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return supplier;
         }
@@ -45,36 +48,29 @@ namespace OnlineShop.EntityServices
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)
             {
-                throw new InvalidOperationException($"Supplier with ID {supplierID} not found.");
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return supplier;
         }
 
 
-        public bool DeleteSupplierByID(int supplierID)
+       public void DeleteSupplierByID(int supplierID)
         {
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier != null)
             {
-                return suppliers.Remove(supplier);
+                suppliers.Remove(supplier);
+                outputManager.Write(NotificationConstants.DELETED, commonEntityService.GetListType());
             }
-            return false;
-        }
-
-        public string GetListType() {
-            return suppliers.AsQueryable().ElementType.Name;
-        }
-        public override string ToString()
-        {
-            if (suppliers.Count == 0)
-                return "No suppliers in the list.";
-
-            string result = "Suppliers:\n";
-            foreach (var supplier in suppliers)
+            else
             {
-                result += supplier.ToString() + "\n";
+                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
-            return result;
+        }
+
+        public void OutputSuppliers()
+        {
+            outputManager.Write(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
         }
     }
 }
