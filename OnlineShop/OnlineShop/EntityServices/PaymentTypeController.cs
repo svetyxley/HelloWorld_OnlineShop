@@ -5,32 +5,37 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using OnlineShop.Entities;
 
-namespace OnlineShop
+namespace OnlineShop.EntityServices
 {
-    internal static class PaymentTypeController
+    public static class PaymentTypeController
     {
-        
-        public static void AddPaymentType (this PaymentType p, string name)
+
+        public static void AddPaymentType( string name)
         {
-            WriteToFile(new PaymentType(name));
+            List<PaymentType> list = ReadFromFile();
+
+            list.Add(new PaymentType(name));
+
+            WriteToFile(list);
         }
+
 
         public static List<PaymentType> ShowAll()
         {
-            List <PaymentType> resutl = ReadFromFile();
+            List<PaymentType> resutl = ReadFromFile();
             return resutl;
         }
 
 
 
-
-
-        public static void WriteToFile (this PaymentType p)
+        public static void WriteToFile(List<PaymentType> list)
         {
             using (FileStream fs = new FileStream("PaymentType.json", FileMode.OpenOrCreate))
             {
-                JsonSerializer.Serialize<PaymentType>(fs, p);
+
+                JsonSerializer.Serialize(fs, list);
             }
         }
 
@@ -38,8 +43,8 @@ namespace OnlineShop
         {
             using (FileStream fs = new FileStream("PaymentType.json", FileMode.Open))
             {
-               List<PaymentType> result = JsonSerializer.Deserialize<List<PaymentType>>(fs);
-               return result;
+                List<PaymentType> result = JsonSerializer.Deserialize<List<PaymentType>>(fs);
+                return result;
             }
         }
     }

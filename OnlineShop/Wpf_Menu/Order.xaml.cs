@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OnlineShop;
+using OnlineShop.Entities;
+using OnlineShop.EntityServices;
 
 namespace Wpf_Menu
 {
@@ -30,17 +31,18 @@ namespace Wpf_Menu
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            Payment_type_combo_box.ItemsSource = PaymentTypeController.ReadFromFile();
+
         }
+
+        
 
         private void Button_Click_Back_to_Main_Menu(object sender, RoutedEventArgs e)
         {
             this.mainWindow.NavigateToPage("MainPage");
         }
 
-        private void Button_Click_AddProduct(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void Button_Click_AddOrder(object sender, RoutedEventArgs e)
         {
@@ -50,11 +52,21 @@ namespace Wpf_Menu
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
 
+
         }
 
         private void Payment_type_combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            paymentType = 
+            paymentType = (PaymentType)Payment_type_combo_box.SelectedItem;
         }
+
+        private void Button_Click_AddPaymentType(object sender, RoutedEventArgs e)
+        {
+            if (this.paymentType != null)
+            {
+                PaymentTypeController.AddPaymentType(PaymentTypeTextBox.Text);
+            }
+        }
+
     }
 }

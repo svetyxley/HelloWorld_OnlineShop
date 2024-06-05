@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop
+namespace OnlineShop.Entities
 {
-    public class PaymentType 
+    public class PaymentType
     {
         private static int indexer = 0;
 
@@ -17,6 +17,7 @@ namespace OnlineShop
         public PaymentType()
         {
             PaymentType_Id = indexer;
+            PaymentType_Name = string.Empty;
             indexer++;
         }
 
@@ -26,5 +27,11 @@ namespace OnlineShop
             PaymentType_Id = indexer;
             indexer++;
         }
+
+        public override string ToString()
+        {
+            return PaymentType_Name;
+        }
+
     }
 }

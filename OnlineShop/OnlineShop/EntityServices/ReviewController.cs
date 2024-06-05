@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop
+namespace OnlineShop.EntityServices
 {
-    internal class CategoryController
+    internal class ReviewController
     {
-       
     }
 }

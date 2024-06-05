@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop
+namespace OnlineShop.Entities
 {
     internal class Review
     {
         public int PaymentType_Id;
         public PaymnetTypes paymnetType;
-        
+
         public Review()
         {
-            
+
         }
 
         public Review(PaymnetTypes type)
