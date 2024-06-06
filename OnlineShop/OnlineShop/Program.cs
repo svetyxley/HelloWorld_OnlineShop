@@ -1,41 +1,10 @@
 ﻿using OnlineShop;
 
-ManufacturerList manufacturersList = new ManufacturerList();
-SupplierList suppliersList = new SupplierList();
-ProductCategoryList productCategoryList = new ProductCategoryList();
-ProductsList productsList = new ProductsList();
-
-/////////
-UserList userList = new UserList();
-EmployeeList employeeList = new EmployeeList();
-/////////
-
-manufacturersList.AddManufacturer(new Manufacturer(1, "Manufacturer1", "Manufacturer1"));
-manufacturersList.AddManufacturer(new Manufacturer(2, "Manufacturer2", "Manufacturer2"));
-Console.WriteLine(manufacturersList.ToString());
-
-suppliersList.AddSupplier(new Supplier(1, "Supplier1", "Supplier1"));
-suppliersList.AddSupplier(new Supplier(2, "Supplier2", "Supplier2"));
-Console.WriteLine(suppliersList.ToString());
-
-productCategoryList.AddProductCategory(new ProductCategory(1, "ProductCategory1"));
-productCategoryList.AddProductCategory(new ProductCategory(2, "ProductCategory2"));
-Console.WriteLine(productCategoryList.ToString());
-
-productsList.AddProduct(new Product(1, "Product1"));
-productsList.AddProduct(new Product(2, "Product2"));
-Console.WriteLine(productsList.ToString());
-
-//////////
-userList.AddUser(new User(1, 3545, "User1", "Usersurname1"));
-userList.AddUser(new User(2, 3454, "User2", "Usersurname2"));
-Console.WriteLine(userList.ToString());
-
-employeeList.AddUser(new Employee(1, 2545, "Employee1", "Employeesurname1"));
-employeeList.AddUser(new Employee(2, 2454, "Employee2", "Employeesurname2"));
-Console.WriteLine(employeeList.ToString());
-//////////
-
-
-
-
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        ProductsCatalogFlow mainFlow = new ProductsCatalogFlow();
+        mainFlow.CatalogProcesses();
+    }
+}

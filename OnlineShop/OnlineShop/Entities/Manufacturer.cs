@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineShop
+﻿namespace OnlineShop.Entities
 {
-    internal class Manufacturer
+    public class Manufacturer
     {
         public int ManufacturerID { get; init; }
-        public string ManufacturerName { get; set; }
-        public string ManufacturerEDRPOU { get; set; }
+        public string? ManufacturerName { get; set; } = "";
+        public string? ManufacturerEDRPOU { get; set; } = "";
 
-        public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU) 
+        public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
+
         {
             ManufacturerID = manufacturerID;
             ManufacturerName = manufacturerName;
             ManufacturerEDRPOU = manufacturerEDRPOU;
+        }
+
+        // Конструктор за замовчуванням
+        public Manufacturer()
+        {
         }
 
         // Override the ToString method
@@ -24,6 +24,5 @@ namespace OnlineShop
         {
             return $"ManufacturerID: {ManufacturerID}, ManufacturerName: {ManufacturerName}, ManufacturerEDRPOU: {ManufacturerEDRPOU}";
         }
-
     }
 }

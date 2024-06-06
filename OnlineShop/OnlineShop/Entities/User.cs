@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop
+namespace OnlineShop.Entities
 {
-    internal class User
+    public class User
     {
         public int UserID { get; set; }
         public int INN { get; set; }
@@ -24,7 +24,6 @@ namespace OnlineShop
             Name = name;
             Surname = surname;
         }
-
         public override string ToString()
         {
             return $"UserID: {UserID}, user name: {Name}, user surname {Surname}";
