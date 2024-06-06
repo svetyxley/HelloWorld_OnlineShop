@@ -31,7 +31,7 @@ namespace Wpf_Menu
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-            Payment_type_combo_box.ItemsSource = PaymentTypeController.ReadFromFile();
+            //Payment_type_combo_box.ItemsSource = PaymentTypeController.ReadFromFile();
 
         }
 
@@ -62,11 +62,15 @@ namespace Wpf_Menu
 
         private void Button_Click_AddPaymentType(object sender, RoutedEventArgs e)
         {
-            if (this.paymentType != null)
-            {
-                PaymentTypeController.AddPaymentType(PaymentTypeTextBox.Text);
-            }
+            //if (this.paymentType != null)
+            //{
+            //    PaymentTypeController.AddPaymentType(PaymentTypeTextBox.Text);
+            //}
         }
 
+        private void Button_Click_AddProduct(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

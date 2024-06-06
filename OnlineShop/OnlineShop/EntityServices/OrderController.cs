@@ -11,13 +11,9 @@ namespace OnlineShop.EntityServices
     public static class OrderController
     {
 
-        public static void AddOrder(string name)
+        public static void AddOrder()
         {
-            List<Order> list = ReadFromFile();
-
-            list.Add(new PaymentType(name));
-
-            WriteToFile(list);
+            
         }
 
 

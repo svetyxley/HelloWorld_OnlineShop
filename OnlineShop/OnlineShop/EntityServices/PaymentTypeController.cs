@@ -12,40 +12,40 @@ namespace OnlineShop.EntityServices
     public static class PaymentTypeController
     {
 
-        public static void AddPaymentType( string name)
-        {
-            List<PaymentType> list = ReadFromFile();
+        //public static void AddPaymentType( string name)
+        //{
+        //    List<PaymentType> list = ReadFromFile();
 
-            list.Add(new PaymentType(name));
+        //    list.Add(new PaymentType(name));
 
-            WriteToFile(list);
-        }
-
-
-        public static List<PaymentType> ShowAll()
-        {
-            List<PaymentType> resutl = ReadFromFile();
-            return resutl;
-        }
+        //    WriteToFile(list);
+        //}
 
 
+        //public static List<PaymentType> ShowAll()
+        //{
+        //    List<PaymentType> resutl = ReadFromFile();
+        //    return resutl;
+        //}
 
-        public static void WriteToFile(List<PaymentType> list)
-        {
-            using (FileStream fs = new FileStream("PaymentType.json", FileMode.OpenOrCreate))
-            {
 
-                JsonSerializer.Serialize(fs, list);
-            }
-        }
 
-        public static List<PaymentType> ReadFromFile()
-        {
-            using (FileStream fs = new FileStream("PaymentType.json", FileMode.Open))
-            {
-                List<PaymentType> result = JsonSerializer.Deserialize<List<PaymentType>>(fs);
-                return result;
-            }
-        }
+        //public static void WriteToFile(List<PaymentType> list)
+        //{
+        //    using (FileStream fs = new FileStream("PaymentType.json", FileMode.OpenOrCreate))
+        //    {
+
+        //        JsonSerializer.Serialize(fs, list);
+        //    }
+        //}
+
+        //public static List<PaymentType> ReadFromFile()
+        //{
+        //    using (FileStream fs = new FileStream("PaymentType.json", FileMode.Open))
+        //    {
+        //        List<PaymentType> result = JsonSerializer.Deserialize<List<PaymentType>>(fs);
+        //        return result;
+        //    }
+        //}
     }
 }

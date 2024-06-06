@@ -18,7 +18,7 @@ namespace OnlineShop.Entities
 
         public decimal ProductAmount { get; set; }
 
-        public DateTime OrderTime { get; set; }; 
+        public DateTime OrderTime { get; set; } 
 
         public int EmployeeId { get; set; }
 

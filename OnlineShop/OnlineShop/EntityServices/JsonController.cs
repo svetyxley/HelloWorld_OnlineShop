@@ -29,25 +29,39 @@ namespace OnlineShop.EntityServices
 
         public static List<T> ReadFromFile()
         {
-            string filePath = $"{typeof(T).Name}.json";
 
-            if (!File.Exists(filePath))
+            string fileName = $"{typeof(T).Name}.json";
+
+            // Проверка существования файла
+            if (!File.Exists(fileName))
             {
+                // Возвращаем пустой список, если файл не существует
                 return new List<T>();
             }
 
-            using (FileStream fs = new FileStream(filePath, FileMode.Open))
+            try
             {
-                try
+                // Чтение и десериализация файла
+                using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Read))
                 {
+                    // Проверка, что файл не пустой
+                    if (fs.Length == 0)
+                    {
+                        return new List<T>();
+                    }
+
                     return JsonSerializer.Deserialize<List<T>>(fs) ?? new List<T>();
                 }
-                catch (JsonException)
-                {
-                    return new List<T>();
-                }
+            }
+            catch (Exception ex)
+            {
+                // Логирование ошибки
+                Console.WriteLine($"Ошибка при чтении из файла {fileName}: {ex.Message}");
+                // Возвращаем пустой список в случае ошибки
+                return new List<T>();
             }
         }
     }
+    
 }
 

@@ -51,5 +51,6 @@ namespace Wpf_Menu
                 MessageBox.Show("Страница не найдена.");
             }
         }
+
     }
 }
