@@ -1,14 +1,11 @@
-﻿using OnlineShop.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace OnlineShop.EntityServices
+namespace ConsoleApp1
 {
     public static class JsonController<T>
     {
@@ -16,18 +13,16 @@ namespace OnlineShop.EntityServices
 
         public static void WriteToFile(T source)
         {
-            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream($"mytest{typeof(T).Name}.json", FileMode.OpenOrCreate))
             {
-                R
-
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.WriteIndented = true;
 
                 if (source != null)
                 {
-                    JsonSerializer.SerializeAsync<T>(fs,source, options);
+                    JsonSerializer.Serialize<T>(fs, source, options);
                 }
-                
+
                 fs.Close();
             }
         }
@@ -35,7 +30,7 @@ namespace OnlineShop.EntityServices
         public static List<T> ReadFromFile()
         {
 
-            string fileName = $"{typeof(T).Name}.json";
+            string fileName = $"mytest.json";
 
             // Проверка существования файла
             if (!File.Exists(fileName))
@@ -60,10 +55,11 @@ namespace OnlineShop.EntityServices
             }
             catch (Exception ex)
             {
+                // Логирование ошибки
+                Console.WriteLine($"Ошибка при чтении из файла {fileName}: {ex.Message}");
+                // Возвращаем пустой список в случае ошибки
                 return new List<T>();
             }
         }
     }
-    
 }
-

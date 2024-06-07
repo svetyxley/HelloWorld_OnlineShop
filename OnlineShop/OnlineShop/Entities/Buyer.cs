@@ -37,7 +37,7 @@ namespace OnlineShop.Entities
 
         public override string ToString()
         {
-            return $"{base.ToString()} BuyerId: {this.BuyerId} + BuyerId: {this.BuyerEmail}";
+            return $"BuyerId: {this.BuyerId} {base.ToString()}  email: {this.BuyerEmail}";
         }
     }
 }

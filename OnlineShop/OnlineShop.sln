@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop", "OnlineShop\OnlineShop.csproj", "{21E97F87-644D-4100-9D3F-D46D9A48C605}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_Menu", "Wpf_Menu\Wpf_Menu.csproj", "{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf_Menu", "Wpf_Menu\Wpf_Menu.csproj", "{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A03437C1-562B-4C0B-B011-BC7F96EE174F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

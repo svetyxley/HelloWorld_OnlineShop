@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OnlineShop.Entities;
 using System.Net.Mail;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Wpf_Menu
 {
@@ -57,9 +59,16 @@ namespace Wpf_Menu
 
 
             Buyer addingBuyer = new Buyer(inn, name, surname, email, phoneNumber,  userBirthDate, address);
-            
 
-            JsonController<Buyer>.Add(addingBuyer);
+            JsonController<Buyer>.WriteToFile(addingBuyer);
+
+            INN.Clear();
+            Name.Clear();
+            Surname.Clear();
+            PhoneNumber.Clear();
+            Date_of_birth.Clear();
+            Address.Clear();
+            emailtext.Clear();
         }
 
         private void Button_Click_ShowAllBuyers(object sender, RoutedEventArgs e)
