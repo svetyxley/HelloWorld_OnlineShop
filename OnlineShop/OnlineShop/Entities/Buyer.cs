@@ -9,11 +9,11 @@ namespace OnlineShop.Entities
 {
     public class Buyer : User
     {
-        private static int indexer = 0;
+        public static int indexer = 0;
 
-        private int BuyerId {  get; set; }
+        public int BuyerId {  get; set; }
 
-        private MailAddress BuyerEmail { get; set; } 
+        public MailAddress BuyerEmail { get; set; } 
 
         //public int DiscountCardId { get; set; }
 
@@ -25,7 +25,7 @@ namespace OnlineShop.Entities
         }
 
         public Buyer( MailAddress email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
-            : base ( inn, name, surname, phoneNumber, userBirthDate, address)
+                                         : base ( inn, name, surname, phoneNumber, userBirthDate, address)
         {
 
             BuyerId = indexer;
