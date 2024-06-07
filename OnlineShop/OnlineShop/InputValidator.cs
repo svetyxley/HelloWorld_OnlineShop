@@ -30,5 +30,14 @@ namespace OnlineShop
             // Validate input using a regular expression
             return Regex.IsMatch(price, pattern);
         }
+
+        public bool IsValidDataID(string id)
+        {
+            // regular expression that checks whether the entered name contains only ten digits
+            string pattern = @"^\d{1,5}$";
+
+            // Validate input using a regular expression
+            return Regex.IsMatch(id, pattern);
+        }
     }
 }
