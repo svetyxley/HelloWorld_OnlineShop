@@ -58,7 +58,7 @@ namespace Wpf_Menu
             MailAddress email = GettingData.GetEmail(emailtext);
 
 
-            Buyer addingBuyer = new Buyer(inn, name, surname, email, phoneNumber,  userBirthDate, address);
+            Buyer addingBuyer = new Buyer(email, inn, name, surname, phoneNumber,  userBirthDate, address);
 
             JsonController<Buyer>.WriteToFile(addingBuyer);
 

@@ -18,8 +18,6 @@ namespace OnlineShop.EntityServices
         {
             using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate))
             {
-                R
-
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.WriteIndented = true;
 

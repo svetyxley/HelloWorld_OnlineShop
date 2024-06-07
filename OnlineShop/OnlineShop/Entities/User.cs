@@ -9,17 +9,17 @@ namespace OnlineShop.Entities
     public class User
     {
 
-        private ulong INN { get; set; }
+        public ulong INN { get; set; }
 
-        private string Name { get; set; }
+        public string Name { get; set; }
 
-        private string Surname { get; set; }
+        public string Surname { get; set; }
 
-        private string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        private DateOnly UserBirthDate { get; set; }
+        public DateOnly UserBirthDate { get; set; }
 
-        private string Address { get; set; }
+        public string Address { get; set; }
 
 
         public User()

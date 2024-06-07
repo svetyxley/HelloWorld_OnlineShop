@@ -24,7 +24,7 @@ namespace OnlineShop.Entities
             indexer++;
         }
 
-        public Buyer( ulong inn, string name, string surname, MailAddress email, string phoneNumber, DateOnly userBirthDate, string address)
+        public Buyer( MailAddress email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
             : base ( inn, name, surname, phoneNumber, userBirthDate, address)
         {
 
