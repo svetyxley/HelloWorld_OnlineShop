@@ -51,6 +51,22 @@
             } while (!inputValidator.IsValidDataPrice(price));
             return Double.Parse(price);
         }
+        public int InputID(InputValidator inputValidator, string type)
+        {
+            string? id;
+            //Input ID for search
+            do
+            {
+                Console.Write($"Make a chose form {type} list and enter {type} ID: ");
+                id = Console.ReadLine();
+                if (!inputValidator.IsValidDataPrice(id))
+                {
+                    Console.WriteLine($"Invalid input. Enter {type} ID.");
+                    Console.WriteLine();
+                }
+            } while (!inputValidator.IsValidDataPrice(id));
+            return Int32.Parse(id);
+        }
     }
 }
 

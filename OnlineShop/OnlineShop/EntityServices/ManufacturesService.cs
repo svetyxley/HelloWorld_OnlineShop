@@ -30,8 +30,9 @@ namespace OnlineShop.EntityServices
             manufacturers.Add(CreateManufacturer());
             outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
-        public Manufacturer GetManufacturerByID(int manufacturerID)
+        public  Manufacturer GetManufacturerByID()
         {
+            var manufacturerID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);
             if (manufacturer == null)
             {

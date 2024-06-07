@@ -10,6 +10,9 @@ namespace OnlineShop.EntityServices
         private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Product> commonEntityService = new();
+        private ManufacturesService manufacturesService = new();
+        private SuppliersService suppliersService = new();
+
 
         private List<Product> products = new List<Product>()
         {         
@@ -23,10 +26,8 @@ namespace OnlineShop.EntityServices
         {
             int productId = idGenerator.InputID(products);
             string productName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-//            string productManufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-//            string productSupplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
             double productPrice = inputManager.InputPrice(inputValidator, commonEntityService.GetListType());
-            return new Product(productId, productName,productPrice);
+            return new Product(productId, productName, manufacturesService.GetManufacturerByID(), suppliersService.GetSupplierByID(), productPrice);
         }
         public void AddToProducts()
         {
@@ -34,8 +35,9 @@ namespace OnlineShop.EntityServices
             outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
 
-        public Product GetProductByID(int productID)
+        public Product GetProductByID()
         {
+            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
@@ -47,8 +49,9 @@ namespace OnlineShop.EntityServices
             }
             return product;
         }
-        public Product UpdateProduct(int productID)
+        public Product UpdateProduct()
         {
+            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
@@ -57,8 +60,9 @@ namespace OnlineShop.EntityServices
             return product;
         }
 
-        public void DeleteProductByID(int productID)
+        public void DeleteProductByID()
         {
+            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var product = products.FirstOrDefault(product => product.ProductID == productID);
             if (product != null)
             {
@@ -70,6 +74,8 @@ namespace OnlineShop.EntityServices
                 outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType()); 
             }
         }
+
+
         public void OutputProducts()
         {
             outputManager.Write(commonEntityService.OutputList(products), commonEntityService.GetListType());
