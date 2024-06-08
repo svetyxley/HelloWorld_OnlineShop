@@ -34,7 +34,7 @@ namespace Wpf_Menu
             this.pages.Add("Payment", new Payment(this));
             this.pages.Add("Product", new Product(this));
             this.pages.Add("Stock", new Stock(this));
-            this.pages.Add("Supplier", new Supplier(this));
+            this.pages.Add("Supplier", new SupplierPage(this));
 
             // Установка начальной страницы
             NavigateToPage("MainPage");
