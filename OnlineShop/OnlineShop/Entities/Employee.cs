@@ -8,6 +8,8 @@ namespace OnlineShop.Entities
 {
     public class Employee : User
     {
+        public double Salary { get; set; }
+        public string Position { get; set; }
         public Employee()
         {
 

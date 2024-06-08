@@ -13,7 +13,6 @@ namespace OnlineShop
             // Validate input using a regular expression
             return Regex.IsMatch(name, pattern);
         }
-
         public bool IsValidDataEDRPOU(string codeEDRPOU)
         {
             // regular expression that checks whether the entered name contains only ten digits
