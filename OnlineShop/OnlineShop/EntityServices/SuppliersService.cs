@@ -32,8 +32,9 @@ namespace OnlineShop.EntityServices
             outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
 
-        public Supplier GetSupplierByID(int supplierID)
+        public Supplier GetSupplierByID()
         {
+            var supplierID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)
             {

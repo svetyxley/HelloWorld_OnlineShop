@@ -43,11 +43,8 @@ namespace OnlineShop
             purchaseService.OutputPurchase();
 
             //Робота зі списком продуктів
-            productsService.DeleteProductByID(10); //видалення продукту за неіснуючім ID
-            productsService.DeleteProductByID(2);  //видалення продукту за існуючім ID
-            productsService.GetProductByID(10);   //Отримання продукту за неіснуючім ID
-            productsService.GetProductByID(1);    //Отримання продукту за існуючім ID
-
+           productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
+           productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
         }
     }
 }

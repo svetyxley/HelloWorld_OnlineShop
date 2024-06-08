@@ -70,11 +70,11 @@
             string id;
             do
             {
-                Console.Write($"Enter {type} id: ");
+                Console.Write($"Make a chose form {type} list and enter {type} ID: ");
                 id = Console.ReadLine();
                 if (!inputValidator.IsValidDataID(id))
                 {
-                    Console.WriteLine($"Invalid input. Enter {type} id.");
+                    Console.WriteLine($"Invalid input. Enter {type} ID.");
                     Console.WriteLine();
                 }
             } while (!inputValidator.IsValidDataID(id));
