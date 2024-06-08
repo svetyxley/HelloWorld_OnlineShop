@@ -50,6 +50,7 @@ namespace Wpf_Menu
             if (!GettingData.GetEDRPOU(SupplierEDRPOU, out edrpou)) { return; }
 
             Supplier addingSupplier = new Supplier( indexer, name, edrpou );
+
             indexer++;
             JsonController<Supplier>.SaveIndexer(indexer);
 
@@ -57,6 +58,11 @@ namespace Wpf_Menu
 
             SupplierName.Clear();
             SupplierEDRPOU.Clear();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.mainWindow.NavigateToPage("MainPage");
         }
     }
 }

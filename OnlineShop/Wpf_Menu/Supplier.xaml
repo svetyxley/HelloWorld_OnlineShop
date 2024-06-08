@@ -17,6 +17,7 @@
         <Label Content="SupplierEDRPOU" HorizontalAlignment="Left" Margin="600,222,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="SupplierName" HorizontalAlignment="Left" Margin="555,174,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="23"/>
         <TextBox x:Name="SupplierEDRPOU" HorizontalAlignment="Left" Margin="555,248,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="197" Height="23"/>
+        <Button Content="Back to main menu" Margin="555,343,0,0" VerticalAlignment="Top" Width="197" Click="Button_Click"/>
 
     </Grid>
 </Page>

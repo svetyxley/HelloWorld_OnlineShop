@@ -23,10 +23,9 @@ namespace OnlineShop.EntityServices
         {
             int productId = idGenerator.InputID(products);
             string productName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-//            string productManufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-//            string productSupplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            string productSupplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
             double productPrice = inputManager.InputPrice(inputValidator, commonEntityService.GetListType());
-            return new Product(productId, productName,productPrice);
+            return new Product(productId, productName,(uint)productPrice);
         }
         public void AddToProducts()
         {

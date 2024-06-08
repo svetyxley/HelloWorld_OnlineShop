@@ -6,25 +6,24 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Entities
 {
-    internal class Category
+    public class Category
     {
-        private static int incrementer = 0;
-
-        public int Category_Id { get; private set; }
+       
+        public int Category_Id { get; set; }
 
         public string Category_Name { get; set; }
 
         public Category()
         {
-            Category_Id = incrementer;
-            incrementer++;
+            
         }
 
-        public Category(string name)
+        public Category(int id,string name)
         {
+            Category_Id = id;
             Category_Name = name;
-            Category_Id = incrementer;
-            incrementer++;
         }
+
+        public override string ToString() { return $"Category_Id:{Category_Id} Category_Name:{Category_Name}"; }
     }
 }

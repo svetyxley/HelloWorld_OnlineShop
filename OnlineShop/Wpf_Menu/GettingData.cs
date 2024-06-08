@@ -13,6 +13,27 @@ namespace Wpf_Menu
 {
     static class GettingData
     {
+        public static bool GetPrice(TextBox textbox, out uint result)
+        {
+            result = 0;
+
+            if (string.IsNullOrEmpty(textbox.Text))
+            {
+                MessageBox.Show("Данные цены отсутствуют");
+                result = 0;
+                return false;
+            }
+            else if (textbox.Text.Length > 4)
+            {
+                MessageBox.Show("Ошибка формата данных цены");
+                result = 0;
+                return false;
+            }
+
+            return uint.TryParse(textbox.Text, out result);
+
+        }
+
         public static bool GetINN(TextBox textbox, out ulong result)
         {
             result = 0;
@@ -37,6 +58,27 @@ namespace Wpf_Menu
             }
             
             return false;
+
+        }
+
+        public static bool GetIdNumber(TextBox textbox, out int result)
+        {
+            result = 0;
+
+            if (string.IsNullOrEmpty(textbox.Text))
+            {
+                MessageBox.Show("Данные Id отсутствуют");
+                result = 0;
+                return false;
+            }
+            else if (textbox.Text.Length > 5)
+            {
+                MessageBox.Show("Ошибка формата данных Id");
+                result = 0;
+                return false;
+            }
+
+            return int.TryParse(textbox.Text, out result);
 
         }
 

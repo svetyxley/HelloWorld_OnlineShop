@@ -71,6 +71,17 @@ namespace OnlineShop.EntityServices
             string json = JsonSerializer.Serialize(indexer);
             File.WriteAllText($"indexer_of_{typeof(T).Name}.json", json);
         }
+
+
+        public static bool checkId(int enteredId)
+        {
+            int lastindex = LoadIndexer();
+            if(enteredId < lastindex)
+            {
+                return true;
+            }
+            return false;
+        }
     }
     
 }
