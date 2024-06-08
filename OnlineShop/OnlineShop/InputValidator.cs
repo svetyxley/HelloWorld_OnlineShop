@@ -37,8 +37,8 @@ namespace OnlineShop
         }
         public bool IsValidDataID(string id)
         {
-            string pattern = @"^\d{1,5}$";
-            // string pattern = @"^[0-9]{1,20}$";
+            string pattern = @"^[0-9]{1,20}$";
+            // string pattern = @"^\d{1,5}$";
 
             return Regex.IsMatch(id, pattern);
         }
