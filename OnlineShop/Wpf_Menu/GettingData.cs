@@ -15,6 +15,8 @@ namespace Wpf_Menu
     {
         public static bool GetINN(TextBox textbox, out ulong result)
         {
+            result = 0;
+
             if (string.IsNullOrEmpty(textbox.Text))
             {
                 MessageBox.Show("Данные ИНН отсутствуют");
@@ -28,8 +30,40 @@ namespace Wpf_Menu
                 return false;
             }
 
-            result  = ulong.Parse(textbox.Text);
-            return true;
+            else if (Regex.IsMatch(textbox.Text, @"^\d{10}$"))
+            {
+                result = ulong.Parse(textbox.Text);
+                return true;
+            }
+            
+            return false;
+
+        }
+
+        public static bool GetEDRPOU(TextBox textbox, out string result)
+        {
+            result = string.Empty;
+
+            if (string.IsNullOrEmpty(textbox.Text))
+            {
+                MessageBox.Show("Данные ЕДРПОУ отсутствуют");
+
+                return false;
+            }
+            else if (textbox.Text.Length != 8)
+            {
+                MessageBox.Show("Ошибка формата данных ЕДРПОУ");
+                return false;
+            }
+
+            else if (Regex.IsMatch(textbox.Text, @"^\d{8}$"))
+            {
+                result = textbox.Text;
+                return true;
+            }
+
+            return false;
+
         }
 
         public static bool GetString(TextBox textbox, out string result)

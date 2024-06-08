@@ -29,6 +29,8 @@ namespace Wpf_Menu
 
         private MainWindow mainWindow;
 
+        private int indexer = JsonController<Buyer>.LoadIndexer();
+
         public Buyers(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -74,6 +76,9 @@ namespace Wpf_Menu
 
             Buyer addingBuyer = new Buyer();
 
+            addingBuyer.BuyerId = indexer;
+            indexer++;
+            JsonController<Buyer>.SaveIndexer(indexer);
             addingBuyer.INN = inn;
             addingBuyer.Name = name;
             addingBuyer.Surname = surname;
@@ -95,12 +100,12 @@ namespace Wpf_Menu
 
         private void Button_Click_ShowAllBuyers(object sender, RoutedEventArgs e)
         {
+            //AllBuyersListBox.Items.Clear();
+
             List<Buyer> list = JsonController<Buyer>.ReadFromFile();
 
-            foreach (var buyer in list)
-            {
-                AllBuyersListBox.Items.Add(buyer);
-            }
+            AllBuyersListBox.ItemsSource = list;
+
         }
     }
 }

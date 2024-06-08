@@ -53,6 +53,24 @@ namespace OnlineShop.EntityServices
             }
         }
 
+
+        public static int LoadIndexer()
+        {
+            if (File.Exists($"indexer_of_{typeof(T).Name}.json"))
+            {
+                string json = File.ReadAllText($"indexer_of_{typeof(T).Name}.json");
+                return JsonSerializer.Deserialize<int>(json);
+            }
+
+            return 0; // Возвращаем 0, если файл не существует или не удалось загрузить данные
+        }
+
+
+        public static void SaveIndexer(int indexer)
+        {
+            string json = JsonSerializer.Serialize(indexer);
+            File.WriteAllText($"indexer_of_{typeof(T).Name}.json", json);
+        }
     }
     
 }

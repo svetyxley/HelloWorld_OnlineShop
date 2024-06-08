@@ -29,7 +29,7 @@ namespace Wpf_Menu
             this.pages.Add("Card", new Card(this));
             this.pages.Add("Category", new Category(this));
             this.pages.Add("Employee", new Employee(this));
-            this.pages.Add("Manufacturer", new Manufacturer(this));
+            this.pages.Add("Manufacturer", new ManufacturerPage(this));
             this.pages.Add("Order", new Order(this));
             this.pages.Add("Payment", new Payment(this));
             this.pages.Add("Product", new Product(this));

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShop.EntityServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -9,7 +10,6 @@ namespace OnlineShop.Entities
 {
     public class Buyer : User
     {
-        public static int indexer = 0;
 
         public int BuyerId {  get; set; }
 
@@ -20,16 +20,13 @@ namespace OnlineShop.Entities
 
         public Buyer()
         {
-            BuyerId = indexer;
-            indexer++;
+            
         }
 
-        public Buyer( string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
+        public Buyer(int Id, string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
                                          : base ( inn, name, surname, phoneNumber, userBirthDate, address)
         {
-
-            BuyerId = indexer;
-            indexer++;
+            BuyerId = Id;
 
             BuyerEmail = email;
             //DiscountCardId = discountCardId;
