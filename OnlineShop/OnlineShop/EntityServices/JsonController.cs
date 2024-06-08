@@ -7,6 +7,8 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Text.Json.Serialization;
 
 namespace OnlineShop.EntityServices
 {
@@ -16,14 +18,18 @@ namespace OnlineShop.EntityServices
 
         public static void WriteToFile(T source)
         {
-            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.Append))
             {
+                List<T> list = ReadFromFile();
+
+                list.Add(source);
+
                 JsonSerializerOptions options = new JsonSerializerOptions();
                 options.WriteIndented = true;
 
                 if (source != null)
                 {
-                    JsonSerializer.SerializeAsync<T>(fs,source, options);
+                    JsonSerializer.SerializeAsync(fs, list, options);
                 }
                 
                 fs.Close();
@@ -32,26 +38,15 @@ namespace OnlineShop.EntityServices
 
         public static List<T> ReadFromFile()
         {
-
-            try
+            // Чтение и десериализация файла
+            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate, FileAccess.Read))
             {
-                // Чтение и десериализация файла
-                using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate, FileAccess.Read))
-                {
-                    // Проверка, что файл не пустой
-                    if (fs.Length == 0)
-                    {
-                        return new List<T>();
-                    }
 
-                    return JsonSerializer.Deserialize<List<T>>(fs) ?? new List<T>();
-                }
-            }
-            catch (Exception ex)
-            {
-                return new List<T>();
+                List<T> result = JsonSerializer.Deserialize<List<T>>(fs);
+                return result;
             }
         }
+
     }
     
 }

@@ -69,6 +69,11 @@ namespace Wpf_Menu
         {
             try
             {
+
+                Regex emailCheck = new Regex()
+                emailCheck.Match(textbox.Text);
+
+
                 return new MailAddress(textbox.Text.Trim());
             }
             catch (FormatException)

@@ -55,10 +55,18 @@ namespace Wpf_Menu
             DateOnly userBirthDate = GettingData.GetDataOnly(Date_of_birth);
 
             string address = GettingData.GetString(Address);
-            MailAddress email = GettingData.GetEmail(emailtext);
+            string email = GettingData.GetEmail(emailtext);
 
 
-            Buyer addingBuyer = new Buyer(email, inn, name, surname, phoneNumber,  userBirthDate, address);
+            Buyer addingBuyer = new Buyer();
+
+            addingBuyer.INN = inn;
+            addingBuyer.Name = name;
+            addingBuyer.Surname = surname;
+            addingBuyer.PhoneNumber = phoneNumber;  
+            addingBuyer.Address = address;
+            addingBuyer.BuyerEmail = email;
+            addingBuyer.UserBirthDate = userBirthDate;
 
             JsonController<Buyer>.WriteToFile(addingBuyer);
 
@@ -77,7 +85,7 @@ namespace Wpf_Menu
 
             foreach (var buyer in list)
             {
-                AllBuyersListBox.Items.Add(buyer.ToString());
+                AllBuyersListBox.Items.Add(buyer);
             }
         }
     }
