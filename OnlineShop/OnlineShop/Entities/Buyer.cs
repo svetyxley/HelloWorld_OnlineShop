@@ -13,7 +13,7 @@ namespace OnlineShop.Entities
 
         public int BuyerId {  get; set; }
 
-        public MailAddress BuyerEmail { get; set; } 
+        public string BuyerEmail { get; set; } 
 
         //public int DiscountCardId { get; set; }
 
@@ -24,7 +24,7 @@ namespace OnlineShop.Entities
             indexer++;
         }
 
-        public Buyer( MailAddress email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
+        public Buyer( string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
                                          : base ( inn, name, surname, phoneNumber, userBirthDate, address)
         {
 

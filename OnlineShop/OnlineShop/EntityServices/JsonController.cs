@@ -18,10 +18,10 @@ namespace OnlineShop.EntityServices
 
         public static void WriteToFile(T source)
         {
-            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.Append))
-            {
-                List<T> list = ReadFromFile();
+            List<T> list = ReadFromFile();
 
+            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.Create))
+            {
                 list.Add(source);
 
                 JsonSerializerOptions options = new JsonSerializerOptions();
@@ -39,11 +39,17 @@ namespace OnlineShop.EntityServices
         public static List<T> ReadFromFile()
         {
             // Чтение и десериализация файла
-            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate, FileAccess.Read))
+            using (FileStream fs = new FileStream($"{typeof(T).Name}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
             {
-
-                List<T> result = JsonSerializer.Deserialize<List<T>>(fs);
-                return result;
+                try
+                {
+                    List<T> result = JsonSerializer.Deserialize<List<T>>(fs);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    return new List<T>();
+                }
             }
         }
 

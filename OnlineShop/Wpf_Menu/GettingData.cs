@@ -13,36 +13,39 @@ namespace Wpf_Menu
 {
     static class GettingData
     {
-        public static ulong GetINN(TextBox textbox)
+        public static bool GetINN(TextBox textbox, out ulong result)
         {
-            ulong intResult = 0;
-
             if (string.IsNullOrEmpty(textbox.Text))
             {
                 MessageBox.Show("Данные ИНН отсутствуют");
-                return intResult;
+                result = 0;
+                return false;
             }
             else if (textbox.Text.Length != 10)
             {
                 MessageBox.Show("Ошибка формата данных ИНН");
-                return intResult;
+                result = 0;
+                return false;
             }
 
-            return intResult = ulong.Parse(textbox.Text);
+            result  = ulong.Parse(textbox.Text);
+            return true;
         }
 
-
-        public static string GetString(TextBox textbox)
+        public static bool GetString(TextBox textbox, out string result)
         {
             if (textbox.Text == null)
             {
                 MessageBox.Show("Ошибка при получении текста");
+                result = string.Empty;
+                return false;
             }
 
-            return textbox.Text.Trim();
+            result = textbox.Text.Trim();
+            return true;
         }
 
-        public static DateOnly GetDataOnly(TextBox textbox)
+        public static bool GetDataOnly(TextBox textbox, out DateOnly result)
         {
 
             DateOnly defaultValue = DateOnly.MinValue;
@@ -51,52 +54,61 @@ namespace Wpf_Menu
             if (string.IsNullOrWhiteSpace(textbox.Text))
             {
                 MessageBox.Show("Ошибка, данные не заполнены");
-                return defaultValue;
+                textbox.Clear();
+                result = defaultValue;
+                return false;
             }
 
-            if (DateOnly.TryParse(textbox.Text.Trim(), out DateOnly result))
+            else if (DateOnly.TryParse(textbox.Text.Trim(), out result))
             {
-                return result; // Возвращаем успешно преобразованную дату
+                return true; // Возвращаем успешно преобразованную дату
             }
             else
             {
                 MessageBox.Show("Ошибка при преобразовании текста в дату");
-                return defaultValue;
+                result = defaultValue;
+                textbox.Clear();
+                return false;
             }
         }
 
-        public static MailAddress GetEmail(TextBox textbox)
+        public static bool GetEmail(TextBox textbox, out string result)
         {
             try
             {
+                if(Regex.IsMatch(textbox.Text.Trim(), @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+                {
+                    result = textbox.Text;
+                    return true;
+                }
 
-                Regex emailCheck = new Regex()
-                emailCheck.Match(textbox.Text);
-
-
-                return new MailAddress(textbox.Text.Trim());
+                throw new FormatException();
             }
             catch (FormatException)
             {
                 MessageBox.Show("Неверный формат email.");
-                return null; // Возвращаем null в случае ошибки
+                textbox.Clear();
+                result = string.Empty;
+                return false; // Возвращаем null в случае ошибки
             }
         }
 
-        public static string GetPhoneNumber(TextBox textbox)
+        public static bool GetPhoneNumber(TextBox textbox, out string result)
         {
             Regex regex2 = new Regex("@\"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\"");
 
             // Проверка соответствия текста регулярному выражению
             if (regex2.IsMatch(textbox.Text))
             {
-                return textbox.Text;
+                result = textbox.Text;
+                return true;
             }
 
             else
             {
                 MessageBox.Show("Неверный формат email.");
-                return string.Empty;
+                result = string.Empty;
+                return false;
             }
         }
 

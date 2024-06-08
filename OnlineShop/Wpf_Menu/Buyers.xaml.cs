@@ -48,14 +48,28 @@ namespace Wpf_Menu
         private void Button_Click_AddBuyer(object sender, RoutedEventArgs e)
         {
 
-            ulong inn = GettingData.GetINN(INN);
-            string name = GettingData.GetString(Name);
-            string surname = GettingData.GetString(Surname);
-            string phoneNumber = GettingData.GetString(PhoneNumber);
-            DateOnly userBirthDate = GettingData.GetDataOnly(Date_of_birth);
 
-            string address = GettingData.GetString(Address);
-            string email = GettingData.GetEmail(emailtext);
+            ulong inn;
+            if(!GettingData.GetINN(INN,out inn)) { return; }
+
+
+            string name;
+            if(!GettingData.GetString(Name, out name)){return; }
+
+            string surname;
+            if(!GettingData.GetString(Surname,out surname)){return; }
+
+            string phoneNumber;
+            if(!GettingData.GetString(PhoneNumber, out phoneNumber)) { return; }
+
+            DateOnly userBirthDate;
+            if(!GettingData.GetDataOnly(Date_of_birth,out userBirthDate)) {return;}
+
+            string address;
+            if(!GettingData.GetString(Address, out address)) {return;}
+            
+            string email;
+            if (!GettingData.GetEmail(emailtext,out email)) {return;}
 
 
             Buyer addingBuyer = new Buyer();
