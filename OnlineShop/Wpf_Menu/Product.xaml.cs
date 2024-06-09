@@ -34,9 +34,9 @@ namespace Wpf_Menu
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
-            List<Product> suppliers = JsonController<Product>.ReadFromFile();
+            List<Product> products = JsonController<Product>.ReadFromFile();
 
-            ProductsListBox.ItemsSource = suppliers;
+            ProductsListBox.ItemsSource = products;
         }
 
         private void Button_Click_AddProduct(object sender, RoutedEventArgs e)

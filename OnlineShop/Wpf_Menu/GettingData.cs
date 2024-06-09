@@ -34,6 +34,28 @@ namespace Wpf_Menu
 
         }
 
+
+        public static bool GetAmountDecimal(TextBox textbox, out decimal result)
+        {
+            result = 0;
+
+            if (string.IsNullOrEmpty(textbox.Text))
+            {
+                MessageBox.Show("Данные цены отсутствуют");
+                result = 0;
+                return false;
+            }
+            else if (textbox.Text.Length > 4)
+            {
+                MessageBox.Show("Ошибка формата данных цены");
+                result = 0;
+                return false;
+            }
+
+            return decimal.TryParse(textbox.Text, out result);
+
+        }
+
         public static bool GetINN(TextBox textbox, out ulong result)
         {
             result = 0;

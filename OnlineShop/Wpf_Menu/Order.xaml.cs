@@ -14,20 +14,22 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OnlineShop.Entities;
 using OnlineShop.EntityServices;
+using System.Linq;
+using OnlineShop.Entities;
 
 namespace Wpf_Menu
 {
     /// <summary>
     /// Interaction logic for Order.xaml
     /// </summary>
-    public partial class Order : Page
+    public partial class OrderPage : Page
     {
 
         private MainWindow mainWindow;
 
-        private PaymentType paymentType;
+        private int indexer = JsonController<Order>.LoadIndexer();
 
-        public Order(MainWindow mainWindow)
+        public OrderPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
@@ -47,30 +49,55 @@ namespace Wpf_Menu
         private void Button_Click_AddOrder(object sender, RoutedEventArgs e)
         {
 
+            int orderId = indexer;
+            indexer++;
+            JsonController<Order>.SaveIndexer(indexer);
+
+            int supplierId;
+            if (!GettingData.GetIdNumber(SupplierIdTextBox, out supplierId)) { return; }
+            else if (!JsonController<Supplier>.checkId(supplierId)) { MessageBox.Show("Нет такого Supplier Id  в базе"); return; }
+
+            int productId;
+            if (!GettingData.GetIdNumber(ProductIdTextBox, out productId)) { return; }
+            else if (!JsonController<Product>.checkId(productId)) { MessageBox.Show("Нет такого Product Id  в базе"); return; }
+
+            int employeeId;
+            if (!GettingData.GetIdNumber(EmployeeIdTextBox, out employeeId)) { return; }
+            else if (!JsonController<Employee>.checkId(employeeId)) { MessageBox.Show("Нет такого Manager Id  в базе"); return; }
+
+            decimal productAmount;
+            if (!GettingData.GetAmountDecimal(ProductAmountTextBox, out productAmount)) { return; }
+
+            Order order = new Order(orderId, supplierId, productId, employeeId, productAmount, DateTime.Now);
+
+            JsonController<Order>.WriteToFile(order);
+
+            SupplierIdTextBox.Clear();
+            ProductIdTextBox.Clear();
+            ProductAmountTextBox.Clear();
+            EmployeeIdTextBox.Clear();
+
         }
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
         {
+            List<Order> orders = JsonController<Order>.ReadFromFile();
 
-
+            ProductsListBox.ItemsSource = orders;
         }
 
-        private void Payment_type_combo_box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+
+        private void Button_Click_Show_products(object sender, RoutedEventArgs e)
         {
-            paymentType = (PaymentType)Payment_type_combo_box.SelectedItem;
+            List<Product> products  = JsonController<Product>.ReadFromFile();
+
+            Dictionary<int, string> result = (from product in products select new {product.ProductID, product.ProductName}).ToDictionary(p => p.ProductID, p => p.ProductName);
+
+            ProductsListBox.ItemsSource = result;
         }
 
-        private void Button_Click_AddPaymentType(object sender, RoutedEventArgs e)
-        {
-            //if (this.paymentType != null)
-            //{
-            //    PaymentTypeController.AddPaymentType(PaymentTypeTextBox.Text);
-            //}
-        }
 
-        private void Button_Click_AddProduct(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }

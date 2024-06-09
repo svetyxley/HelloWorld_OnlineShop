@@ -8,6 +8,8 @@ namespace OnlineShop.Entities
 {
     internal class Employee : User
     {
+        public int EmployeeId {  get; set; }    
+
         public string Position { get; set; }
 
         public DateOnly HireDate { get; set; }
@@ -20,12 +22,13 @@ namespace OnlineShop.Entities
              
         }
 
-        public Employee(string position, DateOnly hiredate, int salary)
+        public Employee(int employeeId, string position, DateOnly hiredate, int salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
+            : base (inn, name, surname, phoneNumber, userBirthDate, address)
         {
+            EmployeeId = employeeId;    
             Position = position;
             HireDate = hiredate;
             Salary = salary;
-      
         }
     }
 }
