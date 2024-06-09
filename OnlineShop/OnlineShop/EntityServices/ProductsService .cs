@@ -1,5 +1,6 @@
 ﻿using OnlineShop.Constants;
 using OnlineShop.Entities;
+using OnlineShop.Records;
 
 namespace OnlineShop.EntityServices
 {
@@ -12,10 +13,11 @@ namespace OnlineShop.EntityServices
         private CommonEntityService<Product> commonEntityService = new();
         private ManufacturesService manufacturesService = new();
         private SuppliersService suppliersService = new();
+        ActivityLogService logService = new ActivityLogService();
 
 
         private List<Product> products = new List<Product>()
-        {         
+        {
             new Product(1, "Product1"),
             new Product(2, "Product2"),
             new Product(3, "Product3")
@@ -32,7 +34,9 @@ namespace OnlineShop.EntityServices
         public void AddToProducts()
         {
             products.Add(CreateProduct());
-            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
+            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
         }
 
         public Product GetProductByID()
@@ -41,12 +45,14 @@ namespace OnlineShop.EntityServices
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             else
             {
-                outputManager.Write(product.ToString(), commonEntityService.GetListType());
+                outputManager.OutputToConsole(product.ToString(), commonEntityService.GetListType());
             }
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
             return product;
         }
         public Product UpdateProduct()
@@ -55,8 +61,10 @@ namespace OnlineShop.EntityServices
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
             return product;
         }
 
@@ -67,22 +75,26 @@ namespace OnlineShop.EntityServices
             if (product != null)
             {
                 products.Remove(product);
-                outputManager.Write(NotificationConstants.DELETED, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.DELETED, commonEntityService.GetListType());
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // cteate log record
+                logService.OutputLog(log);// output result to log
             }
             else
-            { 
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType()); 
+            {
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
         }
 
-        public int GetProductsAmount() 
+        public int GetProductsAmount()
         {
             return commonEntityService.ListAmount(products);
         }
 
         public void OutputProducts()
         {
-            outputManager.Write(commonEntityService.OutputList(products), commonEntityService.GetListType());
+            outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
         }
     }
 }

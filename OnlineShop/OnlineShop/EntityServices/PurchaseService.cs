@@ -34,7 +34,7 @@ namespace OnlineShop.EntityServices
         public void AddPurchase()
         {
             purchases.Add(CreatePurchase());
-            _outputManager.Write(NotificationConstants.ADDED, _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(NotificationConstants.ADDED, _commonEntityService.GetListType());
         }
         public void RemovePurchaseID(int purchaseID)
         {
@@ -42,11 +42,11 @@ namespace OnlineShop.EntityServices
             if (purchase != null)
             {
                 purchases.Remove(purchase);
-                _outputManager.Write(NotificationConstants.DELETED, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.DELETED, _commonEntityService.GetListType());
             }
             else
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
         }
         public Purchase UpdatePurchase(int purchaseID)
@@ -54,7 +54,7 @@ namespace OnlineShop.EntityServices
             var purchase = purchases.FirstOrDefault(purchase => purchase.PurchaseID == purchaseID);
             if (purchase == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return purchase;
         }
@@ -63,13 +63,13 @@ namespace OnlineShop.EntityServices
             var purchase = purchases.FirstOrDefault(purchase => purchase.PurchaseID == purchaseID);
             if (purchase == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return purchase;
         }
         public void OutputPurchase()
         {
-            _outputManager.Write(_commonEntityService.OutputList(purchases), _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(_commonEntityService.OutputList(purchases), _commonEntityService.GetListType());
         }
     }
 }

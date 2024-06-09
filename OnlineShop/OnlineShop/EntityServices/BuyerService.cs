@@ -32,7 +32,7 @@ namespace OnlineShop.EntityServices
         public void AddBuyer()
         {
             buyers.Add(CreateBuyer());
-            _outputManager.Write(NotificationConstants.ADDED, _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(NotificationConstants.ADDED, _commonEntityService.GetListType());
         }
         public void RemoveBuyerID(int buyerID)
         {
@@ -40,11 +40,11 @@ namespace OnlineShop.EntityServices
             if (buyer != null)
             {
                 buyers.Remove(buyer);
-                _outputManager.Write(NotificationConstants.DELETED, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.DELETED, _commonEntityService.GetListType());
             }
             else
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
         }
         public Buyer Updatebuyer(int buyerID)
@@ -52,7 +52,7 @@ namespace OnlineShop.EntityServices
             var buyer = buyers.FirstOrDefault(buyer => buyer.UserID == buyerID);
             if (buyer == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return buyer;
         }
@@ -61,13 +61,13 @@ namespace OnlineShop.EntityServices
             var buyer = buyers.FirstOrDefault(buyer => buyer.UserID == buyerID);
             if (buyer == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return buyer;
         }
         public void OutputBuyers()
         {
-            _outputManager.Write(_commonEntityService.OutputList(buyers), _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(_commonEntityService.OutputList(buyers), _commonEntityService.GetListType());
         }
     }
 }
