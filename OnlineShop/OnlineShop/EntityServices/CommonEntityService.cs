@@ -8,6 +8,10 @@
             return list.AsQueryable().ElementType.Name;
         }
 
+        public int ListAmount(List<T> list)
+        {
+            return list.Count;
+        }
         public string OutputList(List<T> list)
         {
             if (list.Count == 0)

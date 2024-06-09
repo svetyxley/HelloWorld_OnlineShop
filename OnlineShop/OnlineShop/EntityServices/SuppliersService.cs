@@ -1,5 +1,6 @@
 ﻿using OnlineShop.Constants;
 using OnlineShop.Entities;
+using OnlineShop.Records;
 
 namespace OnlineShop.EntityServices
 {
@@ -10,6 +11,7 @@ namespace OnlineShop.EntityServices
         private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Supplier> commonEntityService = new();
+        ActivityLogService logService = new ActivityLogService();
 
         private List<Supplier> suppliers = new List<Supplier>()
         {
@@ -29,7 +31,9 @@ namespace OnlineShop.EntityServices
         public void AddToSuppliers()
         {
             suppliers.Add(CreateSupplier());
-            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
+            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType()); // output result to consol
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
         }
 
         public Supplier GetSupplierByID()
@@ -38,8 +42,10 @@ namespace OnlineShop.EntityServices
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
             return supplier;
         }
 
@@ -49,29 +55,35 @@ namespace OnlineShop.EntityServices
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
             return supplier;
         }
 
 
-       public void DeleteSupplierByID(int supplierID)
+        public void DeleteSupplierByID(int supplierID)
         {
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier != null)
             {
                 suppliers.Remove(supplier);
-                outputManager.Write(NotificationConstants.DELETED, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.DELETED, commonEntityService.GetListType());
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+                logService.OutputLog(log);// output result to log
             }
             else
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
         }
 
         public void OutputSuppliers()
         {
-            outputManager.Write(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
+            outputManager.OutputToConsole(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+            logService.OutputLog(log);// output result to log
         }
     }
 }

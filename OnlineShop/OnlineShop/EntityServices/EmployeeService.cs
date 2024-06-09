@@ -32,7 +32,7 @@ namespace OnlineShop.EntityServices
         public void AddEmployee()
         {
             employees.Add(CreateEmployee());
-            _outputManager.Write(NotificationConstants.ADDED, _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(NotificationConstants.ADDED, _commonEntityService.GetListType());
         }
         public void RemoveemployeeID(int employeeID)
         {
@@ -40,11 +40,11 @@ namespace OnlineShop.EntityServices
             if (employee != null)
             {
                 employees.Remove(employee);
-                _outputManager.Write(NotificationConstants.DELETED, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.DELETED, _commonEntityService.GetListType());
             }
             else
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
         }
         public User Updatebuyer(int employeeID)
@@ -52,7 +52,7 @@ namespace OnlineShop.EntityServices
             var employee = employees.FirstOrDefault(employee => employee.UserID == employeeID);
             if (employee == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return employee;
         }
@@ -61,13 +61,13 @@ namespace OnlineShop.EntityServices
             var employee = employees.FirstOrDefault(employee => employee.UserID == employeeID);
             if (employee == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return employee;
         }
         public void OutputEmployees()
         {
-            _outputManager.Write(_commonEntityService.OutputList(employees), _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(_commonEntityService.OutputList(employees), _commonEntityService.GetListType());
         }
     }
 }
