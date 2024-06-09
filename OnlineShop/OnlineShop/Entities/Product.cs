@@ -1,6 +1,4 @@
-﻿using static System.Net.WebRequestMethods;
-
-namespace OnlineShop.Entities
+﻿namespace OnlineShop.Entities
 {
     public class Product
     {

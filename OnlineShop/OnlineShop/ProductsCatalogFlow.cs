@@ -1,4 +1,5 @@
 ﻿using OnlineShop.EntityServices;
+using OnlineShop.Extensions;
 
 namespace OnlineShop
 {
@@ -14,20 +15,21 @@ namespace OnlineShop
             BuyerService buyerService = new BuyerService();
             UserService userService = new UserService();
 
-            //Додавання нового виробника та вивід повного списка виробників
-            manufactureService.AddToManufacturers();
-            manufactureService.OutputManufacturers();
+            /*            //Додавання нового виробника та вивід повного списка виробників
+                        manufactureService.AddToManufacturers();
+                        manufactureService.OutputManufacturers();
 
-            //Додавання нового виробника та вивід повного списка постачальників
-            suppliersService.AddToSuppliers();
-            suppliersService.OutputSuppliers();
+                        //Додавання нового виробника та вивід повного списка постачальників
+                        suppliersService.AddToSuppliers();
+                        suppliersService.OutputSuppliers();*/
 
             //Додавання нового продукту та вивід повного списка продуктів
-            productsService.AddToProducts();
+            productsService.CountChecker(); // extension method
+            productsService.AddToProducts();            
             productsService.OutputProducts();
 
             //Додавання нового користувача та вивід повного списка користувачів
-            userService.AddUser();
+  /*          userService.AddUser();
             userService.OutputUsers();
 
             //Додавання нового покупця та вивід повного списка покупців
@@ -44,7 +46,7 @@ namespace OnlineShop
 
             //Робота зі списком продуктів
            productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
-           productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
+           productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID*/
         }
     }
 }

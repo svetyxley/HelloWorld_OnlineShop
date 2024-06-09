@@ -75,6 +75,10 @@ namespace OnlineShop.EntityServices
             }
         }
 
+        public int GetProductsAmount() 
+        {
+            return commonEntityService.ListAmount(products);
+        }
 
         public void OutputProducts()
         {
