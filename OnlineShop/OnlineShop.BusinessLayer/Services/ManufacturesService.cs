@@ -19,12 +19,17 @@ namespace OnlineShop.EntityServices
            new(2, "Manufacturer2", "ManufacturerEDRPOU2"),
            new(3, "Manufacturer3", "ManufacturerEDRPOU3")
         };
-        public Manufacturer CreateManufacturer()
+        public Manufacturer CreateManufacturer(int manufacturerId, string name, string manufacturerEDRPOU)
         {
-            int manufacturerID = idGenerator.InputID(manufacturers);
-            string manufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-            string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
-            return new Manufacturer(manufacturerID, manufacturerName, manufacturerEDRPOU);
+            var manufacturer = new Manufacturer
+            {
+
+            };
+
+            //int manufacturerID = idGenerator.InputID(manufacturers);
+            //string manufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            //string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
+            return new Manufacturer(manufacturerId, name, manufacturerEDRPOU);
         }
 
         public void AddToManufacturers()
@@ -34,7 +39,7 @@ namespace OnlineShop.EntityServices
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
         }
-        public  Manufacturer GetManufacturerByID()
+        public  Manufacturer GetManufacturerByID(Guid id)
         {
             var manufacturerID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);
