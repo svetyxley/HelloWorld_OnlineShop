@@ -13,6 +13,16 @@ namespace OnlineShop
             EmployeeService employeeService = new EmployeeService();
             BuyerService buyerService = new BuyerService();
             UserService userService = new UserService();
+            OrderSupplyService orderSupplyService = new OrderSupplyService();
+            DiscountCardService discountCardService = new DiscountCardService();
+
+            //Створення дисконтної картки та вивід усіх карток
+            discountCardService.AddCard();
+            discountCardService.OutputDiscountCards();
+
+            //Замовлення поставки та вивід усіх замовлень поставок
+            orderSupplyService.AddOrder();
+            orderSupplyService.OutputSupplyOrders();
 
             //Додавання нового виробника та вивід повного списка виробників
             manufactureService.AddToManufacturers();

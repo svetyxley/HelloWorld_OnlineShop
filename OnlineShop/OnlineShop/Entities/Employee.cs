@@ -24,7 +24,7 @@ namespace OnlineShop.Entities
 
         public override string ToString()
         {
-            return $"EmployeeID: {UserID}, employee INN: {INN}, employee name: {Name}, employee surname: {Surname}";
+            return $"EmployeeID: {UserID}, Employee INN: {INN}, Employee name: {Name}, Employee surname: {Surname}";
         }
     }
 }

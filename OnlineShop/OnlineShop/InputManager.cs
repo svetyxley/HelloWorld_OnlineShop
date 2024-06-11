@@ -80,6 +80,35 @@
             } while (!inputValidator.IsValidDataID(id));
             return int.Parse(id);
         }
+        public int InputAmount(InputValidator inputValidator, string type)
+        {
+            string amount;
+            do
+            {
+                Console.Write($"Enter {type} amount: ");
+                amount = Console.ReadLine();
+                if (!inputValidator.IsValidAmount(amount))
+                {
+                    Console.WriteLine($"Invalid input. Enter {type} amount.");
+                    Console.WriteLine();
+                }
+            } while (!inputValidator.IsValidAmount(amount));
+            return Int32.Parse(amount);
+        }
+        public double InputDiscountPercantage(InputValidator inputValidator, string type)
+        {
+            string discount;
+            do
+            {
+                Console.Write($"Enter {type} discount: ");
+                discount = Console.ReadLine();
+                if (!inputValidator.IsValidDiscount(discount))
+                {
+                    Console.WriteLine($"Invalid input. Enter {type} discount.");
+                    Console.WriteLine();
+                }
+            } while (!inputValidator.IsValidDiscount(discount));
+            return Double.Parse(discount);
+        }
     }
 }
-
