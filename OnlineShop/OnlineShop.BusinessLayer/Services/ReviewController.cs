@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.EntityServices
 {
-    internal class CategoryController
+    internal class ReviewController
     {
-
     }
 }

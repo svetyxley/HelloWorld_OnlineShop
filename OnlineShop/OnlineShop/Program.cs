@@ -1,5 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-using OnlineShop;
+﻿using OnlineShop;
+using OnlineShop.Records;
 
 internal class Program
 {

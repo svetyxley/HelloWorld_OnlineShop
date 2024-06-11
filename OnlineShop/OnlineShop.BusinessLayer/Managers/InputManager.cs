@@ -34,7 +34,6 @@
             } while (!inputValidator.IsValidDataEDRPOU(codeEDRPOU));
             return codeEDRPOU;
         }
-
         public double InputPrice(InputValidator inputValidator, string type)
         {
             string? price;
@@ -50,6 +49,36 @@
                 }
             } while (!inputValidator.IsValidDataPrice(price));
             return Double.Parse(price);
+        }
+        public int InputINN(InputValidator inputValidator , string type)
+        {
+            string inn;
+            do
+            {
+                Console.Write($"Enter {type} inn: ");
+                inn = Console.ReadLine();
+                if (!inputValidator.IsValidDataINN(inn))
+                {
+                    Console.WriteLine($"Invalid input. Enter {type} inn.");
+                    Console.WriteLine();
+                }
+            } while (!inputValidator.IsValidDataINN(inn));
+            return int.Parse(inn);
+        }
+        public int InputID(InputValidator inputValidator, string type)
+        {
+            string id;
+            do
+            {
+                Console.Write($"Make a chose form {type} list and enter {type} ID: ");
+                id = Console.ReadLine();
+                if (!inputValidator.IsValidDataID(id))
+                {
+                    Console.WriteLine($"Invalid input. Enter {type} ID.");
+                    Console.WriteLine();
+                }
+            } while (!inputValidator.IsValidDataID(id));
+            return int.Parse(id);
         }
     }
 }

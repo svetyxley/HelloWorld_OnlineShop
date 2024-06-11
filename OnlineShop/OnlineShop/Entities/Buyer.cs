@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OnlineShop.Entities
@@ -20,7 +21,7 @@ namespace OnlineShop.Entities
 
         public Buyer()
         {
-            
+
         }
 
         public Buyer(int Id, string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)

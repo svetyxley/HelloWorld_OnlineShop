@@ -8,6 +8,7 @@ namespace OnlineShop.Entities
 {
     public class User
     {
+        public int UserID { get; set; }
 
         public ulong INN { get; set; }
 
@@ -24,11 +25,12 @@ namespace OnlineShop.Entities
 
         public User()
         {
-            
+
         }
 
         public User(ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
         {
+            UserID = userid;
             INN = inn;
             Name = name;
             Surname = surname;
