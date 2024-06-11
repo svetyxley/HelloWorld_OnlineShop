@@ -1,8 +1,10 @@
-﻿using OnlineShop.Constants;
+﻿using OnlineShop.BusinessLayer.Managers;
+using OnlineShop.Constants;
 using OnlineShop.Entities;
+using OnlineShop.EntityServices;
 using OnlineShop.Records;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class ManufacturesService
     {
@@ -19,17 +21,12 @@ namespace OnlineShop.EntityServices
            new(2, "Manufacturer2", "ManufacturerEDRPOU2"),
            new(3, "Manufacturer3", "ManufacturerEDRPOU3")
         };
-        public Manufacturer CreateManufacturer(int manufacturerId, string name, string manufacturerEDRPOU)
+        public Manufacturer CreateManufacturer()
         {
-            var manufacturer = new Manufacturer
-            {
-
-            };
-
-            //int manufacturerID = idGenerator.InputID(manufacturers);
-            //string manufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-            //string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
-            return new Manufacturer(manufacturerId, name, manufacturerEDRPOU);
+            int manufacturerID = idGenerator.InputID(manufacturers);
+            string manufacturerName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
+            string manufacturerEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
+            return new Manufacturer(manufacturerID, manufacturerName, manufacturerEDRPOU);
         }
 
         public void AddToManufacturers()
@@ -39,7 +36,7 @@ namespace OnlineShop.EntityServices
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
         }
-        public  Manufacturer GetManufacturerByID(Guid id)
+        public  Manufacturer GetManufacturerByID()
         {
             var manufacturerID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);

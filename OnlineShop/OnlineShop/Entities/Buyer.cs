@@ -1,13 +1,6 @@
-﻿using OnlineShop.EntityServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using OnlineShop.Entities;
 
-namespace OnlineShop.Entities
+namespace OnlineShop.Data.Entities
 {
     public class Buyer : User
     {
@@ -25,7 +18,7 @@ namespace OnlineShop.Entities
         }
 
         public Buyer(int Id, string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
-                                         : base ( inn, name, surname, phoneNumber, userBirthDate, address)
+                                         : base (Id, inn, name, surname, phoneNumber, userBirthDate, address)
         {
             BuyerId = Id;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineShop.Entities
+﻿namespace OnlineShop.Data.Entities
 {
     public class User
     {
@@ -28,7 +22,7 @@ namespace OnlineShop.Entities
 
         }
 
-        public User(ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
+        public User(int userid, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
         {
             UserID = userid;
             INN = inn;

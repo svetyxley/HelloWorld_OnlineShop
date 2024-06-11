@@ -1,7 +1,8 @@
-﻿using OnlineShop.EntityServices;
-using OnlineShop.Extensions;
+﻿using OnlineShop.BusinessLayer.Extensions;
+using OnlineShop.BusinessLayer.Services;
+using OnlineShop.EntityServices;
 
-namespace OnlineShop
+namespace OnlineShop.BusinessLayer.Managers
 {
     public class ProductsCatalogFlow
     {

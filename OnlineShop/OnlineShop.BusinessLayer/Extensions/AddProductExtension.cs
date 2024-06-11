@@ -1,7 +1,7 @@
-﻿using OnlineShop.EntityServices;
+﻿using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Constants;
 
-namespace OnlineShop.Extensions
+namespace OnlineShop.BusinessLayer.Extensions
 {
     public static class AddProductExtension
     {

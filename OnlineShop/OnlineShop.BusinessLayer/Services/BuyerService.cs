@@ -1,12 +1,9 @@
-﻿using OnlineShop.Constants;
-using OnlineShop.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OnlineShop.BusinessLayer.Managers;
+using OnlineShop.Constants;
+using OnlineShop.Data.Entities;
+using OnlineShop.EntityServices;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class BuyerService
     {
@@ -18,16 +15,16 @@ namespace OnlineShop.EntityServices
 
         private List<Buyer> buyers = new List<Buyer>()
         {
-           new(1, 34334, "BuyerName1", "BuyerSurName1"),
-           new(2, 34634, "BuyerName2", "BuyerSurName2")
+           //new(1, 34334, "BuyerName1", "BuyerSurName1"),
+           //new(2, 34634, "BuyerName2", "BuyerSurName2")
         };
         public Buyer CreateBuyer()
         {
             int userID = _generatorID.InputID(buyers);
-            int inn = _inputManager.InputINN(_inputValidator, _commonEntityService.GetListType());
+            ulong inn = 11;//_inputManager.InputINN(_inputValidator, _commonEntityService.GetListType());
             string name = _inputManager.InputName(_inputValidator, _commonEntityService.GetListType());
             string surname = _inputManager.InputName(_inputValidator, _commonEntityService.GetListType());
-            return new Buyer(userID, inn, name, surname);
+            return new Buyer(userID,"email", inn, name, surname, "11111", DateOnly.MaxValue, "address");
         }
         public void AddBuyer()
         {

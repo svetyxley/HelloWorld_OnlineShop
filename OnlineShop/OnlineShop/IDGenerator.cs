@@ -2,9 +2,9 @@
 {
     public class IDGenerator
     {
-        public Guid InputID<T>()
+        public int InputID<T>(List<T> items)
         {
-            return Guid.NewGuid();
+            return items.Count() + 1;
         }
     }
 }

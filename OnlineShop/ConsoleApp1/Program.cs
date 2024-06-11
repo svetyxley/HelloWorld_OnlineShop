@@ -1,11 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-using ConsoleApp1;
-using System.Text.Json;
+﻿using OnlineShop.BusinessLayer.Managers;
 
-Buyer b2 = new Buyer();
+namespace ConsoleApp1
+{
+    public static class Program
+    {
+        static void Main(string[] args)
+        {
 
-b2.Name = "Ivan12";
-b2.Surname = "Popov12";
+            ProductsCatalogFlow mainFlow = new ProductsCatalogFlow();
+            mainFlow.CatalogProcesses();
+        }
+    }
+}
 
-
-JsonController<Buyer>.WriteToFile(b2);

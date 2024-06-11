@@ -1,8 +1,10 @@
-﻿using OnlineShop.Constants;
+﻿using OnlineShop.BusinessLayer.Managers;
+using OnlineShop.Constants;
 using OnlineShop.Entities;
+using OnlineShop.EntityServices;
 using OnlineShop.Records;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class ProductsService
     {
@@ -29,7 +31,8 @@ namespace OnlineShop.EntityServices
             int productId = idGenerator.InputID(products);
             string productName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
             double productPrice = inputManager.InputPrice(inputValidator, commonEntityService.GetListType());
-            return new Product(productId, productName, manufacturesService.GetManufacturerByID(), suppliersService.GetSupplierByID(), productPrice);
+            return new Product();
+            //new Product(productId, productName, manufacturesService.GetManufacturerByID(), suppliersService.GetSupplierByID(), productPrice);
         }
         public void AddToProducts()
         {

@@ -1,5 +1,4 @@
-﻿using OnlineShop.EntityServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +16,8 @@ using OnlineShop.Entities;
 using System.Net.Mail;
 using System.Text.Json;
 using System.Threading.Tasks;
+using OnlineShop.Data.Entities;
+using OnlineShop.EntityServices;
 
 namespace Wpf_Menu
 {

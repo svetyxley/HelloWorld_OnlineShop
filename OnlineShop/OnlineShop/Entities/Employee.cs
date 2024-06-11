@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnlineShop.Data.Entities;
 
 namespace OnlineShop.Entities
 {
@@ -15,14 +16,11 @@ namespace OnlineShop.Entities
 
         public DateOnly HireDate { get; set; }
 
-        public uint Salary { get; set; }
-
-
         public Employee()
         {
 
         }
-        public Employee(int userID, int inn, string name, string surname)
+        public Employee(int userID, ulong inn, string name, string surname)
         {
             UserID = userID;
             INN = inn;
@@ -31,7 +29,7 @@ namespace OnlineShop.Entities
         }
 
         public Employee(int employeeId, string position, DateOnly hiredate, uint salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
-            : base (inn, name, surname, phoneNumber, userBirthDate, address)
+            : base (employeeId, inn, name, surname, phoneNumber, userBirthDate, address)
         
         {
             EmployeeId = employeeId;    
