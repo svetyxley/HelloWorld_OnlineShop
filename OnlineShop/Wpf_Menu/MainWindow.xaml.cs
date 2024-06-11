@@ -28,7 +28,7 @@ namespace Wpf_Menu
             this.pages.Add("Buyers", new Buyers(this));
             this.pages.Add("Card", new Card(this));
             this.pages.Add("Category", new CategoryPage(this));
-            this.pages.Add("Employee", new Employee(this));
+            this.pages.Add("Employee", new EmployeePage(this));
             this.pages.Add("Manufacturer", new ManufacturerPage(this));
             this.pages.Add("Order", new OrderPage(this));
             this.pages.Add("Payment", new Payment(this));

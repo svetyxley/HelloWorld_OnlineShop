@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Entities
 {
-    internal class Employee : User
+    public class Employee : User
     {
         public int EmployeeId {  get; set; }    
 
@@ -14,7 +14,7 @@ namespace OnlineShop.Entities
 
         public DateOnly HireDate { get; set; }
 
-        public int Salary { get; set; }
+        public uint Salary { get; set; }
 
 
         public Employee()
@@ -22,7 +22,7 @@ namespace OnlineShop.Entities
              
         }
 
-        public Employee(int employeeId, string position, DateOnly hiredate, int salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
+        public Employee(int employeeId, string position, DateOnly hiredate, uint salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
             : base (inn, name, surname, phoneNumber, userBirthDate, address)
         {
             EmployeeId = employeeId;    
