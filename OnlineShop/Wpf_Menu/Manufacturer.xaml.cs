@@ -55,7 +55,6 @@ namespace Wpf_Menu
             ManufacturerName.Clear();
             ManufacturerEDRPOU.Clear();
 
-
         }
 
         private void Button_Click_ShowAllManufacturer(object sender, RoutedEventArgs e)

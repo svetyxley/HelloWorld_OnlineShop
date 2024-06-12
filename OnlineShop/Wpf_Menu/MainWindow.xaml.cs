@@ -52,5 +52,10 @@ namespace Wpf_Menu
             }
         }
 
+        public void MessageAlert (string message)
+        {
+            MessageBox.Show(message); 
+        }
+
     }
 }

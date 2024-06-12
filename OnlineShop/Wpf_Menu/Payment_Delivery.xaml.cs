@@ -73,7 +73,7 @@ namespace Wpf_Menu
 
         private void Button_Click_AddOrder(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Button_Click_ShowAll(object sender, RoutedEventArgs e)
