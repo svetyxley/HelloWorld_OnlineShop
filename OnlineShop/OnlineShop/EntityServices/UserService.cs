@@ -35,7 +35,7 @@ namespace OnlineShop.EntityServices
         public void AddUser()
         {
             users.Add(CreateUser());
-            _outputManager.Write(NotificationConstants.ADDED, _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(NotificationConstants.ADDED, _commonEntityService.GetListType());
         }
         public void RemoveUserID(int userID)
         {
@@ -43,11 +43,11 @@ namespace OnlineShop.EntityServices
             if (user != null)
             {
                 users.Remove(user);
-                _outputManager.Write(NotificationConstants.DELETED, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.DELETED, _commonEntityService.GetListType());
             }
             else
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
         }
         public User UpdateUser(int userID)
@@ -55,7 +55,7 @@ namespace OnlineShop.EntityServices
             var user = users.FirstOrDefault(user => user.UserID == userID);
             if (user == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return user;
         }
@@ -64,13 +64,13 @@ namespace OnlineShop.EntityServices
             var user = users.FirstOrDefault(user => user.UserID == userID);
             if (user == null)
             {
-                _outputManager.Write(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
             }
             return user;
         }
         public void OutputUsers()
         {
-            _outputManager.Write(_commonEntityService.OutputList(users), _commonEntityService.GetListType());
+            _outputManager.OutputToConsole(_commonEntityService.OutputList(users), _commonEntityService.GetListType());
         }
     }
 }

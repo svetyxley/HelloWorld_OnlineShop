@@ -1,4 +1,5 @@
 ﻿using OnlineShop.EntityServices;
+using OnlineShop.Extensions;
 
 namespace OnlineShop
 {
@@ -33,6 +34,7 @@ namespace OnlineShop
             suppliersService.OutputSuppliers();
 
             //Додавання нового продукту та вивід повного списка продуктів
+            productsService.CountChecker(); // extension method
             productsService.AddToProducts();
             productsService.OutputProducts();
 
@@ -53,8 +55,8 @@ namespace OnlineShop
             purchaseService.OutputPurchase();
 
             //Робота зі списком продуктів
-           productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
-           productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
+            productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
+            productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
         }
     }
 }

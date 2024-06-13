@@ -1,4 +1,5 @@
 ﻿using OnlineShop;
+using OnlineShop.Records;
 
 internal class Program
 {
