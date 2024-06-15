@@ -42,5 +42,16 @@ namespace OnlineShop
 
             return Regex.IsMatch(id, pattern);
         }
+        public bool IsValidAmount(string amount)
+        {
+            string pattern = @"^[1-9]\d*$";
+
+            return Regex.IsMatch(amount, pattern);
+        }
+        public bool IsValidDiscount(string percentage)
+        {
+            string pattern = @"^(100|[1-9]?[0-9])$";
+            return Regex.IsMatch(percentage, pattern);
+        }
     }
 }

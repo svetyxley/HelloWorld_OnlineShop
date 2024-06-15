@@ -53,8 +53,9 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return buyer;
         }
-        public Buyer GetManufacturerByID(int buyerID)
+        public Buyer GetManufacturerByID()
         {
+            var buyerID = _inputManager.InputID(_inputValidator, _commonEntityService.GetListType());
             var buyer = buyers.FirstOrDefault(buyer => buyer.UserID == buyerID);
             if (buyer == null)
             {

@@ -54,8 +54,9 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return employee;
         }
-        public User GetManufacturerByID(int employeeID)
+        public Employee GetEmployeeByID()
         {
+            var employeeID = _inputManager.InputID(_inputValidator, _commonEntityService.GetListType());
             var employee = employees.FirstOrDefault(employee => employee.UserID == employeeID);
             if (employee == null)
             {
