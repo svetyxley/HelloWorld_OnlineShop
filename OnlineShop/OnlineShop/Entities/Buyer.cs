@@ -1,13 +1,15 @@
 ﻿using OnlineShop.Entities;
+using OnlineShop.Data;
+
 
 namespace OnlineShop.Data.Entities
 {
     public class Buyer : User
     {
+        public int BuyerId { get; set; }
 
-        public int BuyerId {  get; set; }
-
-        public string BuyerEmail { get; set; } 
+        public string BuyerEmail { get; set; }
+        public Action<string>? ShowError { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         //public int DiscountCardId { get; set; }
 
@@ -18,7 +20,7 @@ namespace OnlineShop.Data.Entities
         }
 
         public Buyer(int Id, string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
-                                         : base (Id, inn, name, surname, phoneNumber, userBirthDate, address)
+                                         : base(Id, inn, name, surname, phoneNumber, userBirthDate, address)
         {
             BuyerId = Id;
 
@@ -30,5 +32,8 @@ namespace OnlineShop.Data.Entities
         {
             return $"BuyerId: {this.BuyerId} {base.ToString()}  email: {this.BuyerEmail}";
         }
+
+
     }
+
 }

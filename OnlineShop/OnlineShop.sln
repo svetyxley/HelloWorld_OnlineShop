@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.Data", "OnlineSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wpf_Menu", "Wpf_Menu\Wpf_Menu.csproj", "{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A03437C1-562B-4C0B-B011-BC7F96EE174F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.BusinessLayer", "OnlineShop.BusinessLayer\OnlineShop.BusinessLayer.csproj", "{074BB4B0-A589-4A35-8429-DC20737F15B1}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A03437C1-562B-4C0B-B011-BC7F96EE174F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Release|Any CPU.ActiveCfg = Release|Any CPU

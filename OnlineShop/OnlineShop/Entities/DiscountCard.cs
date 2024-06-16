@@ -3,7 +3,7 @@
     public class DiscountCard
     {
         public int DiscountCard_ID { get; init; }
-        public Buyer? buyerID { get; set; }
+        public int buyerID { get; set; }
         public double PercanatageDiscount { get; set; }
         public DiscountCard()
         {
@@ -14,7 +14,7 @@
             DiscountCard_ID = discountCard_ID;
             PercanatageDiscount = percanatageDiscount;
         }
-        public DiscountCard(int discountCard_ID, Buyer _buyerID, double percanatageDiscount)
+        public DiscountCard(int discountCard_ID, int _buyerID, double percanatageDiscount)
         {
             DiscountCard_ID = discountCard_ID;
             buyerID = _buyerID;
