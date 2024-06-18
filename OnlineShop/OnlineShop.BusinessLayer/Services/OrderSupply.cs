@@ -1,6 +1,6 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.Data.Entities;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class OrderSupply
     {

@@ -1,11 +1,11 @@
 ﻿using OnlineShop.Data;
-using OnlineShop.Entities;
-using OnlineShop.EntityServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data.Entities;
 
 namespace OnlineShop.BusinessLayer.Extensions
 {

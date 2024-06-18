@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using OnlineShop.Data.Entities;
 
-namespace OnlineShop.Entities
+namespace OnlineShop.Data.Entities
 {
     public class Purchase
     {

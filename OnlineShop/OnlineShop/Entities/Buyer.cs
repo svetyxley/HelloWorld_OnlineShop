@@ -1,5 +1,4 @@
-﻿using OnlineShop.Entities;
-using OnlineShop.Data;
+﻿using OnlineShop.Data;
 
 
 namespace OnlineShop.Data.Entities

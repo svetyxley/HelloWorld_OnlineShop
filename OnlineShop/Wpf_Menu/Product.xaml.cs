@@ -1,4 +1,5 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OnlineShop.EntityServices;
 
 namespace Wpf_Menu
 {

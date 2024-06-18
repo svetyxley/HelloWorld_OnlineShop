@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
 
-namespace OnlineShop.Entities
+namespace OnlineShop.Data.Entities
 {
     public class Product
     {

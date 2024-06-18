@@ -1,6 +1,6 @@
 ﻿using OnlineShop.Data;
-using OnlineShop.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

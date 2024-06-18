@@ -14,8 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OnlineShop;
-using OnlineShop.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data.Entities;
 
 namespace Wpf_Menu
 {

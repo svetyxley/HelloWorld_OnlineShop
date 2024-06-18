@@ -1,6 +1,8 @@
 ﻿using OnlineShop.Constants;
+using OnlineShop.Data.Entities;
+using OnlineShop.Records;
 
-namespace OnlineShop.Records
+namespace OnlineShop.BusinessLayer.Services
 {
     public class ActivityLogService
     {

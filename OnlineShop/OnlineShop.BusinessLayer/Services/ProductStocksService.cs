@@ -1,7 +1,9 @@
 ﻿using OnlineShop.Constants;
-using OnlineShop.Entities;
+using OnlineShop.Data.Entities;
+using OnlineShop.BusinessLayer.Managers;
+using OnlineShop.BusinessLayer.Services;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class ProductStocksService
     {
@@ -26,11 +28,11 @@ namespace OnlineShop.EntityServices
         public void AddProduct()
         {
             productStocks.Add(CreateProduct());
-            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
+            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
         public ProductStocks BuyProducts()
         {
-            
+            return null;
         }
     }
 }

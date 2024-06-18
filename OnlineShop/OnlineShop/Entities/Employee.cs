@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OnlineShop.Data.Entities;
 
-namespace OnlineShop.Entities
+namespace OnlineShop.Data.Entities
 {
     public class Employee : User
     {

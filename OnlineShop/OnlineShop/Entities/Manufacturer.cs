@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Entities
+﻿namespace OnlineShop.Data.Entities
 {
     public class Manufacturer
     {

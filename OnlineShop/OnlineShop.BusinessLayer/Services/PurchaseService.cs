@@ -8,9 +8,9 @@ using System.Xml.Linq;
 using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Constants;
-using OnlineShop.Entities;
+using OnlineShop.Data.Entities;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     internal class PurchaseService
     {

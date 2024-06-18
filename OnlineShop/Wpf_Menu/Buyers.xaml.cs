@@ -12,12 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OnlineShop.Entities;
 using System.Net.Mail;
 using System.Text.Json;
 using System.Threading.Tasks;
 using OnlineShop.Data.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Services;
 
 namespace Wpf_Menu
 {

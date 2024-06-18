@@ -1,8 +1,7 @@
 ﻿using OnlineShop.BusinessLayer.Extensions;
-using OnlineShop.BusinessLayer.Services;
-using OnlineShop.EntityServices;
+using OnlineShop.Data.Entities;
 
-namespace OnlineShop
+namespace OnlineShop.BusinessLayer.Services
 {
     public class ProductsCatalogFlow
     {

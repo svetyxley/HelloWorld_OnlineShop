@@ -1,4 +1,4 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public static class OrderController
     {
