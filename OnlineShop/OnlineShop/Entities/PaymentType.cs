@@ -8,7 +8,6 @@ namespace OnlineShop.Entities
 {
     public class PaymentType
     {
-        private static int indexer = 0;
 
         public int PaymentType_Id { get; private set; }
 
@@ -16,16 +15,13 @@ namespace OnlineShop.Entities
 
         public PaymentType()
         {
-            PaymentType_Id = indexer;
-            PaymentType_Name = string.Empty;
-            indexer++;
+
         }
 
-        public PaymentType(string name)
+        public PaymentType( int id, string name)
         {
+            PaymentType_Id = id;
             PaymentType_Name = name;
-            PaymentType_Id = indexer;
-            indexer++;
         }
 
         public override string ToString()
