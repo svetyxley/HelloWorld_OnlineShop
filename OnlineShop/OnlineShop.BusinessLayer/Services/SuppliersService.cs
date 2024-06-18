@@ -1,8 +1,10 @@
-﻿using OnlineShop.Constants;
+﻿using OnlineShop.BusinessLayer.Managers;
+using OnlineShop.Constants;
 using OnlineShop.Entities;
+using OnlineShop.EntityServices;
 using OnlineShop.Records;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class SuppliersService
     {

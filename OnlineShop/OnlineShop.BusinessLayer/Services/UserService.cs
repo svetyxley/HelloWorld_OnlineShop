@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
-using OnlineShop.Entities;
+using OnlineShop.Data.Entities;
+using OnlineShop.EntityServices;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class UserService
     {
@@ -19,18 +15,18 @@ namespace OnlineShop.EntityServices
         
         private List<User> users = new List<User>()
         {
-           new(1, 34334, "UserName1", "UserSurName1"),
-           new(2, 34634, "UserName2", "UserSurName2"),
-           new(3, 34894, "UserName3", "UserSurName3"),
-           new(4, 34314, "UserName4", "UserSurName4")
+           //new(1, 34334, "UserName1", "UserSurName1","123123", DateOnly.FromDateTime(), ),
+           //new(2, 34634, "UserName2", "UserSurName2"),
+           //new(3, 34894, "UserName3", "UserSurName3"),
+           //new(4, 34314, "UserName4", "UserSurName4")
         };
         public User CreateUser()
         {
             int userID = _generatorID.InputID(users);
-            int inn = _inputManager.InputINN(_inputValidator, _commonEntityService.GetListType());
+            ulong inn = 11;//_inputManager.InputINN(_inputValidator, _commonEntityService.GetListType());
             string name = _inputManager.InputName(_inputValidator, _commonEntityService.GetListType());
             string surname = _inputManager.InputName(_inputValidator, _commonEntityService.GetListType());
-            return new User(userID, inn, name, surname);
+            return new User(userID, inn, name, surname,"123123", DateOnly.MaxValue, "address");
         }
         public void AddUser()
         {
