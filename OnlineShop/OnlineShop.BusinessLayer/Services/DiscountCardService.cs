@@ -1,7 +1,9 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
+using OnlineShop.Entities;
+using OnlineShop.EntityServices;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class DiscountCardService
     {
@@ -23,12 +25,12 @@ namespace OnlineShop.EntityServices
         {
             int cardID = idGenerator.InputID(discountCard);
             double discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
-            return new DiscountCard(cardID, buyerService.GetManufacturerByID(), discountPercantage);
+            return new DiscountCard(cardID, buyerService.GetManufacturerByID().BuyerId, discountPercantage);
         }
         public void AddCard()
         {
             discountCard.Add(CreateCard());
-            outputManager.Write(NotificationConstants.ADDED, commonEntityService.GetListType());
+            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
         }
         public DiscountCard UpdateCard()
         {
@@ -36,13 +38,13 @@ namespace OnlineShop.EntityServices
             var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
             if (card == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             return card;
         }
         public void OutputDiscountCards()
         {
-            outputManager.Write(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
+            outputManager.OutputToConsole(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
         }
         public DiscountCard GetDiscountCardByID()
         {
@@ -50,11 +52,11 @@ namespace OnlineShop.EntityServices
             var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
             if (card == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             else
             {
-                outputManager.Write(card.ToString(), commonEntityService.GetListType());
+                outputManager.OutputToConsole(card.ToString(), commonEntityService.GetListType());
             }
             return card;
         }

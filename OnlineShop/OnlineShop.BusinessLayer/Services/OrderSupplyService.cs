@@ -1,7 +1,8 @@
-﻿using OnlineShop.Entities;
+﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
+using OnlineShop.EntityServices;
 
-namespace OnlineShop.EntityServices
+namespace OnlineShop.BusinessLayer.Services
 {
     public class OrderSupplyService
     {
@@ -32,7 +33,7 @@ namespace OnlineShop.EntityServices
         public void AddOrder()
         {
             orderSupply.Add(MakeOrderOfSupply());
-            outputManager.Write(NotificationConstants.ORDERED, commonEntityService.GetListType());
+            outputManager.OutputToConsole(NotificationConstants.ORDERED, commonEntityService.GetListType());
         }
         public OrderSupply GetSupplyOrderByID()
         {
@@ -40,11 +41,11 @@ namespace OnlineShop.EntityServices
             var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.SupplyOrderID == supplyID);
             if (supply == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             else
             {
-                outputManager.Write(supply.ToString(), commonEntityService.GetListType());
+                outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
             }
             return supply;
         }
@@ -54,17 +55,17 @@ namespace OnlineShop.EntityServices
             var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
             if (supply == null)
             {
-                outputManager.Write(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
             else
             {
-                outputManager.Write(supply.ToString(), commonEntityService.GetListType());
+                outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
             }
             return supplyAmount;
         }
         public void OutputSupplyOrders()
         {
-            outputManager.Write(commonEntityService.OutputList(orderSupply), commonEntityService.GetListType());
+            outputManager.OutputToConsole(commonEntityService.OutputList(orderSupply), commonEntityService.GetListType());
         }
     }
 }
