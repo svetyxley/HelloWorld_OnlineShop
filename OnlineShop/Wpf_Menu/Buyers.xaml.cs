@@ -68,7 +68,6 @@ namespace Wpf_Menu
 
         private void Button_Click_ShowAllBuyers(object sender, RoutedEventArgs e)
         {
-            //AllBuyersListBox.Items.Clear();
 
             List<Buyer> list = JsonController<Buyer>.ReadFromFile();
 

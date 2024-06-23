@@ -12,110 +12,131 @@ namespace OnlineShop.BusinessLayer.Managers
         public static Action<string>? ShowError;
 
 
-        public static uint GetPriceUint(string textbox)
+        public static bool GetPriceUint(string textbox, out uint uintPrice)
         {
-            uint result = 0;
 
             if (string.IsNullOrEmpty(textbox))
             {
                 ShowError.Invoke("Данные цены отсутствуют");
-                result = 0;
+                uintPrice = 0;
+                return false;
             }
-            else if (textbox.Length > 4)
+            else if (textbox.Length > 5)
+            {
+                ShowError.Invoke("Ошибка формата данных цены, слишком большое значение");
+                uintPrice = 0;
+                return false;
+            }
+
+             if(!uint.TryParse(textbox, out uintPrice))
             {
                 ShowError.Invoke("Ошибка формата данных цены");
-                result = 0;
             }
 
-             if(!uint.TryParse(textbox, out result))
-            {
-                ShowError.Invoke("Ошибка формата данных цены");
-            }
-
-             return result;
-
+             return true;
         }
 
-        public static decimal GetAmountDecimal(string textbox)
+        public static bool GetAmountDecimal(string textbox,out decimal result)
         {
-            decimal result = 0;
+            
 
             if (string.IsNullOrEmpty(textbox))
             {
                 ShowError.Invoke("Данные количества товара отсутствуют");
                 result = 0;
+                return false;
             }
             else if (textbox.Length > 4)
             {
-                ShowError.Invoke("Ошибка формата данных количества товара");
+                ShowError.Invoke("Ошибка формата данных количества товара, слишком большое значение количества");
                 result = 0;
+                return false;
             }
 
-            if( decimal.TryParse(textbox, out result))
+            if(!decimal.TryParse(textbox, out result))
             {
                 ShowError.Invoke("Ошибка формата данных количества товара");
+                result = 0;
+                return false;
             }
-            return result;
+            return true;
 
         }
 
-        public static ulong GetINN(string textbox)
+        public static bool GetINN(string textbox, out ulong result)
         {
-            ulong result = 0;
-
+            
             if (string.IsNullOrEmpty(textbox))
             {
                 ShowError.Invoke("Данные ИНН отсутствуют");
+                result = 0;
+                return false;
             }
             else if (textbox.Length != 10)
             {
                 ShowError.Invoke("Ошибка формата данных ИНН");
+                result = 0;
+                return false;
             }
 
-            else if (Regex.IsMatch(textbox, @"^\d{10}$"))
+             if (Regex.IsMatch(textbox, @"^\d{10}$"))
             {
                 result = ulong.Parse(textbox);
+                return true;
             }
 
-            return result;
+            result = 0;
+            return false;
         }
 
-        public static int GetIdNumber(string textbox)
-        {
-            int result = 0;
+        public static bool GetIdNumber(string textbox, out int idNumber)
+        {;
 
             if (string.IsNullOrEmpty(textbox))
             {
                 ShowError.Invoke("Данные Id отсутствуют");
-                result = 0;
+                idNumber = 0;
+                return false;
             }
             else if (textbox.Length > 5)
             {
                 ShowError.Invoke("Ошибка формата данных Id");
-                result = 0;
+                idNumber = 0;
+                return false;
             }
 
-            return result;
+            if(!int.TryParse(textbox, out idNumber))
+            {
+                ShowError.Invoke("Ошибка конвертации данных Id");
+                idNumber = 0;
+                return false;
+            }
+
+            return true;
         }
 
-        public static string GetEDRPOU(string textbox)
+        public static bool GetEDRPOU(string textbox, out string strEDRPOU)
         {
-            string result = string.Empty;
+            strEDRPOU = string.Empty;
 
             if (string.IsNullOrEmpty(textbox))
             {
                 ShowError.Invoke("Данные ЕДРПОУ отсутствуют");
+                return false;
             }
             else if (textbox.Length != 8)
             {
                 ShowError.Invoke("Ошибка формата данных ЕДРПОУ");
+                return false;
             }
 
             else if (Regex.IsMatch(textbox, @"^\d{8}$"))
             {
-                result = textbox;
+                strEDRPOU = textbox;
+                return true;
             }
-            return result;
+
+            return false;
         }
 
         public static string GetString(string textbox)
@@ -162,11 +183,11 @@ namespace OnlineShop.BusinessLayer.Managers
                 if (Regex.IsMatch(textbox.Trim(), @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
                 {
                     result = textbox;
+                    return result;
                 }
 
-                throw new FormatException();
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 ShowError.Invoke("Неверный формат email.");
                 result = string.Empty;
@@ -179,7 +200,7 @@ namespace OnlineShop.BusinessLayer.Managers
         {
             string result = string.Empty;
             
-            Regex regex2 = new Regex("@\"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\"");
+            Regex regex2 = new Regex("^0\\d{2}-\\d{3}-\\d{2}-\\d{2}$");
 
             // Проверка соответствия текста регулярному выражению
             if (regex2.IsMatch(textbox))
@@ -189,7 +210,7 @@ namespace OnlineShop.BusinessLayer.Managers
 
             else
             {
-                ShowError.Invoke("Неверный формат email.");
+                ShowError.Invoke("Неверный формат телефона.");
                 result = string.Empty;
             }
             return result;
