@@ -154,16 +154,16 @@ namespace OnlineShop.BusinessLayer.Managers
             return true;
         }
 
-        public static DateOnly GetDataOnly(string textbox)
+        public static bool GetDataOnly(string textbox, out DateOnly result)
         {
 
-            DateOnly result = DateOnly.MinValue;
+             result = DateOnly.MinValue;
 
 
             if (string.IsNullOrWhiteSpace(textbox))
             {
                 ShowError.Invoke("Ошибка, данные даты не заполнены");
-                return result;
+                return false;
             }
 
             else if (!DateOnly.TryParse(textbox.Trim(), out result))
@@ -171,19 +171,20 @@ namespace OnlineShop.BusinessLayer.Managers
                 ShowError.Invoke("Ошибка при преобразовании текста в дату");
             }
 
-            return result;
+            return true;
 
         }
 
-        public static string GetEmail(string textbox)
+        public static bool GetEmail(string textbox, out string result)
         {
-            string result = string.Empty;   
+            result = string.Empty;   
+
             try
             {
                 if (Regex.IsMatch(textbox.Trim(), @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
                 {
                     result = textbox;
-                    return result;
+                    return true;
                 }
 
             }
@@ -191,14 +192,16 @@ namespace OnlineShop.BusinessLayer.Managers
             {
                 ShowError.Invoke("Неверный формат email.");
                 result = string.Empty;
+                return false;
             }
 
-            return result;
+            return false;
+
         }
 
-        public static string GetPhoneNumber(string textbox)
+        public static bool GetPhoneNumber(string textbox, out string result)
         {
-            string result = string.Empty;
+            result = string.Empty;
             
             Regex regex2 = new Regex("^0\\d{2}-\\d{3}-\\d{2}-\\d{2}$");
 
@@ -206,14 +209,15 @@ namespace OnlineShop.BusinessLayer.Managers
             if (regex2.IsMatch(textbox))
             {
                 result = textbox;
+                return true;
             }
 
             else
             {
                 ShowError.Invoke("Неверный формат телефона.");
-                result = string.Empty;
+                return false;
             }
-            return result;
+            return false;
         }
     }
 }
