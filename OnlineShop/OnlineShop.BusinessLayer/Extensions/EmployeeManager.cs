@@ -1,6 +1,7 @@
 ﻿using OnlineShop.Data;
 using OnlineShop.Data.Entities;
 using OnlineShop.BusinessLayer.Services;
+using OnlineShop.BusinessLayer.Managers;
 
 
 namespace OnlineShop.BusinessLayer.Extensions

@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Data;
 using OnlineShop.Data.Entities;
 using OnlineShop.BusinessLayer.Services;
-
+using OnlineShop.BusinessLayer.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace OnlineShop.BusinessLayer.Extensions
 {
-    static class BuyerManager
+    public static class BuyerManager
     {
         public static void addDataToBuyer(this Buyer buyer, string email, string inn, string name, string surname, string phoneNumber, string userBirthDate, string address)
         {

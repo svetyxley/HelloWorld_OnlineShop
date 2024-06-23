@@ -5,11 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Data
+namespace OnlineShop.BusinessLayer.Managers
 {
     public static class InputCheck
     {
-        public static Action<string>? ShowError { get; set; }
+        public static Action<string>? ShowError;
+
 
         public static uint GetPriceUint(string textbox)
         {

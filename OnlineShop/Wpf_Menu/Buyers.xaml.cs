@@ -17,6 +17,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using OnlineShop.Data.Entities;
 using OnlineShop.BusinessLayer.Services;
+using OnlineShop.BusinessLayer.Extensions;
 
 namespace Wpf_Menu
 {
@@ -75,17 +76,7 @@ namespace Wpf_Menu
 
 
             Buyer addingBuyer = new Buyer();
-
-            addingBuyer.BuyerId = indexer;
-            indexer++;
-            JsonController<Buyer>.SaveIndexer(indexer);
-            addingBuyer.INN = inn;
-            addingBuyer.Name = name;
-            addingBuyer.Surname = surname;
-            addingBuyer.PhoneNumber = phoneNumber;  
-            addingBuyer.Address = address;
-            addingBuyer.BuyerEmail = email;
-            addingBuyer.UserBirthDate = userBirthDate;
+            addingBuyer.addDataToBuyer(emailtext.Text, INN.Text, Name.Text, Surname.Text, PhoneNumber.Text, Date_of_birth.Text, Address.Text);
 
             JsonController<Buyer>.WriteToFile(addingBuyer);
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using OnlineShop.BusinessLayer.Managers;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,6 +26,9 @@ using System.Windows.Shapes;
             public MainPage(MainWindow mainWindow)
             {
                 InitializeComponent();
+                InputCheck.ShowError = MessageAlert;
+
+
                 this.mainWindow = mainWindow;
             }
 
@@ -77,6 +81,12 @@ using System.Windows.Shapes;
             {
                 mainWindow.NavigateToPage("Stock");
             }
-        }
+
+            public void MessageAlert(string message)
+            {
+                MessageBox.Show(message);
+            }
 
     }
+
+}

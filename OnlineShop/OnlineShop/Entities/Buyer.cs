@@ -8,7 +8,6 @@ namespace OnlineShop.Data.Entities
         public int BuyerId { get; set; }
 
         public string BuyerEmail { get; set; }
-        public Action<string>? ShowError { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         //public int DiscountCardId { get; set; }
 

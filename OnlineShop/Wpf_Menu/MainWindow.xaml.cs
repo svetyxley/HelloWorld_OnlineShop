@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop;
 using Wpf_Menu;
 
@@ -50,11 +51,6 @@ namespace Wpf_Menu
             {
                 MessageBox.Show("Страница не найдена.");
             }
-        }
-
-        public void MessageAlert (string message)
-        {
-            MessageBox.Show(message); 
         }
 
     }

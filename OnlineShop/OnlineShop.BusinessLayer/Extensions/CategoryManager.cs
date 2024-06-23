@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Data.Entities;
+using OnlineShop.BusinessLayer.Managers;
 
 namespace OnlineShop.BusinessLayer.Extensions
 {
