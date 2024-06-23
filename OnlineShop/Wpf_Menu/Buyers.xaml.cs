@@ -52,29 +52,6 @@ namespace Wpf_Menu
         {
 
 
-            ulong inn;
-            if(!GettingData.GetINN(INN,out inn)) { return; }
-
-
-            string name;
-            if(!GettingData.GetString(Name, out name)){return; }
-
-            string surname;
-            if(!GettingData.GetString(Surname,out surname)){return; }
-
-            string phoneNumber;
-            if(!GettingData.GetString(PhoneNumber, out phoneNumber)) { return; }
-
-            DateOnly userBirthDate;
-            if(!GettingData.GetDataOnly(Date_of_birth,out userBirthDate)) {return;}
-
-            string address;
-            if(!GettingData.GetString(Address, out address)) {return;}
-            
-            string email;
-            if (!GettingData.GetEmail(emailtext,out email)) {return;}
-
-
             Buyer addingBuyer = new Buyer();
             addingBuyer.addDataToBuyer(emailtext.Text, INN.Text, Name.Text, Surname.Text, PhoneNumber.Text, Date_of_birth.Text, Address.Text);
 
