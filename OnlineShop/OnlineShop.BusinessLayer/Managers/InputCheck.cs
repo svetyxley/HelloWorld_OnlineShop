@@ -139,19 +139,19 @@ namespace OnlineShop.BusinessLayer.Managers
             return false;
         }
 
-        public static string GetString(string textbox)
+        public static bool GetString(string textbox, out string strResult)
         {
-            string result = string.Empty;
+            strResult = string.Empty;
 
             if (textbox == null)
             {
                 ShowError.Invoke("Ошибка при получении текста");
-                return result;
+                return false;
             }
 
-            result = textbox.Trim();
+            strResult = textbox.Trim();
 
-            return result;
+            return true;
         }
 
         public static DateOnly GetDataOnly(string textbox)
