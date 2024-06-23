@@ -15,22 +15,37 @@ namespace OnlineShop.BusinessLayer.Extensions
     public static class BuyerManager
     {
 
-        //string position;
-        //    if (!GettingData.GetString(positionTextBox, out position)) { return; }
 
         public static void addDataToBuyer(this Buyer buyer, string email, string inn, string name, string surname, string phoneNumber, string userBirthDate, string address)
         {
+
+
+            string buyerEmail;
+            if(!InputCheck.GetEmail(email,out buyerEmail)) { return; }
+
+            string Name;
+            if(!InputCheck.GetString(name,out Name)) { return; }
+
+            string Surname;
+            if(!InputCheck.GetString(surname,out Surname)) { return; }
+
+            string PhoneNumber;
+            if(!InputCheck.GetPhoneNumber(phoneNumber,out PhoneNumber)) { return; }
+
+            ulong INN;
+            if(!InputCheck.GetINN(inn,out INN)) { return; }
+
+            string Address;
+            if(!InputCheck.GetString(address,out Address)) { return; }
+
+
+            DateOnly UserBirthDate;
+            if(!InputCheck.GetDataOnly(userBirthDate,out UserBirthDate)) { return; }
+
+
+
             buyer.BuyerId = JsonController<Buyer>.LoadIndexer();
             JsonController<Buyer>.SaveIndexer(buyer.BuyerId + 1);
-
-            string buyerEmail = InputCheck.GetEmail(email);
-            string Name = InputCheck.GetString(name);
-            string Surname = InputCheck.GetString(surname);
-            string PhoneNumber = InputCheck.GetPhoneNumber(phoneNumber);
-            ulong INN = InputCheck.GetINN(inn);
-            string Address = InputCheck.GetString(address);
-            DateOnly UserBirthDate = InputCheck.GetDataOnly(userBirthDate);
-
 
             buyer.BuyerEmail = buyerEmail;
             buyer.Name = Name;
