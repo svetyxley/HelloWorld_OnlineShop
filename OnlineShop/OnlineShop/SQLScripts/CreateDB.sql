@@ -18,24 +18,8 @@ GO
 
 CREATE TABLE DiscountCards(
 CardId int IDENTITY NOT NULL PRIMARY KEY,
---BuyerId int FOREIGN KEY(Buyer) REFERENCES Buyers(BuyerId),
+--BuyerId int FOREIGN KEY REFERENCES Buyers(BuyerId),
 PecantageDiscount float
-)
-GO
-
-CREATE TABLE Stocks(
---ProductId int FOREIGN KEY(Product) REFERENCES Product(ProductId),
-ProductAmount int,
-StockId int IDENTITY NOT NULL PRIMARY KEY,
-)
-GO
-
-CREATE TABLE OrderSupply(
-OrderId int IDENTITY NOT NULL PRIMARY KEY,
---ProductId int FOREIGN KEY(Product) REFERENCES Product(ProductId),
-ProductAmount int,
-OrderTime datetime,
---BuyerId int FOREIGN KEY(Buyer) REFERENCES Buyers(BuyerId),
 )
 GO
 
@@ -64,6 +48,22 @@ ProductPrice DECIMAL (10,2)
 )
 GO
 
+CREATE TABLE Stocks(
+ProductAmount int,
+StockId int IDENTITY NOT NULL PRIMARY KEY,
+ProductId int FOREIGN KEY REFERENCES Product(ProductID)
+)
+GO
+
+CREATE TABLE OrderSupply(
+OrderId int IDENTITY NOT NULL PRIMARY KEY,
+ProductId int FOREIGN KEY REFERENCES Product(ProductID),
+ProductAmount int,
+OrderTime datetime,
+--BuyerId int FOREIGN KEY REFERENCES Buyers(BuyerId),
+)
+GO
+
 -- N is used before string values ​​to indicate that it is a Unicode string
 INSERT INTO Manufacturer (ManufacturerName, ManufacturerEDRPOU) VALUES
 (N'Norven', '1234567890'),
@@ -89,3 +89,26 @@ INSERT INTO Product (ProductName, ProductCategoryID, ManufacturerID, SupplierID,
 (N'Сир Philadelphia оригінальний', 1, 5, 5, 99.00);
 GO
 
+INSERT INTO DiscountCards (PecantageDiscount) VALUES
+(8.5),
+(5.5),
+(15.5),
+(50),
+(3.5);
+GO
+
+INSERT INTO Stocks(ProductAmount, ProductId) VALUES
+(15, 1),
+(10, 3),
+(31, 5),
+(2, 2),
+(12, 4);
+GO
+
+INSERT INTO OrderSupply(ProductId, ProductAmount, OrderTime) VALUES
+(2, 15, '2024-06-26 18:05:23'),
+(3, 10, '2024-06-29 19:07:23'),
+(1, 12, '2024-06-30 12:07:35'),
+(2, 95, '2024-07-4 13:09:32'),
+(5, 45, '2024-06-9 21:10:39');
+GO
