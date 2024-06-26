@@ -14,8 +14,13 @@ namespace OnlineShop.BusinessLayer.Extensions
             manufacturer.ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
             JsonController<Employee>.SaveIndexer(manufacturer.ManufacturerID + 1);
 
-            manufacturer.ManufacturerName = InputCheck.GetString(manufacturerName);
-            manufacturer.ManufacturerEDRPOU = InputCheck.GetEDRPOU(manufacturerEDRPOU);
+            string name = string.Empty;
+            if (!InputCheck.GetString(manufacturerName, out name)) { return; }
+            manufacturer.ManufacturerName = name;
+
+            string edrpou ;
+            if (!InputCheck.GetEDRPOU(manufacturerEDRPOU ,out edrpou)) {  return; }    
+            manufacturer.ManufacturerEDRPOU = edrpou;
         }
     }
 }
