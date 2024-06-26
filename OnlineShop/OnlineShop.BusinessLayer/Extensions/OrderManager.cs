@@ -51,6 +51,7 @@ namespace OnlineShop.BusinessLayer.Extensions
 
             decimal productAmountD;
             if (!InputCheck.GetAmountDecimal(productAmount, out productAmountD)){ return; }
+
             order.ProductAmount = productAmountD;
 
             //OrderId

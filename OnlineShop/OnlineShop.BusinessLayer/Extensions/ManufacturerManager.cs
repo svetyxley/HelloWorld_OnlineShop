@@ -11,15 +11,17 @@ namespace OnlineShop.BusinessLayer.Extensions
         {
             //public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
 
-            manufacturer.ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
-            JsonController<Employee>.SaveIndexer(manufacturer.ManufacturerID + 1);
 
             string name = string.Empty;
             if (!InputCheck.GetString(manufacturerName, out name)) { return; }
-            manufacturer.ManufacturerName = name;
 
             string edrpou ;
-            if (!InputCheck.GetEDRPOU(manufacturerEDRPOU ,out edrpou)) {  return; }    
+            if (!InputCheck.GetEDRPOU(manufacturerEDRPOU ,out edrpou)) {  return; }
+
+            manufacturer.ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
+            JsonController<Employee>.SaveIndexer(manufacturer.ManufacturerID + 1);
+
+            manufacturer.ManufacturerName = name;
             manufacturer.ManufacturerEDRPOU = edrpou;
         }
     }
