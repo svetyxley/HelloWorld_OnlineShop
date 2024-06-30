@@ -5,15 +5,15 @@ namespace OnlineShop.Data.Entities
 {
     public class Product
     {
-        public int ProductID { get; init; }
+        public int ProductID { get; set; }
 
         public string ProductName { get; set; } = string.Empty;
 
-        public int ProductCategoryID { get; init; }
+        public int ProductCategoryID { get; set; }
 
-        public int ManufacturerId { get; init; }
+        public int ManufacturerId { get; set; }
 
-        public int SupplierID { get; init; }
+        public int SupplierID { get; set; }
 
         public uint? ProductPrice { get; set; }
 
@@ -55,7 +55,7 @@ namespace OnlineShop.Data.Entities
 
         public override string ToString()
         {
-            return $"ProductID: {ProductID}, ProductName: {ProductName}, ProductManufacturer: {ProductManufacturer}, ProductSupplier: {ProductSupplier}, ProductPrice: {ProductPrice}";
+            return $"ProductID: {ProductID}, ProductName: {ProductName}, ProductManufacturer: {ManufacturerId}, ProductSupplier: {SupplierID}, ProductPrice: {ProductPrice}";
         }
     }
 }

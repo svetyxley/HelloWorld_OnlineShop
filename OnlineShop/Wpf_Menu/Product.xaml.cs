@@ -1,4 +1,5 @@
-﻿using OnlineShop.BusinessLayer.Services;
+﻿using OnlineShop.BusinessLayer.Extensions;
+using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -41,30 +42,10 @@ namespace Wpf_Menu
 
         private void Button_Click_AddProduct(object sender, RoutedEventArgs e)
         {
-            int categoryId;
-            if(!GettingData.GetIdNumber(CategoryIdTextBox, out categoryId)) { return; }
-            else if (!JsonController<Category>.checkId(categoryId)){ MessageBox.Show("Нет такого Category Id  в базе"); return; }
 
-            int manufacturerId;
-            if (!GettingData.GetIdNumber(ManufacturerTextBox, out manufacturerId)) { return; }
-            else if (!JsonController<Manufacturer>.checkId(manufacturerId)) { MessageBox.Show("Нет такого Manufacturer Id  в базе"); return; }
+            Product addingProduct = new Product();
 
-            int supplierId;
-            if (!GettingData.GetIdNumber(SupplierTextBox, out supplierId)) { return; }
-            else if (!JsonController<Supplier>.checkId(supplierId)) { MessageBox.Show("Нет такого Supplier Id  в базе"); return; }
-
-            string name;
-            if (!GettingData.GetString(ProductNameTextBox, out name)) { return; }
-
-            uint price;
-            if(!GettingData.GetPrice(ProductPriceTextBox, out price)) {  return; }
-
-
-
-            Product addingProduct = new Product(indexer, name, categoryId, manufacturerId, supplierId, price);
-
-            indexer++;
-            JsonController<Product>.SaveIndexer(indexer);
+            addingProduct.AddDataToProduct(ProductNameTextBox.Text, CategoryIdTextBox.Text, ManufacturerTextBox.Text, SupplierTextBox.Text, ProductPriceTextBox.Text);
 
             JsonController<Product>.WriteToFile(addingProduct);
 

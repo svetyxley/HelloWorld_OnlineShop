@@ -9,7 +9,7 @@ namespace OnlineShop.Data.Entities
     public class PaymentType
     {
 
-        public int PaymentType_Id { get; private set; }
+        public int PaymentType_Id { get; set; }
 
         public string PaymentType_Name { get; set; }
 
