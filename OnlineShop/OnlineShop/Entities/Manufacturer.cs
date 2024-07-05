@@ -6,6 +6,8 @@
         public string? ManufacturerName { get; set; } = "";
         public string? ManufacturerEDRPOU { get; set; } = "";
 
+        public List<Product>? products { get; set; }
+
         public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
 
         {

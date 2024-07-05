@@ -28,7 +28,7 @@ PecantageDiscount float
 GO
 
 CREATE TABLE Manufacturer(
-МanufacturerID int IDENTITY PRIMARY KEY,
+ManufacturerID int IDENTITY PRIMARY KEY,
 ManufacturerName nvarchar (255),
 ManufacturerEDRPOU nvarchar (10)
 )
