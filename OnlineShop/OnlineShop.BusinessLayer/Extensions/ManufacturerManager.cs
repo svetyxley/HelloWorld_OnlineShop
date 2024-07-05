@@ -18,8 +18,8 @@ namespace OnlineShop.BusinessLayer.Extensions
         {
             //public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
 
-            manufacturer.ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
-            JsonController<Employee>.SaveIndexer(manufacturer.ManufacturerID + 1);
+            manufacturer.МanufacturerID = JsonController<Manufacturer>.LoadIndexer();
+            JsonController<Employee>.SaveIndexer(manufacturer.МanufacturerID + 1);
 
             manufacturer.ManufacturerName = InputCheck.GetString(manufacturerName);
             manufacturer.ManufacturerEDRPOU = InputCheck.GetEDRPOU(manufacturerEDRPOU);

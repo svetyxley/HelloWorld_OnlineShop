@@ -2,14 +2,16 @@
 {
     public class Manufacturer
     {
-        public int ManufacturerID { get; set; }
+        public int МanufacturerID { get; set; }
         public string? ManufacturerName { get; set; } = "";
         public string? ManufacturerEDRPOU { get; set; } = "";
 
-        public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
+        public string CreatedDate1 { get; set; }
+
+        public Manufacturer(int мanufacturerId, string manufacturerName, string manufacturerEDRPOU)
 
         {
-            ManufacturerID = manufacturerID;
+            МanufacturerID = мanufacturerId;
             ManufacturerName = manufacturerName;
             ManufacturerEDRPOU = manufacturerEDRPOU;
         }
@@ -22,7 +24,7 @@
         // Override the ToString method
         public override string ToString()
         {
-            return $"ManufacturerID: {ManufacturerID}, ManufacturerName: {ManufacturerName}, ManufacturerEDRPOU: {ManufacturerEDRPOU}";
+            return $"МanufacturerID: {МanufacturerID}, ManufacturerName: {ManufacturerName}, ManufacturerEDRPOU: {ManufacturerEDRPOU}";
         }
     }
 }
