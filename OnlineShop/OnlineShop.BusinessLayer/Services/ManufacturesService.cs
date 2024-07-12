@@ -1,4 +1,6 @@
-﻿using OnlineShop.BusinessLayer.Managers;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.EntityServices;
@@ -13,6 +15,9 @@ namespace OnlineShop.BusinessLayer.Services
         private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Manufacturer> commonEntityService = new();
+
+        private DapperContext dapperContext = new();
+
         ActivityLogService logService = new ActivityLogService();
 
         private List<Manufacturer> manufacturers = new List<Manufacturer>() 
@@ -36,17 +41,16 @@ namespace OnlineShop.BusinessLayer.Services
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
         }
-        public  Manufacturer GetManufacturerByID()
+
+        public  Manufacturer GetManufacturerByID(int id, string connectionStr)
         {
-            var manufacturerID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);
-            if (manufacturer == null)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-            return manufacturer;
+            var connection = dapperContext.OpenConnection(connectionStr);
+
+                //var sql = $"select * from [Manufacturer] where МanufacturerID = @id";
+
+            var manufacturer = connection.Query<Manufacturer>("GetManufacturerById", new {Id = id });
+            return manufacturer.FirstOrDefault();
+
         }
 
         public Manufacturer GetManufacturerByName(string  manufacturerName)
@@ -63,7 +67,7 @@ namespace OnlineShop.BusinessLayer.Services
 
         public Manufacturer UpdateManufacturer(int manufacturerID)
         {
-            var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.ManufacturerID == manufacturerID);
+            var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.МanufacturerID == manufacturerID);
             if (manufacturer == null)
             {
                 outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
@@ -73,7 +77,7 @@ namespace OnlineShop.BusinessLayer.Services
 
         public void DeleteManufacturerByID(int manufacturerID)
         {
-            var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.ManufacturerID == manufacturerID);
+            var manufacturer = manufacturers.FirstOrDefault(manufacturer => manufacturer.МanufacturerID == manufacturerID);
             if (manufacturer != null)
             {
                 manufacturers.Remove(manufacturer);
