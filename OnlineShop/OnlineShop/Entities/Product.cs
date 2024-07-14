@@ -1,11 +1,12 @@
-﻿using System.Xml.Linq;
+﻿using OnlineShop.BusinessLayer.Services;
+using System.Xml.Linq;
 using static System.Net.WebRequestMethods;
 
 namespace OnlineShop.Data.Entities
 {
     public class Product
     {
-        public int ProductID { get; set; }
+        public required int ProductID { get; set; }
 
         public string ProductName { get; set; } = string.Empty;
 
@@ -25,27 +26,14 @@ namespace OnlineShop.Data.Entities
 
         public Product()
         {
-
-        }
-
-        public Product(int id, string name)
-        {
-            ProductID = id;
-            ProductName = name;
-        }
-
-        public Product(int id,string name, uint price)
-        {
-            ProductID = id;
-            ProductName = name;
-            ProductPrice = price;
+            ProductID = JsonController<Product>.LoadIndexer();
         }
 
 
 
-        public Product(int productID, string productName, int productCategoryId, int productManufacturerId, int productSupplierId, uint productPrice)
+        public Product( string productName, int productCategoryId, int productManufacturerId, int productSupplierId, uint productPrice)
         {
-            ProductID = productID;
+            ProductID = JsonController<Product>.LoadIndexer();
             ProductName = productName;
             ProductCategoryID = productCategoryId;
             ManufacturerId = productManufacturerId;

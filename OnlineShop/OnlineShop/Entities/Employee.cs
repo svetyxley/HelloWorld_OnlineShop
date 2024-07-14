@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Data.Entities;
 
 namespace OnlineShop.Data.Entities
 {
     public class Employee : User
     {
-        public int EmployeeId {  get; set; }    
+        public required int EmployeeId {  get; set; }    
 
         public double Salary { get; set; }
         public string Position { get; set; }
@@ -18,21 +19,21 @@ namespace OnlineShop.Data.Entities
 
         public Employee()
         {
-
+            EmployeeId = JsonController<Employee>.LoadIndexer();
         }
-        public Employee(int userID, ulong inn, string name, string surname)
+        public Employee( ulong inn, string name, string surname)
         {
-            UserID = userID;
+            EmployeeId = JsonController<Employee>.LoadIndexer();
             INN = inn;
             Name = name;
             Surname = surname;
         }
 
-        public Employee(int employeeId, string position, DateOnly hiredate, uint salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
-            : base (employeeId, inn, name, surname, phoneNumber, userBirthDate, address)
+        public Employee( string position, DateOnly hiredate, uint salary, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address) 
+            : base (inn, name, surname, phoneNumber, userBirthDate, address)
         
         {
-            EmployeeId = employeeId;    
+            EmployeeId = JsonController<Employee>.LoadIndexer();
             Position = position;
             HireDate = hiredate;
             Salary = salary;
@@ -41,7 +42,7 @@ namespace OnlineShop.Data.Entities
 
         public override string ToString()
         {
-            return $"EmployeeID: {UserID}, Employee INN: {INN}, Employee name: {Name}, Employee surname: {Surname}";
+            return $"EmployeeID: {EmployeeId}, Employee INN: {INN}, Employee name: {Name}, Employee surname: {Surname}, Salary: {Salary}, Position:{Position}";
         }
     }
 }

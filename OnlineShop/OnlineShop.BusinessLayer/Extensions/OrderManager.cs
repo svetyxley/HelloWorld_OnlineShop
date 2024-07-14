@@ -54,12 +54,6 @@ namespace OnlineShop.BusinessLayer.Extensions
 
             order.ProductAmount = productAmountD;
 
-            //OrderId
-            order.OrderId = JsonController<Order>.LoadIndexer();
-            JsonController<Order>.SaveIndexer(order.OrderId + 1);
-
-
-
             order.OrderTime = DateTime.Now;
         }
 

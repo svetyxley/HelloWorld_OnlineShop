@@ -4,35 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using OnlineShop.BusinessLayer.Services;
 using OnlineShop.Data.Entities;
 
 namespace OnlineShop.Data.Entities
 {
     public class Purchase
     {
-        public int PurchaseID { get; set; }
-        private Product _productID = new();
-        private Buyer _buyerID = new();
-        private Employee _employeeID = new();
+        public  required int PurchaseId { get; set; }
+        public int BuyerId { get; set; }
+
+        public int EmployeeId { get; set; }
+
+        public int OrderDetailsId { get; set; }
+
+        public DateTime PurchaseTime { get; set; }
+
+        private Buyer _buyer;
+        private Employee _employee;
 
         public Purchase()
         {
+            PurchaseId = JsonController<Purchase>.LoadIndexer();
+        }
 
-        }
-        public Purchase(int purchaseID)
-        {
-            PurchaseID = purchaseID;
-        }
-        public Purchase(int purchaseID, Product productID, Buyer buyerID, Employee employeeID)
-        {
-            PurchaseID = purchaseID;
-            _productID = productID;
-            _buyerID = buyerID;
-            _employeeID = employeeID;
-        }
         public override string ToString()
         {
-            return $"PurchaseID: {PurchaseID}, buyerID: {_buyerID}, empliyeeID: {_employeeID} and productID: {_productID}";
+            return $"PurchaseID: {PurchaseId}, buyerID: {BuyerId}, PurchaseTime: {PurchaseTime} and productID: {_productID}";
         }
     }
 }

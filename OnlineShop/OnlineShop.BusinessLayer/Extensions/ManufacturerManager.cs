@@ -18,8 +18,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             string edrpou ;
             if (!InputCheck.GetEDRPOU(manufacturerEDRPOU ,out edrpou)) {  return; }
 
-            manufacturer.ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
-            JsonController<Employee>.SaveIndexer(manufacturer.ManufacturerID + 1);
 
             manufacturer.ManufacturerName = name;
             manufacturer.ManufacturerEDRPOU = edrpou;

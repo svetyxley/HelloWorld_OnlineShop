@@ -54,11 +54,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             if(!InputCheck.GetPriceUint(productPrice, out price)) { return; }
             product.ProductPrice = price;
 
-
-            product.ProductID = JsonController<Product>.LoadIndexer();
-            JsonController<Product>.SaveIndexer(product.ProductID + 1);
-
-
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace OnlineShop.Data.Entities
+﻿using OnlineShop.BusinessLayer.Services;
+
+namespace OnlineShop.Data.Entities
 {
     public class DiscountCard
     {
-        public int DiscountCard_ID { get; init; }
+        public required int DiscountCard_ID { get; init; }
         public int buyerID { get; set; }
         public double PercanatageDiscount { get; set; }
         public DiscountCard()
@@ -11,12 +13,12 @@
         }
         public DiscountCard(int discountCard_ID, double percanatageDiscount)
         {
-            DiscountCard_ID = discountCard_ID;
+            DiscountCard_ID = JsonController<DiscountCard>.LoadIndexer();
             PercanatageDiscount = percanatageDiscount;
         }
         public DiscountCard(int discountCard_ID, int _buyerID, double percanatageDiscount)
         {
-            DiscountCard_ID = discountCard_ID;
+            DiscountCard_ID = JsonController<DiscountCard>.LoadIndexer();
             buyerID = _buyerID;
             PercanatageDiscount = percanatageDiscount;
         }

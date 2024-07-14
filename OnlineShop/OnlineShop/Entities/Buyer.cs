@@ -1,11 +1,13 @@
-﻿using OnlineShop.Data;
+﻿using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data;
 
 
 namespace OnlineShop.Data.Entities
 {
     public class Buyer : User
     {
-        public int BuyerId { get; set; }
+
+        public required int BuyerId { get; set; }
 
         public string BuyerEmail { get; set; }
 
@@ -14,13 +16,13 @@ namespace OnlineShop.Data.Entities
 
         public Buyer()
         {
-
+            BuyerId = JsonController<Buyer>.LoadIndexer();
         }
 
-        public Buyer(int Id, string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
-                                         : base(Id, inn, name, surname, phoneNumber, userBirthDate, address)
+        public Buyer( string email, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
+                                         : base(inn, name, surname, phoneNumber, userBirthDate, address)
         {
-            BuyerId = Id;
+            BuyerId = JsonController<Buyer>.LoadIndexer();
 
             BuyerEmail = email;
             //DiscountCardId = discountCardId;

@@ -48,10 +48,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             string pos = string.Empty;
             if(!InputCheck.GetString(address,out pos)) { return; }
             employee.Position = pos;
-
-
-            employee.EmployeeId = JsonController<Employee>.LoadIndexer();
-            JsonController<Employee>.SaveIndexer(employee.EmployeeId + 1);
         }
     }
 }

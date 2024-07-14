@@ -18,10 +18,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             string PaymnetTypeName = string.Empty;
             if (!InputCheck.GetString(paymentName, out PaymnetTypeName)) { return; }
 
-            //присваиваем id и записываем в json id на 1 больше
-            paymentType.PaymentType_Id = JsonController<PaymentType>.LoadIndexer();
-            JsonController<PaymentType>.SaveIndexer(paymentType.PaymentType_Id + 1);
-
             // присваеваем проверенное имя свойству PaymentType_Name
             paymentType.PaymentType_Name = PaymnetTypeName;
         }

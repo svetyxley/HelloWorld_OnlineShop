@@ -18,9 +18,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             if (!InputCheck.GetString(categoryName, out catName)) { return; }
             category.Category_Name = catName;
 
-            category.Category_Id = JsonController<Category>.LoadIndexer();
-            JsonController<Category>.SaveIndexer(category.Category_Id + 1);
-
         }
     }
 }

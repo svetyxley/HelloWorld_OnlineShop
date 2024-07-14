@@ -5,7 +5,6 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using OnlineShop.Constants;
 using OnlineShop.Data.Entities;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -54,20 +53,28 @@ namespace OnlineShop.BusinessLayer.Services
 
         public static int LoadIndexer()
         {
+            int result;
+            string json = string.Empty;
+
+            //если файл существует открываем и вычитываем в Result
             if (File.Exists($"indexer_of_{typeof(T).Name}.json"))
             {
-                string json = File.ReadAllText($"indexer_of_{typeof(T).Name}.json");
-                return JsonSerializer.Deserialize<int>(json);
+                json = File.ReadAllText($"indexer_of_{typeof(T).Name}.json");
+                result = JsonSerializer.Deserialize<int>(json);
             }
 
-            return 0; // Возвращаем 0, если файл не существует или не удалось загрузить данные
-        }
+            else
+            {
+                // Присваеваем 0, если файл не существует или не удалось загрузить данные
+                result = 0;
+            }
 
-
-        public static void SaveIndexer(int indexer)
-        {
-            string json = JsonSerializer.Serialize(indexer);
+            //Запись индекса +1
+            json = JsonSerializer.Serialize(result + 1);
             File.WriteAllText($"indexer_of_{typeof(T).Name}.json", json);
+
+            //Возврат результата
+            return result;
         }
 
 

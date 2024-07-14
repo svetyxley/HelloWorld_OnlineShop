@@ -1,8 +1,9 @@
-﻿namespace OnlineShop.Data.Entities
+﻿using OnlineShop.BusinessLayer.Services;
+
+namespace OnlineShop.Data.Entities
 {
     public class User
     {
-        public int UserID { get; set; }
 
         public ulong INN { get; set; }
 
@@ -19,12 +20,11 @@
 
         public User()
         {
-
+            
         }
 
-        public User(int userid, ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
+        public User( ulong inn, string name, string surname, string phoneNumber, DateOnly userBirthDate, string address)
         {
-            UserID = userid;
             INN = inn;
             Name = name;
             Surname = surname;

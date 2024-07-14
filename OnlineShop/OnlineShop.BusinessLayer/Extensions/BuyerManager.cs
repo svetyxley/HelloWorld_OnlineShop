@@ -42,11 +42,6 @@ namespace OnlineShop.BusinessLayer.Extensions
             DateOnly UserBirthDate;
             if(!InputCheck.GetDataOnly(userBirthDate,out UserBirthDate)) { return; }
 
-
-
-            buyer.BuyerId = JsonController<Buyer>.LoadIndexer();
-            JsonController<Buyer>.SaveIndexer(buyer.BuyerId + 1);
-
             buyer.BuyerEmail = buyerEmail;
             buyer.Name = Name;
             buyer.Surname = Surname;

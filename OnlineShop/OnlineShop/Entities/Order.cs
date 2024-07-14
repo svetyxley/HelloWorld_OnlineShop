@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShop.BusinessLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace OnlineShop.Data.Entities
 {
     public class Order
     {
-        public int OrderId { get; set; }
+        public required int OrderId { get; set; }
 
         public int SupplierId { get; set; }
 
@@ -24,12 +25,12 @@ namespace OnlineShop.Data.Entities
 
         public Order()
         {
-
+            OrderId = JsonController<Order>.LoadIndexer();
         }
 
         public Order(int id, int supplierId, int productId, int employeeId, decimal productAmount, DateTime time)
         {
-            this.OrderId = id;
+            OrderId = JsonController<Order>.LoadIndexer();
             this.SupplierId = supplierId;
             this.ProductId = productId;
             this.EmployeeId = employeeId;

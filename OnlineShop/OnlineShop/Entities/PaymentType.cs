@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShop.BusinessLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,22 @@ namespace OnlineShop.Data.Entities
     public class PaymentType
     {
 
-        public int PaymentType_Id { get; set; }
+        public required int PaymentType_Id { get; set; }
 
         public string PaymentType_Name { get; set; }
 
+
         public PaymentType()
         {
-
+            PaymentType_Id = JsonController<PaymnetTypes>.LoadIndexer();
         }
 
         public PaymentType( int id, string name)
         {
-            PaymentType_Id = id;
+            PaymentType_Id = JsonController<PaymnetTypes>.LoadIndexer();
             PaymentType_Name = name;
         }
+
 
         public override string ToString()
         {

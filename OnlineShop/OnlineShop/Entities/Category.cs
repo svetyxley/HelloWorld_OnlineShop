@@ -1,4 +1,5 @@
-﻿using OnlineShop.Data;
+﻿using OnlineShop.BusinessLayer.Services;
+using OnlineShop.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,18 @@ namespace OnlineShop.Data.Entities
     public class Category
     {
        
-        public int Category_Id { get; set; }
+        public required int Category_Id { get; set; }
 
         public string Category_Name { get; set; }
 
         public Category()
         {
-            
+            Category_Id = JsonController<Category>.LoadIndexer();
         }
 
         public Category(int id,string name)
         {
-            Category_Id = id;
+            Category_Id = JsonController<Category>.LoadIndexer();
             Category_Name = name;
         }
 

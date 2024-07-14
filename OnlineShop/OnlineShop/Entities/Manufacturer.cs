@@ -1,15 +1,17 @@
-﻿namespace OnlineShop.Data.Entities
+﻿using OnlineShop.BusinessLayer.Services;
+
+namespace OnlineShop.Data.Entities
 {
     public class Manufacturer
     {
-        public int ManufacturerID { get; set; }
+        public required int ManufacturerID { get; set; }
         public string? ManufacturerName { get; set; } = "";
         public string? ManufacturerEDRPOU { get; set; } = "";
 
         public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
 
         {
-            ManufacturerID = manufacturerID;
+            ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
             ManufacturerName = manufacturerName;
             ManufacturerEDRPOU = manufacturerEDRPOU;
         }
@@ -17,6 +19,7 @@
         // Конструктор за замовчуванням
         public Manufacturer()
         {
+            ManufacturerID = JsonController<Manufacturer>.LoadIndexer();
         }
 
         // Override the ToString method
