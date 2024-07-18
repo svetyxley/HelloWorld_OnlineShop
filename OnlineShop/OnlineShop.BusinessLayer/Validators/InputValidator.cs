@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace OnlineShop
+namespace OnlineShop.BusinessLayer.Validators
 {
     public class InputValidator
     {

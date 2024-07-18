@@ -1,7 +1,7 @@
 ﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Data.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Validators;
 
 namespace OnlineShop.BusinessLayer.Services
 {

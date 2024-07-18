@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.EntityServices
+﻿namespace OnlineShop.BusinessLayer.Services
 {
     public class CommonEntityService<T>
     {

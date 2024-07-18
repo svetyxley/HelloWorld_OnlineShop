@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <Configurations>Debug;Release;Dev;QA</Configurations>
+    <Configurations>Debug;Release;SvitlanaL</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

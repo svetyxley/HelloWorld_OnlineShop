@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;Dev;QA</Configurations>
+    <Configurations>Debug;Release;SvitlanaL</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OnlineShop\OnlineShop.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Validators\InputValidator.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>
