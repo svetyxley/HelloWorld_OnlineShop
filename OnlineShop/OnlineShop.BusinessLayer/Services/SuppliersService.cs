@@ -1,7 +1,8 @@
-﻿using OnlineShop.BusinessLayer.Managers;
+﻿using Dapper;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -15,40 +16,22 @@ namespace OnlineShop.BusinessLayer.Services
         private CommonEntityService<Supplier> commonEntityService = new();
         ActivityLogService logService = new ActivityLogService();
 
-        private List<Supplier> suppliers = new List<Supplier>()
-        {
-        new Supplier(1, "Supplier1", "SupplierEDRPOU1"),
-        new Supplier(2, "Supplier2", "SupplierEDRPOU2"),
-        new Supplier(3, "Supplier3", "SupplierEDRPOU3")
-        };
+        private List<Supplier> suppliers = new List<Supplier>();
 
-        public Supplier CreateSupplier()
+        private DapperContext dapperContext = new();
+
+
+        public void CreateSupplier(string name, string code, string connectionStr)
         {
-            int supplierID = idGenerator.InputID(suppliers);
-            string supplierName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-            string supplierEDRPOU = inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType());
-            return new Supplier(supplierID, supplierName, supplierEDRPOU);
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var supplier = connection.Execute("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
         }
 
-        public void AddToSuppliers()
+        public Supplier GetSupplierByID(int id, string connectionStr)
         {
-            suppliers.Add(CreateSupplier());
-            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType()); // output result to consol
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-        }
-
-        public Supplier GetSupplierByID()
-        {
-            var supplierID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
-            if (supplier == null)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-            return supplier;
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var supplier = connection.Query<Supplier>("GetSupplierByID", new { SupplierID = id });
+            return supplier.FirstOrDefault();
         }
 
         //додати логику апдейту

@@ -2,7 +2,7 @@
 using OnlineShop.Constants;
 using OnlineShop.Data.Entities;
 using OnlineShop.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Validators;
 
 namespace OnlineShop.BusinessLayer.Services
 {

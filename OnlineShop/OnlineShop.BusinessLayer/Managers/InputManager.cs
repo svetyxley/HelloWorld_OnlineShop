@@ -1,4 +1,5 @@
-﻿namespace OnlineShop
+﻿using OnlineShop.BusinessLayer.Validators;
+namespace OnlineShop
 {
     public class InputManager
     {

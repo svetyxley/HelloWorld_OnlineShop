@@ -46,7 +46,7 @@ ProductID int IDENTITY PRIMARY KEY,
 ProductName nvarchar (255),
 --ProductCategoryID int FOREIGN KEY REFERENCES Category(Category_Id),
 ProductCategoryID int,
-ManufacturerID int FOREIGN KEY REFERENCES Manufacturer(МanufacturerID),
+ManufacturerID int FOREIGN KEY REFERENCES Manufacturer(ManufacturerID),
 SupplierID int FOREIGN KEY REFERENCES Supplier(SupplierID),
 ProductPrice DECIMAL (10,2)
 )
@@ -115,4 +115,52 @@ INSERT INTO OrderSupply(ProductId, ProductAmount, OrderTime) VALUES
 (1, 12, '2024-06-30 12:07:35'),
 (2, 95, '2024-07-4 13:09:32'),
 (5, 45, '2024-06-9 21:10:39');
+GO
+
+-- Stored Procedures creation
+CREATE PROCEDURE CreateSupplier
+    @SupplierName nvarchar(255),
+    @SupplierEDRPOU nvarchar(10)
+AS
+BEGIN
+  
+    INSERT INTO Supplier (SupplierName, SupplierEDRPOU)
+    VALUES (@SupplierName, @SupplierEDRPOU);    
+    -- Повернення ідентифікатора нового запису
+    SELECT SCOPE_IDENTITY() AS NewSupplierID;
+END;
+GO
+
+CREATE PROCEDURE GetSupplierByID
+    @SupplierID int
+AS
+BEGIN
+    -- Отримання запису з таблиці Supplier
+    SELECT SupplierID, SupplierName, SupplierEDRPOU
+    FROM Supplier
+    WHERE SupplierID = @SupplierID;
+END;
+GO
+
+CREATE PROCEDURE DeleteSupplierByID
+    @SupplierID int
+AS
+BEGIN
+    -- Перевірка, чи існує запис з вказаним SupplierID
+    IF EXISTS (SELECT 1 FROM Supplier WHERE SupplierID = @SupplierID)
+    -- Видалення запису
+    DELETE FROM Supplier
+    WHERE SupplierID = @SupplierID;
+END;
+GO
+
+CREATE PROCEDURE GetManufacturerById
+    @ManufacturerID int
+AS
+BEGIN
+    -- Отримання запису з таблиці Supplier
+    SELECT ManufacturerID, ManufacturerName, ManufacturerEDRPOU
+    FROM Manufacturer
+    WHERE ManufacturerID = @ManufacturerID;
+END;
 GO
