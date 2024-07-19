@@ -48,23 +48,24 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public void DeleteSupplierByID(int supplierID)
+        public void DeleteSupplierByID(int supplierID, string connectionStr)
         {
-            var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
-            if (supplier != null)
-            {
-                suppliers.Remove(supplier);
+            var connection = dapperContext.OpenConnection(connectionStr);
+                connection.Execute("DeleteSupplierByID", new { SupplierID = supplierID });
                 outputManager.OutputToConsole(NotificationConstants.DELETED, commonEntityService.GetListType());
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
                 logService.OutputLog(log);// output result to log
-            }
-            else
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
         }
 
-        public void OutputSuppliers()
+        public List<Supplier> GetAllSupliers(string connectionStr)
+        {
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var sql = $"select * FROM Supplier";
+            var suppliers = connection.Query<Supplier>(sql).AsList();
+            return suppliers;
+        }
+
+        public void OutputSuppliers(List<Supplier> suppliers)
         {
             outputManager.OutputToConsole(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record

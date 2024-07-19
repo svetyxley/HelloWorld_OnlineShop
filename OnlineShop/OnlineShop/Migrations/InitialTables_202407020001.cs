@@ -17,12 +17,12 @@ namespace OnlineShop.Data.Migrations
             Create.Table("DiscountCards")
                 .WithColumn("Id").AsInt64().Identity().NotNullable().PrimaryKey()
                 .WithColumn("PecantageDiscount").AsFloat();
-            
+
             Create.Table("Manufacturer")
                 .WithColumn("ManufacturerID").AsInt64().Identity().NotNullable().PrimaryKey()
                 .WithColumn("ManufacturerName").AsString(255)
                 .WithColumn("ManufacturerEDRPOU").AsString(10);
-            
+
             Create.Table("Supplier")
                 .WithColumn("SupplierID").AsInt64().Identity().NotNullable().PrimaryKey()
                 .WithColumn("SupplierName").AsString(255)
@@ -41,6 +41,11 @@ namespace OnlineShop.Data.Migrations
                 .WithColumn("ProductAmount").AsInt64()
                 .WithColumn("ProductID").AsInt64().ForeignKey("FK_Stocks_Product", "Product", "ProductID");
 
+            Create.Table("OrderSupply")
+                .WithColumn("OrderId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("ProductAmount").AsInt64()
+                .WithColumn("ProductId").AsInt64().ForeignKey("FK_OrderSupply_Product", "Product", "ProductID")
+                .WithColumn("OrderTime").AsDateTime();
         }
     }
 }

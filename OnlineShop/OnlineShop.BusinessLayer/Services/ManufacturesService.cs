@@ -41,10 +41,6 @@ namespace OnlineShop.BusinessLayer.Services
         {
             var connection = dapperContext.OpenConnection(connectionStr);
             var manufacturer = connection.Query<Manufacturer>("GetManufacturerById", new { ManufacturerID = id });
-            if (manufacturer.Count() == 0)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
             return manufacturer.FirstOrDefault();
