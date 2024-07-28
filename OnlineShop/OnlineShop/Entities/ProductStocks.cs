@@ -4,6 +4,7 @@
     {
         public Product? product { get; set; }
         public int ProductAmount { get; set; }
+        //public int StockID { get; set; }
         public ProductStocks()
         {
 

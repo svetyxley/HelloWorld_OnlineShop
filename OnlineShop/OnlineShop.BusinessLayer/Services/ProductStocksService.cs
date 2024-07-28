@@ -16,23 +16,57 @@ namespace OnlineShop.BusinessLayer.Services
         private ProductsService productsService = new();
         private OrderSupplyService orderSupplyService = new();
 
-        private List<ProductStocks> productStocks = new List<ProductStocks>()
+        private List<ProductStocks> productStocksList = new List<ProductStocks>()
         {
             new ProductStocks(10),
         };
-        public ProductStocks CreateProduct()
+        public ProductStocks CreateProduct(Product _product, int productAmount)
         {
-            var _product = productsService.GetProductByID();
-            int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+            //var _product = productsService.GetProductByID();
+            //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             return new ProductStocks(_product, productAmount);
         }
-        public void AddProduct()
+        public void AddProduct(Product _product, int productAmount)
         {
-            productStocks.Add(CreateProduct());
-            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
+            productStocksList.Add(CreateProduct(_product, productAmount));
+            outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         }
-        public ProductStocks BuyProducts()
+        public int GetAmountByID(int productID)
         {
+            var product = productsService.GetProductByID(productID);
+            if (product != null)
+            {
+                var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
+                if (productStock != null)
+                {
+                    return productStock.ProductAmount;
+                }
+            }
+            return 0;
+        }
+        public ProductStocks UpdateOfAmount(int productID, int productAmount)
+        {
+            var product = productsService.GetProductByID(productID);
+            if (product != null)
+            {
+                var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
+                if (productStock != null)
+                {
+                    productStock.ProductAmount = productAmount;
+                    return productStock;
+                }
+            }
+            return null;
+        }
+        public ProductStocks BuyProducts(int productID, int productAmount)
+        {
+            int AmountOnStock = GetAmountByID(productID);
+            if (productAmount <= AmountOnStock)
+            {
+                AmountOnStock-=productAmount;
+                var productStock = UpdateOfAmount(productID, AmountOnStock);
+                return productStock;
+            }
             return null;
         }
     }

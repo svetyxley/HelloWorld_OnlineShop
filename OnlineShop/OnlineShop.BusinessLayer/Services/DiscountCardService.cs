@@ -22,20 +22,20 @@ namespace OnlineShop.BusinessLayer.Services
             new DiscountCard(3, 20)
         };
 
-        public DiscountCard CreateCard()
+        public DiscountCard CreateCard(int cardID, double discountPercantage)
         {
-            int cardID = idGenerator.InputID(discountCard);
-            double discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
+            //int cardID = idGenerator.InputID(discountCard);
+            //double discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
             return new DiscountCard(cardID, buyerService.GetManufacturerByID().BuyerId, discountPercantage);
         }
-        public void AddCard()
+        public void AddCard(int cardID, double discountPercantage)
         {
-            discountCard.Add(CreateCard());
-            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
+            discountCard.Add(CreateCard(cardID, discountPercantage));
+            outputManager.OutputToConsole(NotificationConstants.CARD_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         }
-        public DiscountCard UpdateCard()
+        public DiscountCard UpdateCard(int cardID)
         {
-            var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+            //var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
             if (card == null)
             {
@@ -47,9 +47,9 @@ namespace OnlineShop.BusinessLayer.Services
         {
             outputManager.OutputToConsole(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
         }
-        public DiscountCard GetDiscountCardByID()
+        public DiscountCard GetDiscountCardByID(int cardID)
         {
-            var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+            //var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
             if (card == null)
             {

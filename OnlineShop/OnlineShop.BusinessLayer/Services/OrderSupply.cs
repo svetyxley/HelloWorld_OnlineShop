@@ -5,11 +5,11 @@ namespace OnlineShop.EntityServices
     public class OrderSupply
     {
         public int SupplyOrderID { get; init; }
-        public Supplier? _supplierID { get; set; }
-        public Product? _productID { get; set; }
+        public Supplier? _supplier { get; set; }
+        public Product? _product { get; set; }
         public int ProductAmount { get; init; }
         public string OrderTime { get; set; }
-        public Employee? _employeeID { get; set; }
+        public Employee? _employee { get; set; }
 
 
         public OrderSupply()
@@ -30,19 +30,19 @@ namespace OnlineShop.EntityServices
             OrderTime = orderTime;
         }
 
-        public OrderSupply(int orderID, Supplier supplierID, Product productID, int productAmount, string orderTime, Employee employeeID)
+        public OrderSupply(int orderID, Supplier supplier, Product product, int productAmount, string orderTime, Employee employee)
         {
             SupplyOrderID = orderID;
-            _supplierID = supplierID;
-            _productID = productID;
+            _supplier = supplier;
+            _product = product;
             ProductAmount = productAmount;
             OrderTime = orderTime;
-            _employeeID = employeeID;
+            _employee = employee;
         }
 
         public override string ToString()
         {
-            return $"Supply order ID: {SupplyOrderID}, Supplier: {_supplierID}, Product: {_productID}, Product Amount: {ProductAmount}, Order time: {OrderTime}, Employee: {_employeeID}";
+            return $"Supply order ID: {SupplyOrderID}, Supplier: {_supplier}, Product: {_product}, Product Amount: {ProductAmount}, Order time: {OrderTime}, Employee: {_employee}";
         }
     }
 }

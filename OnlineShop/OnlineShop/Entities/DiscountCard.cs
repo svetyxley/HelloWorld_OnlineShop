@@ -1,6 +1,6 @@
 ﻿namespace OnlineShop.Entities
 {
-    public class DiscountCard
+    public record DiscountCard
     {
         public int DiscountCard_ID { get; init; }
         public int buyerID { get; set; }
