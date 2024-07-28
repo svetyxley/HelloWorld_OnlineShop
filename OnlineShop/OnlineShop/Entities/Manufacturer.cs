@@ -1,15 +1,15 @@
-﻿namespace OnlineShop.Entities
+namespace OnlineShop.Entities
 {
     public class Manufacturer
     {
         public int ManufacturerID { get; set; }
         public string? ManufacturerName { get; set; } = "";
         public string? ManufacturerEDRPOU { get; set; } = "";
+        public string CreatedDate1 { get; set; }
 
-        public Manufacturer(int manufacturerID, string manufacturerName, string manufacturerEDRPOU)
-
+        public Manufacturer(int мanufacturerId, string manufacturerName, string manufacturerEDRPOU)
         {
-            ManufacturerID = manufacturerID;
+            ManufacturerID = мanufacturerId;
             ManufacturerName = manufacturerName;
             ManufacturerEDRPOU = manufacturerEDRPOU;
         }
@@ -22,7 +22,7 @@
         // Override the ToString method
         public override string ToString()
         {
-            return $"ManufacturerID: {ManufacturerID}, ManufacturerName: {ManufacturerName}, ManufacturerEDRPOU: {ManufacturerEDRPOU}";
+            return $"МanufacturerID: {ManufacturerID}, ManufacturerName: {ManufacturerName}, ManufacturerEDRPOU: {ManufacturerEDRPOU}";
         }
     }
 }

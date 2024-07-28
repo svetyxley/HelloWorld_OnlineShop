@@ -1,8 +1,10 @@
-﻿using OnlineShop.BusinessLayer.Managers;
+﻿using Dapper;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
-using OnlineShop.EntityServices;
+using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
+using System.Linq;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -13,14 +15,12 @@ namespace OnlineShop.BusinessLayer.Services
         private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Manufacturer> commonEntityService = new();
+
+        private DapperContext dapperContext = new();
+
         ActivityLogService logService = new ActivityLogService();
 
-        private List<Manufacturer> manufacturers = new List<Manufacturer>() 
-        {
-           new(1, "Manufacturer1", "ManufacturerEDRPOU1"),
-           new(2, "Manufacturer2", "ManufacturerEDRPOU2"),
-           new(3, "Manufacturer3", "ManufacturerEDRPOU3")
-        };
+        private List<Manufacturer> manufacturers = new List<Manufacturer>();
         public Manufacturer CreateManufacturer()
         {
             int manufacturerID = idGenerator.InputID(manufacturers);
@@ -36,22 +36,20 @@ namespace OnlineShop.BusinessLayer.Services
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
         }
-        public  Manufacturer GetManufacturerByID()
+
+        public  Manufacturer GetManufacturerByID(int id, string connectionStr)
         {
-            var manufacturerID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerID == manufacturerID);
-            if (manufacturer == null)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var manufacturer = connection.Query<Manufacturer>("GetManufacturerById", new { ManufacturerID = id });
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
             logService.OutputLog(log);// output result to log
-            return manufacturer;
+            return manufacturer.FirstOrDefault();
         }
 
         public Manufacturer GetManufacturerByName(string  manufacturerName)
         {
             var manufacturer = manufacturers.FirstOrDefault(manufacturers => manufacturers.ManufacturerName == manufacturerName);
+
             if (manufacturer == null)
             {
                 outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());

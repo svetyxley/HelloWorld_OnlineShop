@@ -1,4 +1,6 @@
-﻿namespace OnlineShop
+﻿using OnlineShop.BusinessLayer.Validators;
+
+namespace OnlineShop.BusinessLayer.Managers
 {
     public class InputManager
     {
@@ -50,7 +52,7 @@
             } while (!inputValidator.IsValidDataPrice(price));
             return Double.Parse(price);
         }
-        public int InputINN(InputValidator inputValidator , string type)
+        public int InputINN(InputValidator inputValidator, string type)
         {
             string inn;
             do

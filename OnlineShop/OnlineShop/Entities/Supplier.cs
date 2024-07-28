@@ -6,6 +6,8 @@
         public string? SupplierName { get; set; } = string.Empty;
         public string? SupplierEDRPOU { get; set; } = string.Empty;
 
+        public List<Product>? products { get; set; }
+
         public Supplier(int supplierID, string supplierName, string supplierEDRPOU)
         {
             SupplierID = supplierID;

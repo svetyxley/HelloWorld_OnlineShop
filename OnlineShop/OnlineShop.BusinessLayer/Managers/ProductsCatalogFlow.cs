@@ -21,8 +21,8 @@ namespace OnlineShop.BusinessLayer.Managers
             manufactureService.OutputManufacturers();
 
             //Додавання нового виробника та вивід повного списка постачальників
-            suppliersService.AddToSuppliers();
-            suppliersService.OutputSuppliers();
+//            suppliersService.AddToSuppliers();
+//            suppliersService.OutputSuppliers();
 
             //Додавання нового продукту та вивід повного списка продуктів
             productsService.CountChecker(); // extension method
