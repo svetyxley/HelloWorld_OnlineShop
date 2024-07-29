@@ -42,9 +42,9 @@ namespace OnlineShop.BusinessLayer.Services
             logService.OutputLog(log);// output result to log
         }
 
-        public Product GetProductByID()
+        public Product GetProductByID(int productID)
         {
-            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+            //var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var product = products.FirstOrDefault(products => products.ProductID == productID);
             if (product == null)
             {

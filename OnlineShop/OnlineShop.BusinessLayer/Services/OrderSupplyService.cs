@@ -24,21 +24,21 @@ namespace OnlineShop.BusinessLayer.Services
             new OrderSupply(2, 8, DateTime.Now.ToString()),
             new OrderSupply(3, 18, DateTime.Now.ToString()),
         };
-        public OrderSupply MakeOrderOfSupply()
+        public OrderSupply MakeOrderOfSupply(int supplyID, int productAmount, string orderTime)
         {
-            int supplyID = idGenerator.InputID(orderSupply);
-            int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-            string orderTime = DateTime.Now.ToString();
+            //int supplyID = idGenerator.InputID(orderSupply);
+            //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+            //string orderTime = DateTime.Now.ToString();
             return new OrderSupply(supplyID, suppliersService.GetSupplierByID(1, "connectionString"), productsService.GetProductByID(), productAmount, orderTime, employeeService.GetEmployeeByID());
         }
-        public void AddOrder()
+        public void AddOrder(int supplyID, int productAmount, string orderTime)
         {
-            orderSupply.Add(MakeOrderOfSupply());
-            outputManager.OutputToConsole(NotificationConstants.ORDERED, commonEntityService.GetListType());
+            orderSupply.Add(MakeOrderOfSupply(supplyID, productAmount, orderTime));
+            outputManager.OutputToConsole(NotificationConstants.SUPPLY_IS_SUCESSFULLY_ORDERED, commonEntityService.GetListType());
         }
-        public OrderSupply GetSupplyOrderByID()
+        public OrderSupply GetSupplyOrderByID(int supplyID)
         {
-            var supplyID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+            //var supplyID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.SupplyOrderID == supplyID);
             if (supply == null)
             {
@@ -50,9 +50,9 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return supply;
         }
-        public int GetAmount()
+        public int GetAmount(int supplyAmount)
         {
-            var supplyAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+            //var supplyAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
             if (supply == null)
             {
