@@ -51,6 +51,14 @@ namespace OnlineShop.Data.Migrations
               WHERE ManufacturerID = @ManufacturerID;
             END;
             GO
+
+            CREATE PROCEDURE GetAllManufacturersWithProducts
+            AS
+            BEGIN
+              SELECT m.*, p.* FROM Manufacturer m
+              JOIN Product p ON p.ManufacturerID=m.ManufacturerID
+            END
+            GO
         ");
         }
 

@@ -7,6 +7,8 @@ namespace OnlineShop.Entities
         public string? ManufacturerEDRPOU { get; set; } = "";
         public string CreatedDate1 { get; set; }
 
+        public List<Product>? Products { get; set; }
+
         public Manufacturer(int мanufacturerId, string manufacturerName, string manufacturerEDRPOU)
         {
             ManufacturerID = мanufacturerId;
@@ -17,6 +19,7 @@ namespace OnlineShop.Entities
         // Конструктор за замовчуванням
         public Manufacturer()
         {
+            Products = new List<Product>();
         }
 
         // Override the ToString method

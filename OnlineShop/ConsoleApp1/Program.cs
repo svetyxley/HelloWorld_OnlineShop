@@ -21,6 +21,7 @@ namespace ConsoleApp1
             CommonEntityService<Supplier> commonEntityServiceS = new();
             CommonEntityService<Manufacturer> commonEntityServiceM = new();
             Supplier supplier = new();
+            Product product = new();
             Manufacturer manufacturer = new();
 
 
@@ -49,34 +50,37 @@ namespace ConsoleApp1
             host.MigrateDatabase();
 
 
-            //Cteate new Supplier
-            suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            ////Cteate new Supplier
+            //suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
 
-            //Output all sippliers list
-            suppliersService.OutputSuppliers(suppliersService.GetAllSupliers(connectionString));
+            ////Output all sippliers list
+            //suppliersService.OutputSuppliers(suppliersService.GetAllSupliers(connectionString));
 
-            //Output Supplier by ID
-            supplier = suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
-            if (supplier != null)
-            {
-                Console.WriteLine(supplier.ToString());
-            }
-            else
-            {
-                Console.WriteLine("Supplier not found.");
-            }
+            ////Output Supplier by ID
+            //supplier = suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            //if (supplier != null)
+            //{
+            //    Console.WriteLine(supplier.ToString());
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Supplier not found.");
+            //}
 
 
             //Output Manufacturer by ID
-            manufacturer = manufacturesService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceM.GetListType()), connectionString);
-            if (manufacturer != null)
-            {
-                Console.WriteLine(manufacturer.ToString());
-            }
-            else
-            {
-                Console.WriteLine("Manufacturer not found.");
-            }
+            
+            
+            manufacturer = manufacturesService.GetAllManufacturersWithProductsById(1, connectionString);
+//            manufacturer = manufacturesService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceM.GetListType()), connectionString);
+            //if (manufacturer != null)
+            //{
+            //    Console.WriteLine(manufacturer.ToString());
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Manufacturer not found.");
+            //}
 
 
             //Output Supplier by ID
