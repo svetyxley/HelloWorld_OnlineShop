@@ -47,7 +47,7 @@ namespace OnlineShop.BusinessLayer.Managers
 
             //Робота зі списком продуктів
             productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
-            productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
+            //productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
         }
     }
 }

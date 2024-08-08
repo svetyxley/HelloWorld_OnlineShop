@@ -51,7 +51,7 @@ namespace ConsoleApp1
 
 
             ////Cteate new Supplier
-            //suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
 
             ////Output all sippliers list
             //suppliersService.OutputSuppliers(suppliersService.GetAllSupliers(connectionString));
@@ -71,7 +71,7 @@ namespace ConsoleApp1
             //Output Manufacturer by ID
             
             
-            manufacturer = manufacturesService.GetAllManufacturersWithProductsById(1, connectionString);
+ //           manufacturer = manufacturesService.GetAllManufacturersWithProductsById(1, connectionString);
 //            manufacturer = manufacturesService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceM.GetListType()), connectionString);
             //if (manufacturer != null)
             //{
@@ -83,7 +83,7 @@ namespace ConsoleApp1
             //}
 
 
-            //Output Supplier by ID
+/*            //Output Supplier by ID
             suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
             if (supplier != null)
             {
@@ -95,7 +95,7 @@ namespace ConsoleApp1
             }
 
             //       ProductsCatalogFlow mainFlow = new ProductsCatalogFlow();
-            //           mainFlow.CatalogProcesses();
+            //           mainFlow.CatalogProcesses();*/
         }
     }
 }

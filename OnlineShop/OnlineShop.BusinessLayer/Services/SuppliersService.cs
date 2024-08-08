@@ -21,10 +21,19 @@ namespace OnlineShop.BusinessLayer.Services
         private DapperContext dapperContext = new();
 
 
-        public void CreateSupplier(string name, string code, string connectionStr)
+        public Supplier CreateSupplier(string name, string code, string connectionStr)
         {
-            var connection = dapperContext.OpenConnection(connectionStr);
-            var supplier = connection.Execute("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var supplier = connection.Query<Supplier>("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
+                return supplier.FirstOrDefault();
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex); //зробити запис в лог
+                throw;
+            };
         }
 
         public Supplier GetSupplierByID(int id, string connectionStr)

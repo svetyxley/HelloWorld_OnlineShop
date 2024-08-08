@@ -15,10 +15,20 @@ namespace OnlineShop.Data.Migrations
             CREATE PROCEDURE CreateSupplier
               @SupplierName nvarchar(255),
               @SupplierEDRPOU nvarchar(10)
-            AS
-            BEGIN
+             AS
+             BEGIN
+              DECLARE @InsertedSupplier TABLE (
+               SupplierID int,
+               SupplierName nvarchar(255),
+               SupplierEDRPOU nvarchar(10)
+              );
+
               INSERT INTO Supplier (SupplierName, SupplierEDRPOU)
-              VALUES (@SupplierName, @SupplierEDRPOU);    
+              OUTPUT INSERTED.SupplierID, INSERTED.SupplierName, INSERTED.SupplierEDRPOU
+              INTO @InsertedSupplier
+              VALUES (@SupplierName, @SupplierEDRPOU);
+
+              SELECT * FROM @InsertedSupplier;
             END;
             GO
 
