@@ -42,6 +42,60 @@ namespace OnlineShop.Data.Migrations
             END;
             GO
 
+            CREATE PROCEDURE GetSupplierByName
+              @SupplierName nvarchar(255)
+             AS
+            BEGIN
+              SELECT SupplierID, SupplierName, SupplierEDRPOU
+              FROM Supplier
+              WHERE SupplierName LIKE '%' + @SupplierName + '%';
+            END;
+            GO
+
+            CREATE PROCEDURE GetSupplierByCode
+              @SupplierEDRPOU nvarchar(10)
+             AS
+            BEGIN
+              SELECT SupplierID, SupplierName, SupplierEDRPOU
+              FROM Supplier
+              WHERE SupplierEDRPOU LIKE '%' + @SupplierEDRPOU + '%';
+            END;
+            GO
+
+            CREATE PROCEDURE UpdateSupplierName
+	          @SupplierID int,
+	          @SupplierName nvarchar(255)
+            AS
+            BEGIN
+		        UPDATE Supplier
+		        SET 
+			        SupplierName = @SupplierName
+		        WHERE 
+			        SupplierID = @SupplierID;
+
+	           SELECT SupplierID, SupplierName, SupplierEDRPOU
+	           FROM Supplier
+	           WHERE SupplierID = @SupplierID;
+            END;
+            GO
+
+            CREATE PROCEDURE UpdateSupplierEDRPOU
+	          @SupplierID int,
+	          @SupplierEDRPOU nvarchar(10)
+            AS
+            BEGIN
+		        UPDATE Supplier
+		        SET 
+			        SupplierEDRPOU = @SupplierEDRPOU
+		        WHERE 
+			        SupplierID = @SupplierID;
+
+	           SELECT SupplierID, SupplierName, SupplierEDRPOU
+	           FROM Supplier
+	           WHERE SupplierID = @SupplierID;
+            END;
+            GO
+
             CREATE PROCEDURE DeleteSupplierByID
               @SupplierID int
             AS
