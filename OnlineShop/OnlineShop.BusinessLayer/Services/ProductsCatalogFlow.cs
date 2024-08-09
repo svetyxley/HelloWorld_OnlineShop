@@ -19,11 +19,11 @@ namespace OnlineShop
             DiscountCardService discountCardService = new DiscountCardService();
 
             //Створення дисконтної картки та вивід усіх карток
-            discountCardService.AddCard();
+ //           discountCardService.AddCard();
             discountCardService.OutputDiscountCards();
 
             //Замовлення поставки та вивід усіх замовлень поставок
-            orderSupplyService.AddOrder();
+ //           orderSupplyService.AddOrder();
             orderSupplyService.OutputSupplyOrders();
 
             //Додавання нового виробника та вивід повного списка виробників
@@ -57,7 +57,7 @@ namespace OnlineShop
 
             //Робота зі списком продуктів
             productsService.DeleteProductByID(); //видалення продукту за неіснуючім ID
-            productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
+ //           productsService.GetProductByID();   //Отримання продукту за неіснуючім IDID
         }
     }
 }

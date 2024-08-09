@@ -18,8 +18,8 @@ namespace OnlineShop.Entities
         public uint? ProductPrice { get; set; }
 
 
-        public List<Manufacturer>? manufacturers { get; set; }
-        public List<Supplier>? suppliers { get; set; }
+        public List<Manufacturer>? Manufacturers { get; set; }
+        public List<Supplier>? Suppliers { get; set; }
 
         public Manufacturer? ProductManufacturer { get; set; }
         public Supplier? ProductSupplier { get; set; }

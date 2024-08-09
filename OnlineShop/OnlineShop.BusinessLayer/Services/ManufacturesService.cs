@@ -5,6 +5,7 @@ using OnlineShop.Entities;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
 using System.Linq;
+using System.Data;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -21,6 +22,8 @@ namespace OnlineShop.BusinessLayer.Services
         ActivityLogService logService = new ActivityLogService();
 
         private List<Manufacturer> manufacturers = new List<Manufacturer>();
+        private List<Product> products = new List<Product>();
+
         public Manufacturer CreateManufacturer()
         {
             int manufacturerID = idGenerator.InputID(manufacturers);
@@ -83,6 +86,23 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
             }
+        }
+
+        public Manufacturer GetAllManufacturersWithProductsById(int id, string connectionStr)
+        {
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var manufacturersWithProducts = connection.Query<Manufacturer, Product, Manufacturer>(
+                commandType: CommandType.StoredProcedure,
+                map: GetManufacturer,
+                splitOn: "ProductID",
+                sql: "GetAllManufacturersWithProducts");
+            return manufacturersWithProducts.FirstOrDefault();
+        }
+
+        public Manufacturer GetManufacturer(Manufacturer manufacturer, Product product) 
+        { 
+            manufacturer.Products.Add(product);
+            return manufacturer;
         }
 
         public void OutputManufacturers()

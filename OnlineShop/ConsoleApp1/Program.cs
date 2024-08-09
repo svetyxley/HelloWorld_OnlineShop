@@ -15,13 +15,11 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             ManufacturesService manufacturesService = new();
-            SuppliersService suppliersService = new();
             InputManager inputManager = new();
             InputValidator inputValidator = new();
             CommonEntityService<Supplier> commonEntityServiceS = new();
             CommonEntityService<Manufacturer> commonEntityServiceM = new();
-            Supplier supplier = new();
-            Manufacturer manufacturer = new();
+            SupplierFlow supplierFlow = new SupplierFlow();
 
 
             var configuration = new ConfigurationBuilder()
@@ -49,50 +47,93 @@ namespace ConsoleApp1
             host.MigrateDatabase();
 
 
-            //Cteate new Supplier
-            suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            //Menu
+            bool exit = false;
 
-            //Output all sippliers list
-            suppliersService.OutputSuppliers(suppliersService.GetAllSupliers(connectionString));
-
-            //Output Supplier by ID
-            supplier = suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
-            if (supplier != null)
+            while (!exit)
             {
-                Console.WriteLine(supplier.ToString());
-            }
-            else
-            {
-                Console.WriteLine("Supplier not found.");
-            }
+                Console.WriteLine("Menu:");
+                Console.WriteLine("1. Add new Supplier");
+                Console.WriteLine("2. Get all suppliers list");
+                Console.WriteLine("3. Search Supplier by ID");
+                Console.WriteLine("4. Search Supplier by Name");
+                Console.WriteLine("5. Search Supplier by EDRPOU");
+                Console.WriteLine("6. Update Supplier name");
+                Console.WriteLine("7. Update Supplier EDRPOU");
+                Console.WriteLine("8. Delete Supplier");
+                Console.WriteLine("9. Exit");
+                Console.Write("Make your choice: ");
+
+                string choice = Console.ReadLine();
 
 
-            //Output Manufacturer by ID
-            manufacturer = manufacturesService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceM.GetListType()), connectionString);
-            if (manufacturer != null)
-            {
-                Console.WriteLine(manufacturer.ToString());
-            }
-            else
-            {
-                Console.WriteLine("Manufacturer not found.");
-            }
+                switch (choice)
+                {
+                    case "1":
+                        supplierFlow.CreateNewSupplier(connectionString);
+                        break;
+                    case "2":
+                        supplierFlow.OutputAllSuppliers(connectionString);
+                        break;
+                    case "3":
+                        supplierFlow.GetSupplierByID(connectionString);
+                        break;
+                    case "4":
+                        supplierFlow.GetSupplierByName(connectionString);
+                        break;
+                    case "5":
+                        supplierFlow.GetSupplierByCode(connectionString);
+                        break;
+                    case "6":
+                        supplierFlow.UpdateSupplierNameByID(connectionString);
+                        break;
+                    case "7":
+                        supplierFlow.UpdateSupplierCodeByID(connectionString);
+                        break;
+                    case "8":
+                        supplierFlow.DeleteSupplierByID(connectionString);
+                        break;
+                    case "9":
+                        exit = true;
+                        Console.WriteLine("Exit...");
+                        break;
+                    default:
+                        Console.WriteLine("Wrong choice. Try again.");
+                        break;
+                }
 
-
-            //Output Supplier by ID
-            suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
-            if (supplier != null)
-            {
-                Console.WriteLine(supplier.ToString());
+                Console.WriteLine();
             }
-            else
-            {
-                Console.WriteLine("Supplier not found.");
-            }
-
-            //       ProductsCatalogFlow mainFlow = new ProductsCatalogFlow();
-            //           mainFlow.CatalogProcesses();
         }
+
+        //Output Manufacturer by ID
+
+
+        //           manufacturer = manufacturesService.GetAllManufacturersWithProductsById(1, connectionString);
+        //            manufacturer = manufacturesService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceM.GetListType()), connectionString);
+        //if (manufacturer != null)
+        //{
+        //    Console.WriteLine(manufacturer.ToString());
+        //}
+        //else
+        //{
+        //    Console.WriteLine("Manufacturer not found.");
+        //}
+
+
+        /*            //Output Supplier by ID
+                    suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+                    if (supplier != null)
+                    {
+                        Console.WriteLine(supplier.ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Supplier not found.");
+                    }
+
+                    //       ProductsCatalogFlow mainFlow = new ProductsCatalogFlow();
+                    //           mainFlow.CatalogProcesses();*/
     }
-}
+    }
 

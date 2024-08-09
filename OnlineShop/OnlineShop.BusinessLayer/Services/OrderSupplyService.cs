@@ -1,6 +1,7 @@
 ﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
+using OnlineShop.Entities;
 using OnlineShop.EntityServices;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -29,7 +30,7 @@ namespace OnlineShop.BusinessLayer.Services
             //int supplyID = idGenerator.InputID(orderSupply);
             //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             //string orderTime = DateTime.Now.ToString();
-            return new OrderSupply(supplyID, suppliersService.GetSupplierByID(1, "connectionString"), productsService.GetProductByID(), productAmount, orderTime, employeeService.GetEmployeeByID());
+            return new OrderSupply(supplyID, suppliersService.GetSupplierByID(1, "connectionString"), productsService.GetProductByID(1), productAmount, orderTime, employeeService.GetEmployeeByID());
         }
         public void AddOrder(int supplyID, int productAmount, string orderTime)
         {
