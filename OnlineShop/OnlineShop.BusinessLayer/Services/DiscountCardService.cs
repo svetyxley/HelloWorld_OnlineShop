@@ -24,8 +24,8 @@ namespace OnlineShop.BusinessLayer.Services
 
         public DiscountCard CreateCard(int cardID, double discountPercantage)
         {
-            //int cardID = idGenerator.InputID(discountCard);
-            //double discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
+             cardID = idGenerator.InputID(discountCard);
+             discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
             return new DiscountCard(cardID, buyerService.GetManufacturerByID().BuyerId, discountPercantage);
         }
         public void AddCard(int cardID, double discountPercantage)
@@ -35,7 +35,7 @@ namespace OnlineShop.BusinessLayer.Services
         }
         public DiscountCard UpdateCard(int cardID)
         {
-            //var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+            cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
             var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
             if (card == null)
             {

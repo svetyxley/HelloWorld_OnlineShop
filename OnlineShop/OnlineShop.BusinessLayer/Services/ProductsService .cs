@@ -1,8 +1,11 @@
-﻿using OnlineShop.BusinessLayer.Managers;
+﻿using Dapper;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
+using Microsoft.Data.SqlClient;
+
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -10,94 +13,195 @@ namespace OnlineShop.BusinessLayer.Services
     {
         private InputManager inputManager = new();
         private InputValidator inputValidator = new();
-        private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Product> commonEntityService = new();
-        private ManufacturesService manufacturesService = new();
-        private SuppliersService suppliersService = new();
-        ActivityLogService logService = new ActivityLogService();
+        private ActivityLogService logService = new ActivityLogService();
+        private List<Product> products = new List<Product>();
+        private DapperContext dapperContext = new();
 
-
-        private List<Product> products = new List<Product>()
+        //ProductName nvarchar(255),
+        //ProductCategoryID int,
+        //ManufacturerID int,
+        //SupplierID int
+        //ProductPrice decimal (10, 2),
+        public Product CreateProduct(string name, int productCategoryID, int manufacturerID, int supplierID, double price, string connectionStr)
         {
-            new Product(1, "Product1"),
-            new Product(2, "Product2"),
-            new Product(3, "Product3")
-        };
-
-
-        public Product CreateProduct()
-        {
-            int productId = idGenerator.InputID(products);
-            string productName = inputManager.InputName(inputValidator, commonEntityService.GetListType());
-            double productPrice = inputManager.InputPrice(inputValidator, commonEntityService.GetListType());
-            return new Product();
-            //new Product(productId, productName, manufacturesService.GetManufacturerByID(), suppliersService.GetSupplierByID(), productPrice);
-        }
-        public void AddToProducts()
-        {
-            products.Add(CreateProduct());
-            outputManager.OutputToConsole(NotificationConstants.ADDED, commonEntityService.GetListType());
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-        }
-
-        public Product GetProductByID(int productID)
-        {
-            //var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var product = products.FirstOrDefault(products => products.ProductID == productID);
-            if (product == null)
+            try
             {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("CreateProduct", new { ProductName = name, ProductCategoryID = productCategoryID, ManufacturerID = manufacturerID, SupplierID = supplierID,  ProductPrice = price });
+                return product.FirstOrDefault();
             }
-            else
+            catch (Exception ex)
             {
-                outputManager.OutputToConsole(product.ToString(), commonEntityService.GetListType());
-            }
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-            return product;
-        }
-        public Product UpdateProduct()
-        {
-            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var product = products.FirstOrDefault(products => products.ProductID == productID);
-            if (product == null)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-            }
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
-            return product;
+                outputManager.OutputDBException(ex);
+                throw;
+            };
         }
 
-        public void DeleteProductByID()
+        public Product GetProductByID(int id, string connectionStr)
         {
-            var productID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var product = products.FirstOrDefault(product => product.ProductID == productID);
-            if (product != null)
+            try
             {
-                products.Remove(product);
-                outputManager.OutputToConsole(NotificationConstants.DELETED, commonEntityService.GetListType());
-                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // cteate log record
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("GetProductByID", new { ProductID = id });
+                return product.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product GetProductByName(string name, string connectionStr)
+
+
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("GetProductByName", new { ProductName = name });
+                return product.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product UpdateProductName(int id, string name, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("UpdateProductName", new { ProductID = id, ProductName = name });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
+                return product.FirstOrDefault();
             }
-            else
+            catch (Exception ex)
             {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product UpdateProductCategory(int id, int category, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("UpdateProductCategory", new { ProductID = id, ProductCategoryID = category });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
+                return product.FirstOrDefault();
             }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product UpdateProductManufacturer(int id, int manufacturerID, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("UpdateProductManufacturer", new { ProductID = id, ManufacturerID = manufacturerID });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
+                return product.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product UpdateProductSupplier(int id, int supplierID, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("UpdateProductSupplier", new { ProductID = id, SupplierID = supplierID });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
+                return product.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+        public Product UpdateProductPrice(int id, double price, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = connection.Query<Product>("UpdateProductPrice", new { ProductID = id, ProductPrice = price});
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
+                return product.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputDBException(ex);
+                throw;
+            };
+        }
+
+
+        public string DeleteProductByID(int id, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var result = connection.Execute("DeleteProductByID", new { ProductID = id });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
+                if (result > 0)
+                {
+                    return "The Product has been successfully deleted";
+                }
+                else
+                {
+                    return "Failed to remove Product. This ID may not exist.";
+                }
+            }
+            catch (SqlException ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
+        }
+
+        public List<Product> GetAllProducts(string connectionStr)
+        {
+            var connection = dapperContext.OpenConnection(connectionStr);
+            var sql = $"select * FROM Product";
+            var products = connection.Query<Product>(sql).AsList();
+            return products;
+        }
+
+        public void OutputProducts(List<Product> products)
+        {
+            outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
+            logService.OutputLog(log);// output result to log
         }
 
         public int GetProductsAmount()
         {
             return commonEntityService.ListAmount(products);
-        }
-
-        public void OutputProducts()
-        {
-            outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // cteate log record
-            logService.OutputLog(log);// output result to log
         }
     }
 }

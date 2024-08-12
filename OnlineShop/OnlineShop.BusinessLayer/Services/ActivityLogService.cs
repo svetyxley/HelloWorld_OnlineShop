@@ -6,23 +6,41 @@ namespace OnlineShop.Records
     {
         public void OutputLog(ActivityLog log)
         {
-            FileInfo fileInfo = new FileInfo(FileConstants.LOG_PATH);
+            string logPath = FileConstants.LOG_PATH_D;
 
-            // Якщо файл не існує, створюємо його
-            if (!File.Exists(FileConstants.LOG_PATH)) 
+            // Check if the D: drive exists
+            if (!Directory.Exists("D:\\"))
             {
-                using (FileStream fs = File.Create(FileConstants.LOG_PATH));
+                logPath = FileConstants.LOG_PATH_C;
             }
 
-            // Якщо розмір файлу більше MAX_FILE_SIZE, очищаємо файл
-            if (fileInfo.Length > FileConstants.MAX_FILE_SIZE)
+            try
             {
-                File.WriteAllText(FileConstants.LOG_PATH, string.Empty);
-            }
+                FileInfo fileInfo = new FileInfo(logPath);
 
-            using (StreamWriter writer = new StreamWriter(FileConstants.LOG_PATH, true))
+                // Create file if it doesn't exist
+                if (!File.Exists(logPath))
+                {
+                    using (FileStream fs = File.Create(logPath)) ;
+                }
+
+                // Clean file if its size is bigger than MAX_FILE_SIZE
+                if (fileInfo.Length > FileConstants.MAX_FILE_SIZE)
+                {
+                    File.WriteAllText(logPath, string.Empty);
+                }
+
+                // Write log to the file
+                using (StreamWriter writer = new StreamWriter(logPath, true))
+                {
+                    writer.WriteLine(log.ToString());
+                }
+            }
+            catch (Exception ex)
             {
-                writer.WriteLine(log.ToString());
+                // Log error to console or ignore it silently
+                Console.WriteLine($"Failed to write to log file: {ex.Message}");
+                // or just ignore the error
             }
         }
     }
