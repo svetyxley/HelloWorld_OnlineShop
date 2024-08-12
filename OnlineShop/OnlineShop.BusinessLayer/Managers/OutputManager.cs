@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineShop.BusinessLayer.Managers
+﻿namespace OnlineShop.BusinessLayer.Managers
 {
     public class OutputManager
     {
@@ -12,6 +6,12 @@ namespace OnlineShop.BusinessLayer.Managers
         {
             Console.WriteLine($"{type} {message}");
             Console.WriteLine();
+        }
+
+        public void OutputDBException(Exception ex)
+        {
+            Console.WriteLine($"Something went wrong with the database"); //зробити запис в лог
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }

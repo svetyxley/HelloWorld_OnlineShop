@@ -6,7 +6,7 @@ using OnlineShop.Entities;
 
 namespace ConsoleApp1
 {
-    internal class SupplierFlow
+    internal class SupplierConsoleFlow
     {
         SuppliersService suppliersService = new();
         InputManager inputManager = new();

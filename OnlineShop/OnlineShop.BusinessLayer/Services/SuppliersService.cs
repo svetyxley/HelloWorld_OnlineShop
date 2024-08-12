@@ -4,7 +4,6 @@ using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
-using System.Runtime.InteropServices;
 using Microsoft.Data.SqlClient;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -13,13 +12,10 @@ namespace OnlineShop.BusinessLayer.Services
     {
         private InputManager inputManager = new();
         private InputValidator inputValidator = new();
-        private IDGenerator idGenerator = new();
         private OutputManager outputManager = new();
         private CommonEntityService<Supplier> commonEntityService = new();
-        ActivityLogService logService = new ActivityLogService();
-
-        private List<Supplier> suppliers = new List<Supplier>();
-
+        private ActivityLogService logService = new ActivityLogService();
+ //       private List<Supplier> suppliers = new List<Supplier>();
         private DapperContext dapperContext = new();
 
 
@@ -29,11 +25,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -44,11 +42,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("GetSupplierByID", new { SupplierID = id });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -61,11 +61,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("GetSupplierByName", new { SupplierName = name });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -77,11 +79,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("GetSupplierByCode", new { SupplierEDRPOU = code });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
+                logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -92,13 +96,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("UpdateSupplierName", new { SupplierID = id, SupplierName = name });
-                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // cteate log record
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -109,13 +113,13 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var supplier = connection.Query<Supplier>("UpdateSupplierEDRPOU", new { SupplierID = id, SupplierEDRPOU = code });
-                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // cteate log record
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return supplier.FirstOrDefault();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong with the database"); //зробити запис в лог
+                outputManager.OutputDBException(ex);
                 throw;
             };
         }
@@ -127,7 +131,7 @@ namespace OnlineShop.BusinessLayer.Services
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var result = connection.Execute("DeleteSupplierByID", new { SupplierID = supplierID });
-                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 if (result > 0)
                 {
@@ -159,7 +163,7 @@ namespace OnlineShop.BusinessLayer.Services
         public void OutputSuppliers(List<Supplier> suppliers)
         {
             outputManager.OutputToConsole(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // cteate log record
+            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
             logService.OutputLog(log);// output result to log
         }
     }

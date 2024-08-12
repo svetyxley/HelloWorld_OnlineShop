@@ -1,4 +1,5 @@
 ﻿-- N is used before string values ​​to indicate that it is a Unicode string
+USE OnlineShop;
 INSERT INTO Manufacturer (ManufacturerName, ManufacturerEDRPOU) VALUES
 (N'Norven', '1234567890'),
 (N'Хладик', '2345678901'),
