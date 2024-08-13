@@ -69,5 +69,16 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return null;
         }
+        public void ShowProductStock(ProductStocks productStock)
+        {
+            if (productStock.IsInStock())
+            {
+                Console.WriteLine(productStock.GetStockSummary());
+            }
+            else
+            {
+                Console.WriteLine("Product is out of stock.");
+            }
+        }
     }
 }
