@@ -19,14 +19,14 @@ namespace OnlineShop.BusinessLayer.Services
         private DapperContext dapperContext = new();
 
 
-        public Manufacturer CreateManufacturer(string name, string code, string connectionStr)
+        public async Task<Manufacturer> CreateManufacturer(string name, string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("CreateManufacturer", new { ManufacturerName = name, ManufacturerEDRPOU = code });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("CreateManufacturer", new { ManufacturerName = name, ManufacturerEDRPOU = code });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -36,14 +36,14 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Manufacturer GetManufacturerByID(int id, string connectionStr)
+        public async Task<Manufacturer> GetManufacturerByID(int id, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("GetManufacturerByID", new { ManufacturerID = id });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("GetManufacturerByID", new { ManufacturerID = id });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -53,16 +53,16 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Manufacturer GetManufacturerByName(string name, string connectionStr)
+        public async Task<Manufacturer> GetManufacturerByName(string name, string connectionStr)
 
 
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("GetManufacturerByName", new { ManufacturerName = name });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("GetManufacturerByName", new { ManufacturerName = name });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -73,14 +73,14 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public Manufacturer GetManufacturerByCode(string code, string connectionStr)
+        public async Task<Manufacturer> GetManufacturerByCode(string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("GetManufacturerByCode", new { ManufacturerEDRPOU = code });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("GetManufacturerByCode", new { ManufacturerEDRPOU = code });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -90,14 +90,14 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Manufacturer UpdateManufacturerNameByID(int id, string name, string connectionStr)
+        public async Task<Manufacturer> UpdateManufacturerNameByID(int id, string name, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("UpdateManufacturerName", new { ManufacturerID = id, ManufacturerName = name });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("UpdateManufacturerName", new { ManufacturerID = id, ManufacturerName = name });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -107,14 +107,14 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Manufacturer UpdateManufacturerCodeByID(int id, string code, string connectionStr)
+        public async Task<Manufacturer> UpdateManufacturerCodeByID(int id, string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var manufacturer = connection.Query<Manufacturer>("UpdateManufacturerEDRPOU", new { ManufacturerID = id, ManufacturerEDRPOU = code });
+                var manufacturer = await connection.QueryAsync<Manufacturer>("UpdateManufacturerEDRPOU", new { ManufacturerID = id, ManufacturerEDRPOU = code });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 return manufacturer.FirstOrDefault();
             }
             catch (Exception ex)
@@ -125,14 +125,14 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public string DeleteManufacturerByID(int ManufacturerID, string connectionStr)
+        public async Task<string> DeleteManufacturerByID(int ManufacturerID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var result = connection.Execute("DeleteManufacturerByID", new { ManufacturerID = ManufacturerID });
+                var result = await connection.ExecuteAsync("DeleteManufacturerByID", new { ManufacturerID = ManufacturerID });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                Task.Run(() => logService.OutputLog(log));
                 if (result > 0)
                 {
                     return "The Manufacturer has been successfully deleted";
@@ -152,19 +152,19 @@ namespace OnlineShop.BusinessLayer.Services
             }
         }
 
-        public List<Manufacturer> GetAllManufacturers(string connectionStr)
+        public async Task<List<Manufacturer>> GetAllManufacturers(string connectionStr)
         {
             var connection = dapperContext.OpenConnection(connectionStr);
             var sql = $"select * FROM Manufacturer";
-            var manufacturers = connection.Query<Manufacturer>(sql).AsList();
-            return manufacturers;
+            var manufacturers = await connection.QueryAsync<Manufacturer>(sql);
+            return manufacturers.ToList();
         }
 
-        public void OutputManufacturers(List<Manufacturer> manufacturers)
+        public async Task OutputManufacturers(List<Manufacturer> manufacturers)
         {
             outputManager.OutputToConsole(commonEntityService.OutputList(manufacturers), commonEntityService.GetListType());
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-            logService.OutputLog(log);// output result to log
+            Task.Run(() => logService.OutputLog(log));
         }
     }
 }

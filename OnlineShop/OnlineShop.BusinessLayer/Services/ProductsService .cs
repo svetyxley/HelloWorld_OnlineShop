@@ -19,17 +19,12 @@ namespace OnlineShop.BusinessLayer.Services
         private List<Product> products = new List<Product>();
         private DapperContext dapperContext = new();
 
-        //ProductName nvarchar(255),
-        //ProductCategoryID int,
-        //ManufacturerID int,
-        //SupplierID int
-        //ProductPrice decimal (10, 2),
-        public Product CreateProduct(string name, int productCategoryID, int manufacturerID, int supplierID, double price, string connectionStr)
+        public async Task<Product> CreateProduct(string name, int productCategoryID, int manufacturerID, int supplierID, double price, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("CreateProduct", new { ProductName = name, ProductCategoryID = productCategoryID, ManufacturerID = manufacturerID, SupplierID = supplierID,  ProductPrice = price });
+                var product = await connection.QueryAsync<Product>("CreateProduct", new { ProductName = name, ProductCategoryID = productCategoryID, ManufacturerID = manufacturerID, SupplierID = supplierID,  ProductPrice = price });
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -39,12 +34,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product GetProductByID(int id, string connectionStr)
+        public async Task<Product> GetProductByID(int id, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("GetProductByID", new { ProductID = id });
+                var product = await connection.QueryAsync<Product>("GetProductByID", new { ProductID = id });
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -54,14 +49,14 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product GetProductByName(string name, string connectionStr)
+        public async Task<Product> GetProductByName(string name, string connectionStr)
 
 
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("GetProductByName", new { ProductName = name });
+                var product = await connection.QueryAsync<Product>("GetProductByName", new { ProductName = name });
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -71,12 +66,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product UpdateProductName(int id, string name, string connectionStr)
+        public async Task<Product> UpdateProductName(int id, string name, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("UpdateProductName", new { ProductID = id, ProductName = name });
+                var product = await connection.QueryAsync<Product>("UpdateProductName", new { ProductID = id, ProductName = name });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
@@ -88,12 +83,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product UpdateProductCategory(int id, int category, string connectionStr)
+        public async Task<Product> UpdateProductCategory(int id, int category, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("UpdateProductCategory", new { ProductID = id, ProductCategoryID = category });
+                var product = await connection.QueryAsync<Product>("UpdateProductCategory", new { ProductID = id, ProductCategoryID = category });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
@@ -105,12 +100,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product UpdateProductManufacturer(int id, int manufacturerID, string connectionStr)
+        public async Task<Product> UpdateProductManufacturer(int id, int manufacturerID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("UpdateProductManufacturer", new { ProductID = id, ManufacturerID = manufacturerID });
+                var product = await connection.QueryAsync<Product>("UpdateProductManufacturer", new { ProductID = id, ManufacturerID = manufacturerID });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
@@ -122,12 +117,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product UpdateProductSupplier(int id, int supplierID, string connectionStr)
+        public async Task<Product> UpdateProductSupplier(int id, int supplierID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("UpdateProductSupplier", new { ProductID = id, SupplierID = supplierID });
+                var product = await connection.QueryAsync<Product>("UpdateProductSupplier", new { ProductID = id, SupplierID = supplierID });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
@@ -139,12 +134,12 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public Product UpdateProductPrice(int id, double price, string connectionStr)
+        public async Task<Product> UpdateProductPrice(int id, double price, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = connection.Query<Product>("UpdateProductPrice", new { ProductID = id, ProductPrice = price});
+                var product = await connection.QueryAsync<Product>("UpdateProductPrice", new { ProductID = id, ProductPrice = price});
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
@@ -157,12 +152,12 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public string DeleteProductByID(int id, string connectionStr)
+        public async Task<string> DeleteProductByID(int id, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var result = connection.Execute("DeleteProductByID", new { ProductID = id });
+                var result = await connection.ExecuteAsync("DeleteProductByID", new { ProductID = id });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // create log record
                 logService.OutputLog(log);// output result to log
                 if (result > 0)
@@ -184,15 +179,15 @@ namespace OnlineShop.BusinessLayer.Services
             }
         }
 
-        public List<Product> GetAllProducts(string connectionStr)
+        public async Task<List<Product>> GetAllProducts(string connectionStr)
         {
             var connection = dapperContext.OpenConnection(connectionStr);
             var sql = $"select * FROM Product";
-            var products = connection.Query<Product>(sql).AsList();
-            return products;
+            var products = await connection.QueryAsync<Product>(sql);
+            return products.AsList();
         }
 
-        public void OutputProducts(List<Product> products)
+        public async Task OutputProducts(List<Product> products)
         {
             outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
             ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record

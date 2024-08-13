@@ -20,15 +20,15 @@ namespace OnlineShop.BusinessLayer.Services
         {
             new ProductStocks(10),
         };
-        public ProductStocks CreateProduct(Product _product, int productAmount)
+        public async Task<ProductStocks> CreateProduct(Product _product, int productAmount)
         {
-            _product = productsService.GetProductByID(1, "connectionStr");
+            _product = await productsService.GetProductByID(1, "connectionStr");
             productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             return new ProductStocks(_product, productAmount);
         }
-        public void AddProduct(Product _product, int productAmount)
+        public async Task AddProduct(Product _product, int productAmount)
         {
-            productStocksList.Add(CreateProduct(_product, productAmount));
+            productStocksList.Add(await CreateProduct(_product, productAmount));
             outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         }
         public int GetAmountByID(int productID, string connectionStr)
