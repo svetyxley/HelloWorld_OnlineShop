@@ -22,8 +22,8 @@ namespace OnlineShop.BusinessLayer.Services
         };
         public ProductStocks CreateProduct(Product _product, int productAmount)
         {
-            //var _product = productsService.GetProductByID();
-            //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+            _product = productsService.GetProductByID(1, "connectionStr");
+            productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             return new ProductStocks(_product, productAmount);
         }
         public void AddProduct(Product _product, int productAmount)
@@ -31,9 +31,9 @@ namespace OnlineShop.BusinessLayer.Services
             productStocksList.Add(CreateProduct(_product, productAmount));
             outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         }
-        public int GetAmountByID(int productID)
+        public int GetAmountByID(int productID, string connectionStr)
         {
-            var product = productsService.GetProductByID(productID);
+            var product = productsService.GetProductByID(productID, connectionStr);
             if (product != null)
             {
                 var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
@@ -44,9 +44,9 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return 0;
         }
-        public ProductStocks UpdateOfAmount(int productID, int productAmount)
+        public ProductStocks UpdateOfAmount(int productID, int productAmount, string connectionStr)
         {
-            var product = productsService.GetProductByID(productID);
+            var product = productsService.GetProductByID(productID, connectionStr);
             if (product != null)
             {
                 var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
@@ -58,13 +58,13 @@ namespace OnlineShop.BusinessLayer.Services
             }
             return null;
         }
-        public ProductStocks BuyProducts(int productID, int productAmount)
+        public ProductStocks BuyProducts(int productID, int productAmount, string connectionStr)
         {
-            int AmountOnStock = GetAmountByID(productID);
+            int AmountOnStock = GetAmountByID(productID, connectionStr);
             if (productAmount <= AmountOnStock)
             {
                 AmountOnStock-=productAmount;
-                var productStock = UpdateOfAmount(productID, AmountOnStock);
+                var productStock = UpdateOfAmount(productID, AmountOnStock, connectionStr);
                 return productStock;
             }
             return null;

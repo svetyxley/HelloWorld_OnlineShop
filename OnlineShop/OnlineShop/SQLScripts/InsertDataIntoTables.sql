@@ -1,10 +1,14 @@
 ﻿-- N is used before string values ​​to indicate that it is a Unicode string
+USE OnlineShop;
 INSERT INTO Manufacturer (ManufacturerName, ManufacturerEDRPOU) VALUES
 (N'Norven', '1234567890'),
 (N'Хладик', '2345678901'),
 (N'Hankey Bannister', '3456789012'),
 (N'Ariel', '4567890123'),
-(N'Philadelphia', '5678901234')
+(N'Philadelphia', '5678901234'),
+(N'Крафт', '5678901235'),
+(N'Bells', '3456789012');
+
 GO
 
 INSERT INTO Supplier (SupplierName, SupplierEDRPOU) VALUES
@@ -12,14 +16,19 @@ INSERT INTO Supplier (SupplierName, SupplierEDRPOU) VALUES
 (N'Supplier B', '2345609871'),
 (N'Supplier C', '3456709812'),
 (N'Supplier D', '4567809123'),
-(N'Supplier E', '5678901230');
+(N'Supplier E', '5678901230'),
+(N'Supplier F', '5678901231');
 GO
 
 INSERT INTO Product (ProductName, ProductCategoryID, ManufacturerID, SupplierID, ProductPrice) VALUES
-(N'Сьомга Norven філе слабосолена', 1, 1, 1, 10.50),
-(N'Морозиво «Хладик»', 2, 2, 2, 15.99),
-(N'Віскі Hankey Bannister Original', 1, 3, 3, 299.00),
-(N'Гель для прання Ariel Color', 2, 4, 4, 289.00),
+(N'Сьомга філе слабосолена', 1, 1, 1, 10.50),
+(N'Морозиво шоколадне', 2, 2, 2, 15.99),
+(N'Морозиво пломбір', 2, 2, 2, 15.99),
+(N'Віреники з картоплею', 3, 2, 2, 85.00),
+(N'Віскі Original', 1, 3, 3, 299.00),
+(N'Віскі Original', 1, 7, 3, 59.00),
+(N'Гель для прання Color', 2, 4, 4, 289.00),
+(N'Гель для прання White', 2, 4, 4, 289.00),
 (N'Сир Philadelphia оригінальний', 1, 5, 5, 99.00);
 GO
 
