@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
@@ -12,19 +13,26 @@ namespace OnlineShop.BusinessLayer.Services
         private InputManager inputManager = new();
         private InputValidator inputValidator = new();
         private IDGenerator idGenerator = new();
-        private OutputManager outputManager = new();
+        private OutputManager outputManager;
         private CommonEntityService<Supplier> commonEntityService = new();
-        ActivityLogService logService = new ActivityLogService();
+        ActivityLogService logService;
 
         private List<Supplier> suppliers = new List<Supplier>();
 
-        private DapperContext dapperContext = new();
+        private DapperContext dapperContext;
 
+        public SuppliersService(DapperContext context, ActivityLogService service, OutputManager manager)
+        {
+            dapperContext = context;
+            logService = service;
+            outputManager = manager;
 
-        public void CreateSupplier(string name, string code, string connectionStr)
+        }
+
+        public async Task CreateSupplier(string name, string code, string connectionStr)
         {
             var connection = dapperContext.OpenConnection(connectionStr);
-            var supplier = connection.Execute("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
+            var supplier = connection.ExecuteAsync("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
         }
 
         public Supplier GetSupplierByID(int id, string connectionStr)
@@ -35,7 +43,7 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
         //додати логику апдейту
-        public Supplier UpdateSupplier(int supplierID)
+        public Supplier UpdateSupplier(List<Supplier> suppliers, int supplierID)
         {
             var supplier = suppliers.FirstOrDefault(supplier => supplier.SupplierID == supplierID);
             if (supplier == null)

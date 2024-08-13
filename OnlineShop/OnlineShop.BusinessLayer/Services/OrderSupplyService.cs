@@ -2,6 +2,7 @@
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
 using OnlineShop.EntityServices;
+using OnlineShop.Records;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -12,7 +13,7 @@ namespace OnlineShop.BusinessLayer.Services
         private IDGenerator idGenerator = new();
         private InputValidator inputValidator = new();
         private CommonEntityService<OrderSupply> commonEntityService = new();
-        private SuppliersService suppliersService = new();
+        private SuppliersService suppliersService = new(new DapperContext(), new ActivityLogService(), new OutputManager());
         private ProductsService productsService = new();
         private EmployeeService employeeService = new();
 

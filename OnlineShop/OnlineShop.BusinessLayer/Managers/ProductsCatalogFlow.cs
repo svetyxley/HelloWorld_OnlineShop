@@ -1,6 +1,8 @@
-﻿using OnlineShop.BusinessLayer.Extensions;
+﻿using System.Data;
+using OnlineShop.BusinessLayer.Extensions;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.EntityServices;
+using OnlineShop.Records;
 
 namespace OnlineShop.BusinessLayer.Managers
 {
@@ -10,7 +12,8 @@ namespace OnlineShop.BusinessLayer.Managers
         {
             ProductsService productsService = new ProductsService();
             ManufacturesService manufactureService = new ManufacturesService();
-            SuppliersService suppliersService = new SuppliersService();
+            DapperContext context = new DapperContext();
+            SuppliersService suppliersService = new SuppliersService(new DapperContext(), new ActivityLogService(), new OutputManager());
             PurchaseService purchaseService = new PurchaseService();
             EmployeeService employeeService = new EmployeeService();
             BuyerService buyerService = new BuyerService();

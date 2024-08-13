@@ -6,6 +6,8 @@ using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Entities;
+using OnlineShop.Records;
+using System.Data;
 
 
 namespace ConsoleApp1
@@ -15,7 +17,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             ManufacturesService manufacturesService = new();
-            SuppliersService suppliersService = new();
+            
             InputManager inputManager = new();
             InputValidator inputValidator = new();
             CommonEntityService<Supplier> commonEntityServiceS = new();
@@ -30,6 +32,11 @@ namespace ConsoleApp1
                 .Build();
 
             var connectionString = configuration.GetConnectionString("SvitlanaL");
+
+
+            DapperContext context = new DapperContext();
+            IDbConnection connnection = context.OpenConnection(connectionString);
+            SuppliersService suppliersService = new(context, new ActivityLogService(), new OutputManager());
 
             var datAssembly = AppDomain.CurrentDomain.GetAssemblies()
                 .FirstOrDefault(x => x.GetName().Name == "OnlineShop.Data");

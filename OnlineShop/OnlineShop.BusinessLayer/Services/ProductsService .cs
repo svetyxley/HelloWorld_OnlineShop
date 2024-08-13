@@ -14,7 +14,7 @@ namespace OnlineShop.BusinessLayer.Services
         private OutputManager outputManager = new();
         private CommonEntityService<Product> commonEntityService = new();
         private ManufacturesService manufacturesService = new();
-        private SuppliersService suppliersService = new();
+        private SuppliersService suppliersService = new(new DapperContext(), new ActivityLogService(), new OutputManager());
         ActivityLogService logService = new ActivityLogService();
 
 

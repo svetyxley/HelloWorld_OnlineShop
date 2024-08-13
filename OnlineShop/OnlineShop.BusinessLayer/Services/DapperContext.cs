@@ -12,7 +12,7 @@ namespace OnlineShop.BusinessLayer.Services
     {
         public DapperContext() { }
 
-        public SqlConnection OpenConnection(string connectionString)
+        public virtual SqlConnection OpenConnection(string connectionString)
         {
             var connection = new SqlConnection(connectionString);
             connection.Open();

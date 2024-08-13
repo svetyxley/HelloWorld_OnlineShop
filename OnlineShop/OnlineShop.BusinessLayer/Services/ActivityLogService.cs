@@ -4,7 +4,7 @@ namespace OnlineShop.Records
 {
     public class ActivityLogService
     {
-        public void OutputLog(ActivityLog log)
+        public virtual void OutputLog(ActivityLog log)
         {
             FileInfo fileInfo = new FileInfo(FileConstants.LOG_PATH);
 
