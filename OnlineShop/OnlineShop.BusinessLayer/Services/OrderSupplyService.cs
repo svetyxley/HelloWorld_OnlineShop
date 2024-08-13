@@ -1,7 +1,6 @@
 ﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
-using OnlineShop.Entities;
 using OnlineShop.EntityServices;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -25,17 +24,17 @@ namespace OnlineShop.BusinessLayer.Services
             new OrderSupply(2, 8, DateTime.Now.ToString()),
             new OrderSupply(3, 18, DateTime.Now.ToString()),
         };
-        public OrderSupply MakeOrderOfSupply(int supplyID, int productAmount, string orderTime)
+        public async Task<OrderSupply> MakeOrderOfSupply(int supplyID, int productAmount, string orderTime)
         {
             //int supplyID = idGenerator.InputID(orderSupply);
             //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             //string orderTime = DateTime.Now.ToString();
             //Nazar
-            return new OrderSupply(supplyID, suppliersService.GetSupplierByID(1, "connectionString"), productsService.GetProductByID(1, "connectionString"), productAmount, orderTime, employeeService.GetEmployeeByID());
+            return new OrderSupply(supplyID, await suppliersService.GetSupplierByID(1, "connectionString"), await productsService.GetProductByID(1, "connectionString"), productAmount, orderTime, employeeService.GetEmployeeByID());
         }
-        public void AddOrder(int supplyID, int productAmount, string orderTime)
+        public async Task AddOrder(int supplyID, int productAmount, string orderTime)
         {
-            orderSupply.Add(MakeOrderOfSupply(supplyID, productAmount, orderTime));
+            orderSupply.Add(await MakeOrderOfSupply(supplyID, productAmount, orderTime));
             outputManager.OutputToConsole(NotificationConstants.SUPPLY_IS_SUCESSFULLY_ORDERED, commonEntityService.GetListType());
         }
         public OrderSupply GetSupplyOrderByID(int supplyID)

@@ -15,21 +15,22 @@ namespace ConsoleApp1
         Supplier supplier = new();
 
         //Menu 1
-        public void CreateNewSupplier(string connectionString)
+        public async Task CreateNewSupplier(string connectionString)
         {
-            suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+           await suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
         }
 
         //Menu 2
-        public void OutputAllSuppliers(string connectionString)
+        public async Task OutputAllSuppliers(string connectionString)
         {
-            suppliersService.OutputSuppliers(suppliersService.GetAllSuppliers(connectionString));
+            var suppliers = await suppliersService.GetAllSuppliers(connectionString);
+            await suppliersService.OutputSuppliers(suppliers);
         }
 
         //Menu 3
-        public void GetSupplierByID(string connectionString)
+        public async Task GetSupplierByID(string connectionString)
         {
-            supplier = suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            supplier = await suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
             if (supplier != null)
             {
                 Console.WriteLine(supplier.ToString());
@@ -42,11 +43,11 @@ namespace ConsoleApp1
         }
 
         //Menu 4
-        public void GetSupplierByName(string connectionString)
+        public async Task GetSupplierByName(string connectionString)
         {
             Console.Write($"Enter Supplier Name for search: ");
             var supplierName = Console.ReadLine();
-            supplier = suppliersService.GetSupplierByName(supplierName, connectionString);
+            supplier = await suppliersService.GetSupplierByName(supplierName, connectionString);
             if (supplier != null)
             {
                 Console.Write("Supplier: ");
@@ -59,11 +60,11 @@ namespace ConsoleApp1
         }
 
         //Menu 5
-        public void GetSupplierByCode(string connectionString) 
+        public async Task GetSupplierByCode(string connectionString) 
         {
             Console.Write($"Enter Supplier code EDRPOU for search: ");
             var codeEDRPOU = Console.ReadLine();
-            supplier = suppliersService.GetSupplierByCode(codeEDRPOU, connectionString);
+            supplier = await suppliersService.GetSupplierByCode(codeEDRPOU, connectionString);
             if (supplier != null)
             {
                 Console.WriteLine("EDRPOU: ");
@@ -76,13 +77,13 @@ namespace ConsoleApp1
         }
 
         //Menu 6
-        public void UpdateSupplierNameByID(string connectionString)
+        public async Task UpdateSupplierNameByID(string connectionString)
         {
             Console.Write($"Enter Supplier ID to update Name: ");
             var supplierID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Supplier Name to update: ");
             var supplierName = Console.ReadLine();
-            supplier = suppliersService.UpdateSupplierNameByID(supplierID, supplierName, connectionString);
+            supplier = await suppliersService.UpdateSupplierNameByID(supplierID, supplierName, connectionString);
             if (supplier != null)
             {
                 Console.Write("updated Supplier: ");
@@ -95,13 +96,13 @@ namespace ConsoleApp1
         }
 
         //Menu 7
-        public void UpdateSupplierCodeByID(string connectionString) 
+        public async Task UpdateSupplierCodeByID(string connectionString) 
         {
             Console.Write($"Enter Supplier ID for update EDRPOU: ");
             var supplierID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Supplier EDRPOU to update: ");
             var supplierEDRPOU = Console.ReadLine();
-            supplier = suppliersService.UpdateSupplierCodeByID(supplierID, supplierEDRPOU, connectionString);
+            supplier = await suppliersService.UpdateSupplierCodeByID(supplierID, supplierEDRPOU, connectionString);
             if (supplier != null)
             {
                 Console.Write("updated Supplier: ");
@@ -114,9 +115,9 @@ namespace ConsoleApp1
         }
 
         //Menu 8
-        public void DeleteSupplierByID(string connectionString)
+        public async Task DeleteSupplierByID(string connectionString)
         {
-            Console.WriteLine(suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
         }
     }
 }

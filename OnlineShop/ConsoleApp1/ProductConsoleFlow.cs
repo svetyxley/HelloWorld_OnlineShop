@@ -15,7 +15,7 @@ namespace ConsoleApp1
         Product Product = new();
 
         //Menu 1
-        public void CreateNewProduct(string connectionString)
+        public async Task CreateNewProduct(string connectionString)
         {
             productsService.CreateProduct(
                 inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), 
@@ -26,13 +26,13 @@ namespace ConsoleApp1
         }
 
         //Menu 2
-        public void OutputAllProducts(string connectionString)
+        public async Task OutputAllProducts(string connectionString)
         {
-            productsService.OutputProducts(productsService.GetAllProducts(connectionString));
+            await productsService.OutputProducts(await productsService.GetAllProducts(connectionString));
         }
 
         //Menu 3
-        public void GetProductByID(string connectionString)
+        public async Task GetProductByID(string connectionString)
         {
             var product = productsService.GetProductByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
             if (product != null)
@@ -47,11 +47,11 @@ namespace ConsoleApp1
         }
 
         //Menu 4
-        public void GetProductByName(string connectionString)
+        public async Task GetProductByName(string connectionString)
         {
             Console.Write($"Enter Product Name for search: ");
             var name = Console.ReadLine();
-            var product = productsService.GetProductByName(name, connectionString);
+            var product = await productsService.GetProductByName(name, connectionString);
             if (product != null)
             {
                 Console.Write("Product: ");
@@ -64,13 +64,13 @@ namespace ConsoleApp1
         }
 
         //Menu 5
-        public void UpdateProductNameByID(string connectionString)
+        public async Task UpdateProductNameByID(string connectionString)
         {
             Console.Write($"Enter Product ID to update Name: ");
             var id = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Product Name to update: ");
             var name = Console.ReadLine();
-            var product = productsService.UpdateProductName(id, name, connectionString);
+            var product = await productsService.UpdateProductName(id, name, connectionString);
             if (product != null)
             {
                 Console.Write("updated Product: ");
@@ -83,13 +83,13 @@ namespace ConsoleApp1
         }
 
         //Menu 6
-        public void UpdateProductCategoryByID(string connectionString)
+        public async Task UpdateProductCategoryByID(string connectionString)
         {
             Console.Write($"Enter Product ID for update Category: ");
             var productID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Product Category to update: ");
             var categoryID = int.Parse(Console.ReadLine());
-            var product = productsService.UpdateProductCategory(productID, categoryID, connectionString);
+            var product = await productsService.UpdateProductCategory(productID, categoryID, connectionString);
             if (product != null)
             {
                 Console.Write("updated Product: ");
@@ -102,13 +102,13 @@ namespace ConsoleApp1
         }
 
         //Menu 7
-        public void UpdateProductManufacturerByID(string connectionString)
+        public async Task UpdateProductManufacturerByID(string connectionString)
         {
             Console.Write($"Enter Product ID for update Manufacturer: ");
             var productID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Product Manufacturer to update: ");
             var manufacturerID = int.Parse(Console.ReadLine());
-            var product = productsService.UpdateProductManufacturer(productID, manufacturerID, connectionString);
+            var product = await productsService.UpdateProductManufacturer(productID, manufacturerID, connectionString);
             if (product != null)
             {
                 Console.Write("updated Product: ");
@@ -121,13 +121,13 @@ namespace ConsoleApp1
         }
 
         //Menu 8
-        public void UpdateProductSupplierByID(string connectionString)
+        public async Task UpdateProductSupplierByID(string connectionString)
         {
             Console.Write($"Enter Product ID for update Supplier: ");
             var productID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Product SupplierID to update: ");
             var supplierID = int.Parse(Console.ReadLine());
-            var product = productsService.UpdateProductSupplier(productID, supplierID, connectionString);
+            var product = await productsService.UpdateProductSupplier(productID, supplierID, connectionString);
             if (product != null)
             {
                 Console.Write("updated Product: ");
@@ -140,13 +140,13 @@ namespace ConsoleApp1
         }
 
         //Menu 9
-        public void UpdateProductPrice(string connectionString)
+        public async Task UpdateProductPrice(string connectionString)
         {
             Console.Write($"Enter Product ID for update price:");
             var productID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Product price to update: ");
             var price = Double.Parse(Console.ReadLine());
-            var product = productsService.UpdateProductPrice(productID, price, connectionString);
+            var product = await productsService.UpdateProductPrice(productID, price, connectionString);
             if (product != null)
             {
                 Console.Write("updated Product: ");
@@ -159,9 +159,9 @@ namespace ConsoleApp1
         }
 
         //Menu 10
-        public void DeleteProductByID(string connectionString)
+        public async Task DeleteProductByID(string connectionString)
         {
-            Console.WriteLine(productsService.DeleteProductByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await productsService.DeleteProductByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
         }
     }
 }
