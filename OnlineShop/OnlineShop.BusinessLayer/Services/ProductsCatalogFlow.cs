@@ -21,7 +21,9 @@ namespace OnlineShop
             discountCardService.OutputDiscountCards();
 
             //Замовлення поставки та вивід усіх замовлень поставок
- //           orderSupplyService.AddOrder();
+ //
+ //
+ //orderSupplyService.AddOrder();
             orderSupplyService.OutputSupplyOrders();
 
             //Додавання нового продукту та вивід повного списка продуктів

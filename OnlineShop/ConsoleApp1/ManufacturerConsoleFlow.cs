@@ -15,21 +15,22 @@ namespace ConsoleApp1
         Manufacturer manufacturer = new();
 
         //Menu 1
-        public void CreateNewManufacturer(string connectionString)
+        public async Task CreateNewManufacturer(string connectionString)
         {
-            manufacturersService.CreateManufacturer(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            await manufacturersService.CreateManufacturer(inputManager.InputName(inputValidator,     commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
         }
 
         //Menu 2
-        public void OutputAllManufacturers(string connectionString)
+        public async Task OutputAllManufacturers(string connectionString)
         {
-            manufacturersService.OutputManufacturers(manufacturersService.GetAllManufacturers(connectionString));
+            var manufacturers = await manufacturersService.GetAllManufacturers(connectionString);
+            await manufacturersService.OutputManufacturers(manufacturers);
         }
 
         //Menu 3
-        public void GetManufacturerByID(string connectionString)
+        public async Task GetManufacturerByID(string connectionString)
         {
-            manufacturer = manufacturersService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+             manufacturer = await manufacturersService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
             if (manufacturer != null)
             {
                 Console.WriteLine(manufacturer.ToString());
@@ -42,11 +43,11 @@ namespace ConsoleApp1
         }
 
         //Menu 4
-        public void GetManufacturerByName(string connectionString)
+        public async Task GetManufacturerByName(string connectionString)
         {
             Console.Write($"Enter Manufacturer Name for search: ");
             var manufacturerName = Console.ReadLine();
-            manufacturer = manufacturersService.GetManufacturerByName(manufacturerName, connectionString);
+            manufacturer = await manufacturersService.GetManufacturerByName(manufacturerName, connectionString);
             if (manufacturer != null)
             {
                 Console.Write("Manufacturer: ");
@@ -59,11 +60,11 @@ namespace ConsoleApp1
         }
 
         //Menu 5
-        public void GetManufacturerByCode(string connectionString)
+        public async Task GetManufacturerByCode(string connectionString)
         {
             Console.Write($"Enter Manufacturer code EDRPOU for search: ");
             var codeEDRPOU = Console.ReadLine();
-            manufacturer = manufacturersService.GetManufacturerByCode(codeEDRPOU, connectionString);
+            manufacturer = await manufacturersService.GetManufacturerByCode(codeEDRPOU, connectionString);
             if (manufacturer != null)
             {
                 Console.WriteLine("EDRPOU: ");
@@ -76,13 +77,13 @@ namespace ConsoleApp1
         }
 
         //Menu 6
-        public void UpdateManufacturerNameByID(string connectionString)
+        public async Task UpdateManufacturerNameByID(string connectionString)
         {
             Console.Write($"Enter Manufacturer ID to update Name: ");
             var manufacturerID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Manufacturer Name to update: ");
             var manufacturerName = Console.ReadLine();
-            manufacturer = manufacturersService.UpdateManufacturerNameByID(manufacturerID, manufacturerName, connectionString);
+            manufacturer = await manufacturersService.UpdateManufacturerNameByID(manufacturerID, manufacturerName, connectionString);
             if (manufacturer != null)
             {
                 Console.Write("updated Manufacturer: ");
@@ -95,13 +96,13 @@ namespace ConsoleApp1
         }
 
         //Menu 7
-        public void UpdateManufacturerCodeByID(string connectionString)
+        public async Task UpdateManufacturerCodeByID(string connectionString)
         {
             Console.Write($"Enter Manufacturer ID for update EDRPOU: ");
             var manufacturerID = int.Parse(Console.ReadLine());
             Console.Write($"Enter new Manufacturer EDRPOU to update: ");
             var manufacturerEDRPOU = Console.ReadLine();
-            manufacturer = manufacturersService.UpdateManufacturerCodeByID(manufacturerID, manufacturerEDRPOU, connectionString);
+            manufacturer = await manufacturersService.UpdateManufacturerCodeByID(manufacturerID, manufacturerEDRPOU, connectionString);
             if (manufacturer != null)
             {
                 Console.Write("updated Manufacturer: ");
@@ -114,9 +115,9 @@ namespace ConsoleApp1
         }
 
         //Menu 8
-        public void DeleteManufacturerByID(string connectionString)
+        public async Task DeleteManufacturerByID(string connectionString)
         {
-            Console.WriteLine(manufacturersService.DeleteManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await manufacturersService.DeleteManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
         }
     }
 }
