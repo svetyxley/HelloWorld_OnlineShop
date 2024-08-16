@@ -15,69 +15,106 @@ namespace OnlineShop.BusinessLayer.Services
         private CommonEntityService<OrderSupply> commonEntityService = new();
         private ProductsService productsService = new();
         private OrderSupplyService orderSupplyService = new();
+        private List<ProductStocks> productStocksList = new List<ProductStocks>();
 
-        private List<ProductStocks> productStocksList = new List<ProductStocks>()
+        public async Task<ProductStocks> CreateProduct(Product _product, int productAmount, int stockItemID)
         {
-            new ProductStocks(10),
-        };
-        public async Task<ProductStocks> CreateProduct(Product _product, int productAmount)
-        {
-            _product = await productsService.GetProductByID(1, "connectionStr");
-            productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-            return new ProductStocks(_product, productAmount);
-        }
-        public async Task AddProduct(Product _product, int productAmount)
-        {
-            productStocksList.Add(await CreateProduct(_product, productAmount));
-            outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
-        }
-        public int GetAmountByID(int productID, string connectionStr)
-        {
-            var product = productsService.GetProductByID(productID, connectionStr);
-            if (product != null)
+            try
             {
-                var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
-                if (productStock != null)
-                {
-                    return productStock.ProductAmount;
-                }
+                _product = await productsService.GetProductByID(1, "connectionStr");
+                productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+                return new ProductStocks(_product, productAmount, stockItemID);
             }
-            return 0;
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+        }
+        //public async Task AddProduct(Product _product, int productAmount)
+        //{
+        //    productStocksList.Add(await CreateProduct(_product, productAmount));
+        //    outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
+        //}
+        public async Task<int> GetAmountByID(int productID, string connectionStr)
+        {
+            try
+            {
+                var product = productsService.GetProductByID(productID, connectionStr);
+                if (product != null)
+                {
+                    var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
+                    if (productStock != null)
+                    {
+                        return productStock.ProductAmount;
+                    }
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
         }
         public ProductStocks UpdateOfAmount(int productID, int productAmount, string connectionStr)
         {
-            var product = productsService.GetProductByID(productID, connectionStr);
-            if (product != null)
+            try
             {
-                var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
-                if (productStock != null)
+                var product = productsService.GetProductByID(productID, connectionStr);
+                if (product != null)
                 {
-                    productStock.ProductAmount = productAmount;
+                    var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
+                    if (productStock != null)
+                    {
+                        productStock.ProductAmount = productAmount;
+                        return productStock;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+        }
+        public async Task<ProductStocks> BuyProducts(int productID, int productAmount, string connectionStr)
+        {
+            try
+            {
+                int AmountOnStock = await GetAmountByID(productID, connectionStr);
+                if (productAmount <= AmountOnStock)
+                {
+                    AmountOnStock -= productAmount;
+                    var productStock = UpdateOfAmount(productID, AmountOnStock, connectionStr);
                     return productStock;
                 }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
         }
-        public ProductStocks BuyProducts(int productID, int productAmount, string connectionStr)
+        public async Task ShowProductStock(ProductStocks productStock)
         {
-            int AmountOnStock = GetAmountByID(productID, connectionStr);
-            if (productAmount <= AmountOnStock)
+            try
             {
-                AmountOnStock-=productAmount;
-                var productStock = UpdateOfAmount(productID, AmountOnStock, connectionStr);
-                return productStock;
+                if (productStock.IsInStock())
+                {
+                    Console.WriteLine(productStock.GetStockSummary());
+                }
+                else
+                {
+                    Console.WriteLine("Product is out of stock.");
+                }
             }
-            return null;
-        }
-        public void ShowProductStock(ProductStocks productStock)
-        {
-            if (productStock.IsInStock())
+            catch (Exception ex)
             {
-                Console.WriteLine(productStock.GetStockSummary());
-            }
-            else
-            {
-                Console.WriteLine("Product is out of stock.");
+                outputManager.OutputException(ex);
+                throw;
             }
         }
     }

@@ -26,6 +26,7 @@ namespace ConsoleApp1
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("appsettings.SvitlanaL.json")
+                .AddJsonFile("appsettings.Nazar.json")
                 .Build();
 
             var connectionString = configuration.GetConnectionString("Master");

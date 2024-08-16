@@ -14,52 +14,83 @@ namespace OnlineShop.BusinessLayer.Services
         private InputValidator inputValidator = new();
         private CommonEntityService<DiscountCard> commonEntityService = new();
         private BuyerService buyerService = new();
+        private DapperContext dapperContext = new();
+        private List<DiscountCard> discountCard = new List<DiscountCard>();
 
-        private List<DiscountCard> discountCard = new List<DiscountCard>()
+        public async Task<DiscountCard> CreateCard(double discountPercantage, string connectionStr)
         {
-            new DiscountCard(1, 10),
-            new DiscountCard(2, 15),
-            new DiscountCard(3, 20)
-        };
+            try
+            {
+                //buyerID = idGenerator.InputID(discountCard);
+                var connection = dapperContext.OpenConnection(connectionStr);
 
-        public DiscountCard CreateCard(int cardID, double discountPercantage)
-        {
-             cardID = idGenerator.InputID(discountCard);
-             discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
-            return new DiscountCard(cardID, buyerService.GetManufacturerByID().BuyerId, discountPercantage);
-        }
-        public void AddCard(int cardID, double discountPercantage)
-        {
-            discountCard.Add(CreateCard(cardID, discountPercantage));
-            outputManager.OutputToConsole(NotificationConstants.CARD_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
-        }
-        public DiscountCard UpdateCard(int cardID)
-        {
-            cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
-            if (card == null)
-            {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
+                return new DiscountCard(buyerService.GetManufacturerByID().BuyerId, discountPercantage);
             }
-            return card;
-        }
-        public void OutputDiscountCards()
-        {
-            outputManager.OutputToConsole(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
-        }
-        public DiscountCard GetDiscountCardByID(int cardID)
-        {
-            //var cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
-            if (card == null)
+            catch (Exception ex)
             {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                outputManager.OutputException(ex);
+                throw;
             }
-            else
+        }
+        //public async Task AddCard(int cardID, double discountPercantage)
+        //{
+        //    discountCard.Add(await CreateCard(cardID, discountPercantage));
+        //    outputManager.OutputToConsole(NotificationConstants.CARD_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
+        //}
+        public async Task<DiscountCard> UpdateCard(int cardID, string connectionStr)
+        {
+            try
             {
-                outputManager.OutputToConsole(card.ToString(), commonEntityService.GetListType());
+                var connection = dapperContext.OpenConnection(connectionStr);
+                cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
+                var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
+                if (card == null)
+                {
+                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                }
+                return card;
             }
-            return card;
+            catch(Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+        }
+        public void OutputDiscountCards(string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                outputManager.OutputToConsole(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+        }
+        public async Task<DiscountCard> GetDiscountCardByID(int cardID, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
+                if (card == null)
+                {
+                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                }
+                else
+                {
+                    outputManager.OutputToConsole(card.ToString(), commonEntityService.GetListType());
+                }
+                return card;
+            }
+            catch( Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
         }
     }
 }
