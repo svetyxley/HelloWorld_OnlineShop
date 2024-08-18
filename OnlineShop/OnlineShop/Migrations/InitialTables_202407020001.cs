@@ -14,6 +14,7 @@ namespace OnlineShop.Data.Migrations
         }
         public override void Up()
         {
+            Execute.Sql(@"USE OnlineShop;");
             Create.Table("DiscountCards")
                 .WithColumn("Id").AsInt64().Identity().NotNullable().PrimaryKey()
                 .WithColumn("PecantageDiscount").AsFloat();

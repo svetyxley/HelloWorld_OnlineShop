@@ -18,7 +18,7 @@ namespace OnlineShop
 
             //Створення дисконтної картки та вивід усіх карток
  //           discountCardService.AddCard();
-            discountCardService.OutputDiscountCards();
+            //discountCardService.OutputDiscountCards();
 
             //Замовлення поставки та вивід усіх замовлень поставок
  //

@@ -15,59 +15,83 @@ namespace OnlineShop.BusinessLayer.Services
         private SuppliersService suppliersService = new();
         private ProductsService productsService = new();
         private EmployeeService employeeService = new();
+        private List<OrderSupply> orderSupply = new List<OrderSupply>();
 
-
-
-        private List<OrderSupply> orderSupply = new List<OrderSupply>()
-        {
-            new OrderSupply(1, 15, DateTime.Now.ToString()),
-            new OrderSupply(2, 8, DateTime.Now.ToString()),
-            new OrderSupply(3, 18, DateTime.Now.ToString()),
-        };
-        public async Task<OrderSupply> MakeOrderOfSupply(int supplyID, int productAmount, string orderTime)
+        public async Task<OrderSupply> MakeOrderOfSupply(int supplyID, int productAmount, DateTime orderTime)
         {
             //int supplyID = idGenerator.InputID(orderSupply);
             //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
             //string orderTime = DateTime.Now.ToString();
-            //Nazar
-            return new OrderSupply(supplyID, await suppliersService.GetSupplierByID(1, "connectionString"), await productsService.GetProductByID(1, "connectionString"), productAmount, orderTime, employeeService.GetEmployeeByID());
+            try
+            {
+                return new OrderSupply(supplyID, await suppliersService.GetSupplierByID(1, "connectionString"), await productsService.GetProductByID(1, "connectionString"), productAmount, orderTime, employeeService.GetEmployeeByID());
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
         }
-        public async Task AddOrder(int supplyID, int productAmount, string orderTime)
-        {
-            orderSupply.Add(await MakeOrderOfSupply(supplyID, productAmount, orderTime));
-            outputManager.OutputToConsole(NotificationConstants.SUPPLY_IS_SUCESSFULLY_ORDERED, commonEntityService.GetListType());
-        }
-        public OrderSupply GetSupplyOrderByID(int supplyID)
+        //public async Task AddOrder(int supplyID, int productAmount, DateTime orderTime)
+        //{
+        //    orderSupply.Add(await MakeOrderOfSupply(supplyID, productAmount, orderTime));
+        //    outputManager.OutputToConsole(NotificationConstants.SUPPLY_IS_SUCESSFULLY_ORDERED, commonEntityService.GetListType());
+        //}
+        public async Task<OrderSupply> GetSupplyOrderByID(int supplyID)
         {
             //var supplyID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.SupplyOrderID == supplyID);
-            if (supply == null)
+            try
             {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.SupplyOrderID == supplyID);
+                if (supply == null)
+                {
+                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                }
+                else
+                {
+                    outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
+                }
+                return supply;
             }
-            else
+            catch (Exception ex)
             {
-                outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
+                outputManager.OutputException(ex);
+                throw;
             }
-            return supply;
         }
-        public int GetAmount(int supplyAmount)
+        public async Task<int> GetAmount(int supplyAmount)
         {
             //var supplyAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-            var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
-            if (supply == null)
+            try
             {
-                outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
+                if (supply == null)
+                {
+                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+                }
+                else
+                {
+                    outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
+                }
+                return supplyAmount;
             }
-            else
+            catch (Exception ex)
             {
-                outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
+                outputManager.OutputException(ex);
+                throw;
             }
-            return supplyAmount;
         }
-        public void OutputSupplyOrders()
+        public async Task OutputSupplyOrders()
         {
-            outputManager.OutputToConsole(commonEntityService.OutputList(orderSupply), commonEntityService.GetListType());
+            try
+            {
+                outputManager.OutputToConsole(commonEntityService.OutputList(orderSupply), commonEntityService.GetListType());
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
         }
     }
 }

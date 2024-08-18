@@ -8,7 +8,7 @@ namespace OnlineShop.EntityServices
         public Supplier? _supplier { get; set; }
         public Product? _product { get; set; }
         public int ProductAmount { get; init; }
-        public string OrderTime { get; set; }
+        public DateTime OrderTime { get; set; }
         public Employee? _employee { get; set; }
 
 
@@ -23,14 +23,14 @@ namespace OnlineShop.EntityServices
             ProductAmount = productAmount;
         }
 
-        public OrderSupply(int orderID, int productAmount, string orderTime)
+        public OrderSupply(int orderID, int productAmount, DateTime orderTime)
         {
             SupplyOrderID = orderID;
             ProductAmount = productAmount;
             OrderTime = orderTime;
         }
 
-        public OrderSupply(int orderID, Supplier supplier, Product product, int productAmount, string orderTime, Employee employee)
+        public OrderSupply(int orderID, Supplier supplier, Product product, int productAmount, DateTime orderTime, Employee employee)
         {
             SupplyOrderID = orderID;
             _supplier = supplier;

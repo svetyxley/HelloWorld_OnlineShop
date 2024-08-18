@@ -13,5 +13,11 @@
             Console.WriteLine($"Something went wrong with the database"); //зробити запис в лог
             Console.WriteLine($"Error: {ex.Message}");
         }
+
+        public void OutputException(Exception ex)
+        {
+            Console.WriteLine($"Something went wrong");
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 }
