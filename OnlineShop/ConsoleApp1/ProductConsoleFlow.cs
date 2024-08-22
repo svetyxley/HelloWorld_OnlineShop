@@ -10,31 +10,34 @@ namespace ConsoleApp1
     {
         ProductsService productsService = new();
         InputManager inputManager = new();
+        OutputManager outputManager = new();
         InputValidator inputValidator = new();
-        CommonEntityService<Product> commonEntityServiceS = new();
-        Product Product = new();
+        CommonEntityService<Product> commonEntityService = new();
+        Product product = new();
+        private List<Product> products = new List<Product>();
 
         //Menu 1
         public async Task CreateNewProduct(string connectionString)
         {
-            productsService.CreateProduct(
-                inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), 
-                inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()),
-                inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()),
-                inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()),
-                inputManager.InputPrice(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            await productsService.CreateProduct(
+                inputManager.InputName(inputValidator, commonEntityService.GetListType()), 
+                inputManager.InputID(inputValidator, commonEntityService.GetListType()),
+                inputManager.InputID(inputValidator, commonEntityService.GetListType()),
+                inputManager.InputID(inputValidator, commonEntityService.GetListType()),
+                inputManager.InputPrice(inputValidator, commonEntityService.GetListType()), connectionString);
         }
 
         //Menu 2
         public async Task OutputAllProducts(string connectionString)
         {
-            await productsService.OutputProducts(await productsService.GetAllProducts(connectionString));
+            await productsService.GetAllProducts(connectionString);
+            outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
         }
 
         //Menu 3
         public async Task GetProductByID(string connectionString)
         {
-            var product = productsService.GetProductByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            var product = await productsService.GetProductByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString);
             if (product != null)
             {
                 Console.WriteLine(product.ToString());
@@ -51,6 +54,8 @@ namespace ConsoleApp1
         {
             Console.Write($"Enter Product Name for search: ");
             var name = Console.ReadLine();
+            if (name != null) 
+            {
             var product = await productsService.GetProductByName(name, connectionString);
             if (product != null)
             {
@@ -60,6 +65,7 @@ namespace ConsoleApp1
             else
             {
                 Console.WriteLine("Product not found.");
+            }
             }
         }
 
@@ -161,7 +167,7 @@ namespace ConsoleApp1
         //Menu 10
         public async Task DeleteProductByID(string connectionString)
         {
-            Console.WriteLine(await productsService.DeleteProductByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await productsService.DeleteProductByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString));
         }
     }
 }
