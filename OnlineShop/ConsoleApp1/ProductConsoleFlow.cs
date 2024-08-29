@@ -3,6 +3,7 @@ using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Entities;
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
@@ -30,7 +31,7 @@ namespace ConsoleApp1
         //Menu 2
         public async Task OutputAllProducts(string connectionString)
         {
-            await productsService.GetAllProducts(connectionString);
+            var products = await productsService.GetAllProducts(connectionString);
             outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
         }
 
