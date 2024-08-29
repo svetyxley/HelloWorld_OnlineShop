@@ -3,7 +3,6 @@ using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Entities;
-using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
