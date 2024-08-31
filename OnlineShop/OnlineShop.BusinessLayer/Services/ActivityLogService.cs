@@ -4,7 +4,7 @@ namespace OnlineShop.Records
 {
     public class ActivityLogService
     {
-        public void OutputLog(ActivityLog log)
+        public async Task OutputLog(ActivityLog log)
         {
             string logPath = FileConstants.LOG_PATH_D;
 
@@ -27,13 +27,13 @@ namespace OnlineShop.Records
                 // Clean file if its size is bigger than MAX_FILE_SIZE
                 if (fileInfo.Length > FileConstants.MAX_FILE_SIZE)
                 {
-                    File.WriteAllText(logPath, string.Empty);
+                    await File.WriteAllTextAsync(logPath, string.Empty);
                 }
 
                 // Write log to the file
                 using (StreamWriter writer = new StreamWriter(logPath, true))
                 {
-                    writer.WriteLine(log.ToString());
+                    await writer.WriteLineAsync(log.ToString());
                 }
             }
             catch (Exception ex)
