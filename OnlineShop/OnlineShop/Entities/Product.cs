@@ -23,7 +23,7 @@ namespace OnlineShop.Entities
 
         public Manufacturer? ProductManufacturer { get; set; }
         public Supplier? ProductSupplier { get; set; }
-
+        public ProductStocks? productStocks { get; set; }
 
         public Product()
         {

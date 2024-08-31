@@ -32,12 +32,20 @@ INSERT INTO Product (ProductName, ProductCategoryID, ManufacturerID, SupplierID,
 (N'Сир Philadelphia оригінальний', 1, 5, 5, 99.00);
 GO
 
-INSERT INTO DiscountCards (PecantageDiscount) VALUES
-(8.5),
-(5.5),
-(15.5),
-(50),
-(3.5);
+INSERT INTO Buyer (BuyerEmail) VALUES
+('abc@gmail.com'),
+('nick@gmail.com'),
+('admins@gmail.com'),
+('nicky@gmail.com'),
+('ans@gmail.com');
+GO
+
+INSERT INTO DiscountCards (PecantageDiscount, BuyerID) VALUES
+(8.5, 1),
+(5.5, 2),
+(15.5, 3),
+(50, 4),
+(3.5, 5);
 GO
 
 INSERT INTO Stocks(ProductAmount, ProductId) VALUES

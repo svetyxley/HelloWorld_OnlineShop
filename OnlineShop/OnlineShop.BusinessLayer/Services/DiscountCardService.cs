@@ -3,6 +3,7 @@ using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.EntityServices;
 using OnlineShop.BusinessLayer.Validators;
+using OnlineShop.Data.Entities;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -17,15 +18,13 @@ namespace OnlineShop.BusinessLayer.Services
         private DapperContext dapperContext = new();
         private List<DiscountCard> discountCard = new List<DiscountCard>();
 
-        public async Task<DiscountCard> CreateCard(double discountPercantage, string connectionStr)
+        public async Task<DiscountCard> CreateCard(double discountPercantage, int buyerID, string connectionStr)
         {
             try
             {
-                //buyerID = idGenerator.InputID(discountCard);
                 var connection = dapperContext.OpenConnection(connectionStr);
-
                 discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
-                return new DiscountCard(buyerService.GetManufacturerByID().BuyerId, discountPercantage);
+                return new DiscountCard(buyerService.GetBuyerByID(buyerID), discountPercantage);
             }
             catch (Exception ex)
             {

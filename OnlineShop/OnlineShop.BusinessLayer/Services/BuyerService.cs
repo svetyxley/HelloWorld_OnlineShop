@@ -2,6 +2,7 @@
 using OnlineShop.Constants;
 using OnlineShop.Data.Entities;
 using OnlineShop.BusinessLayer.Validators;
+using OnlineShop.Entities;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -12,6 +13,7 @@ namespace OnlineShop.BusinessLayer.Services
         private OutputManager _outputManager = new();
         private IDGenerator _generatorID = new();
         private CommonEntityService<Buyer> _commonEntityService = new();
+        private DapperContext dapperContext = new();
 
         private List<Buyer> buyers = new List<Buyer>()
         {
@@ -66,6 +68,28 @@ namespace OnlineShop.BusinessLayer.Services
         public void OutputBuyers()
         {
             _outputManager.OutputToConsole(_commonEntityService.OutputList(buyers), _commonEntityService.GetListType());
+        }
+
+        public Buyer GetBuyerByID(int buyerID)
+        {
+            try
+            {
+                var _buyer = buyers.FirstOrDefault(buyer => buyer.BuyerId == buyerID);
+                if (_buyer == null)
+                {
+                    _outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, _commonEntityService.GetListType());
+                }
+                else
+                {
+                    _outputManager.OutputToConsole(_buyer.ToString(), _commonEntityService.GetListType());
+                }
+                return _buyer;
+            }
+            catch (Exception ex)
+            {
+                _outputManager.OutputException(ex);
+                throw;
+            }
         }
     }
 }

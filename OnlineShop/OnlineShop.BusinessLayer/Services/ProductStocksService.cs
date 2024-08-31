@@ -98,24 +98,24 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task ShowProductStock(ProductStocks productStock)
-        {
-            try
-            {
-                if (productStock.IsInStock())
-                {
-                    Console.WriteLine(productStock.GetStockSummary());
-                }
-                else
-                {
-                    Console.WriteLine("Product is out of stock.");
-                }
-            }
-            catch (Exception ex)
-            {
-                outputManager.OutputException(ex);
-                throw;
-            }
-        }
+        //public async Task ShowProductStock(ProductStocks productStock)
+        //{
+        //    try
+        //    {
+        //        if (productStock.IsInStock())
+        //        {
+        //            Console.WriteLine(productStock.GetStockSummary());
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Product is out of stock.");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        outputManager.OutputException(ex);
+        //        throw;
+        //    }
+        //}
     }
 }
