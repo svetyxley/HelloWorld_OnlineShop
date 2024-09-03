@@ -1,6 +1,8 @@
-﻿using OnlineShop.BusinessLayer.Managers;
+﻿using Dapper;
+using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
+using OnlineShop.Entities;
 using OnlineShop.EntityServices;
 
 namespace OnlineShop.BusinessLayer.Services
@@ -16,15 +18,21 @@ namespace OnlineShop.BusinessLayer.Services
         private ProductsService productsService = new();
         private EmployeeService employeeService = new();
         private List<OrderSupply> orderSupply = new List<OrderSupply>();
+        private DapperContext dapperContext = new();
 
-        public async Task<OrderSupply> MakeOrderOfSupply(int supplyID, int productAmount, DateTime orderTime)
+        public async Task<OrderSupply> MakeOrderOfSupply(int supplierID, int productID, int productAmount, DateTime orderTime, string connectionStr)
         {
-            //int supplyID = idGenerator.InputID(orderSupply);
-            //int productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-            //string orderTime = DateTime.Now.ToString();
             try
             {
-                return new OrderSupply(supplyID, await suppliersService.GetSupplierByID(1, "connectionString"), await productsService.GetProductByID(1, "connectionString"), productAmount, orderTime, employeeService.GetEmployeeByID());
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var supply = await connection.QueryAsync<OrderSupply>("MakeOrderOfSupply", new {  
+                    _supplier = suppliersService.GetSupplierByID(supplierID, connectionStr),
+                    _product = productsService.GetProductByID(productID, connectionStr),
+                    ProductAmount = productAmount,
+                    OrderTime = orderTime,
+                    _employee = employeeService.GetEmployeeByID()
+                });
+                return supply.FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -32,60 +40,50 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        //public async Task AddOrder(int supplyID, int productAmount, DateTime orderTime)
+        public async Task<OrderSupply> GetSupplyOrderByID(int supplyID, string connectionStr)
+        {
+            try
+            {
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var supply = await connection.QueryAsync<OrderSupply>("GetSupplyOrderByID", new { OrderSupplyID = supplyID });
+                return supply.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+        }
+        //public async Task<int> GetAmount(int supplyAmount)
         //{
-        //    orderSupply.Add(await MakeOrderOfSupply(supplyID, productAmount, orderTime));
-        //    outputManager.OutputToConsole(NotificationConstants.SUPPLY_IS_SUCESSFULLY_ORDERED, commonEntityService.GetListType());
+        //    //var supplyAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
+        //    try
+        //    {
+        //        var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
+        //        if (supply == null)
+        //        {
+        //            outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
+        //        }
+        //        else
+        //        {
+        //            outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
+        //        }
+        //        return supplyAmount;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        outputManager.OutputException(ex);
+        //        throw;
+        //    }
         //}
-        public async Task<OrderSupply> GetSupplyOrderByID(int supplyID)
-        {
-            //var supplyID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-            try
-            {
-                var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.SupplyOrderID == supplyID);
-                if (supply == null)
-                {
-                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-                }
-                else
-                {
-                    outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
-                }
-                return supply;
-            }
-            catch (Exception ex)
-            {
-                outputManager.OutputException(ex);
-                throw;
-            }
-        }
-        public async Task<int> GetAmount(int supplyAmount)
-        {
-            //var supplyAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-            try
-            {
-                var supply = orderSupply.FirstOrDefault(orderSupply => orderSupply.ProductAmount == supplyAmount);
-                if (supply == null)
-                {
-                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-                }
-                else
-                {
-                    outputManager.OutputToConsole(supply.ToString(), commonEntityService.GetListType());
-                }
-                return supplyAmount;
-            }
-            catch (Exception ex)
-            {
-                outputManager.OutputException(ex);
-                throw;
-            }
-        }
-        public async Task OutputSupplyOrders()
+        public async Task<List<OrderSupply>> OutputSupplyOrders(string connectionStr)
         {
             try
             {
-                outputManager.OutputToConsole(commonEntityService.OutputList(orderSupply), commonEntityService.GetListType());
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var sql = $"select * FROM OrderSupply";
+                var supplies = await connection.QueryAsync<OrderSupply>(sql);
+                return supplies.AsList();
             }
             catch (Exception ex)
             {

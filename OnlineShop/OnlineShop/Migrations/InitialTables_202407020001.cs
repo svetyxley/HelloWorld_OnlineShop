@@ -23,8 +23,8 @@ namespace OnlineShop.Data.Migrations
                 .WithColumn("BuyerEmail").AsString(75);
 
             Create.Table("DiscountCards")
-                .WithColumn("Id").AsInt64().Identity().NotNullable().PrimaryKey()
-                .WithColumn("PecantageDiscount").AsFloat()
+                .WithColumn("CardId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("PercantageDiscount").AsFloat()
                 .WithColumn("BuyerID").AsInt64().ForeignKey("FK_Product_Buyer", "Buyer", "BuyerID");
 
             Create.Table("Manufacturer")
@@ -51,10 +51,12 @@ namespace OnlineShop.Data.Migrations
                 .WithColumn("ProductID").AsInt64().ForeignKey("FK_Stocks_Product", "Product", "ProductID");
 
             Create.Table("OrderSupply")
-                .WithColumn("OrderId").AsInt64().Identity().NotNullable().PrimaryKey()
-                .WithColumn("ProductAmount").AsInt64()
+                .WithColumn("SupplyOrderId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("SupplierID").AsInt64().ForeignKey("FK_OrderSupply_Supplier", "Supplier", "SupplierID")
                 .WithColumn("ProductId").AsInt64().ForeignKey("FK_OrderSupply_Product", "Product", "ProductID")
+                .WithColumn("ProductAmount").AsInt64()
                 .WithColumn("OrderTime").AsDateTime();
+                //.WithColumn("EmployeeId").AsInt64().ForeignKey("FK_OrderSupply_Employee", "Employee", "EmployeeID");
         }
     }
 }

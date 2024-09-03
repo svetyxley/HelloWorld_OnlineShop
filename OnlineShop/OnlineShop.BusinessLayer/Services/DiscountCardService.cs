@@ -1,9 +1,10 @@
 ﻿using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
-using OnlineShop.EntityServices;
 using OnlineShop.BusinessLayer.Validators;
-using OnlineShop.Data.Entities;
+using Dapper;
+using Microsoft.Data.SqlClient;
+using OnlineShop.Records;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -14,6 +15,7 @@ namespace OnlineShop.BusinessLayer.Services
         private IDGenerator idGenerator = new();
         private InputValidator inputValidator = new();
         private CommonEntityService<DiscountCard> commonEntityService = new();
+        private ActivityLogService logService = new ActivityLogService();
         private BuyerService buyerService = new();
         private DapperContext dapperContext = new();
         private List<DiscountCard> discountCard = new List<DiscountCard>();
@@ -23,8 +25,14 @@ namespace OnlineShop.BusinessLayer.Services
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                discountPercantage = inputManager.InputDiscountPercantage(inputValidator, commonEntityService.GetListType());
-                return new DiscountCard(buyerService.GetBuyerByID(buyerID), discountPercantage);
+                var _discountCard = await connection.QueryAsync<DiscountCard>("CreateCard", new { PercantageDiscount = discountPercantage, 
+                    buyer = buyerService.GetBuyerByID(buyerID) });
+                return _discountCard.FirstOrDefault();
+            }
+            catch(SqlException ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
             }
             catch (Exception ex)
             {
@@ -37,31 +45,40 @@ namespace OnlineShop.BusinessLayer.Services
         //    discountCard.Add(await CreateCard(cardID, discountPercantage));
         //    outputManager.OutputToConsole(NotificationConstants.CARD_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         //}
-        public async Task<DiscountCard> UpdateCard(int cardID, string connectionStr)
+        public async Task<DiscountCard> UpdateCardPercantage(int cardID, double percantage, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                cardID = inputManager.InputID(inputValidator, commonEntityService.GetListType());
-                var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
-                if (card == null)
-                {
-                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-                }
-                return card;
+                var card = await connection.QueryAsync<DiscountCard>("UpdateCardPercantage", new { DiscountCard_ID = cardID, PercanatageDiscount = percantage });
+                ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType());
+                await logService.OutputLog(log);
+                return card.FirstOrDefault();
             }
-            catch(Exception ex)
+            catch (SqlException ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+            catch (Exception ex)
             {
                 outputManager.OutputException(ex);
                 throw;
             }
         }
-        public void OutputDiscountCards(string connectionStr)
+        public async Task<List<DiscountCard>> GetDiscountCards(string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                outputManager.OutputToConsole(commonEntityService.OutputList(discountCard), commonEntityService.GetListType());
+                var sql = $"select * FROM DiscountCards";
+                var cards = await connection.QueryAsync<DiscountCard>(sql);
+                return cards.AsList();
+            }
+            catch (SqlException ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
             }
             catch (Exception ex)
             {
@@ -74,18 +91,15 @@ namespace OnlineShop.BusinessLayer.Services
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var card = discountCard.FirstOrDefault(discountCard => discountCard.DiscountCard_ID == cardID);
-                if (card == null)
-                {
-                    outputManager.OutputToConsole(NotificationConstants.NOT_FOUND, commonEntityService.GetListType());
-                }
-                else
-                {
-                    outputManager.OutputToConsole(card.ToString(), commonEntityService.GetListType());
-                }
-                return card;
+                var card = await connection.QueryAsync<DiscountCard>("GetDiscountCardByID", new { DiscountCard_ID = cardID });
+                return card.FirstOrDefault();
             }
-            catch( Exception ex)
+            catch (SqlException ex)
+            {
+                outputManager.OutputException(ex);
+                throw;
+            }
+            catch ( Exception ex)
             {
                 outputManager.OutputException(ex);
                 throw;

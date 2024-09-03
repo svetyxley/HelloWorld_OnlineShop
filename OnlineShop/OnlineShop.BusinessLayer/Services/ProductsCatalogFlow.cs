@@ -23,8 +23,8 @@ namespace OnlineShop
             //Замовлення поставки та вивід усіх замовлень поставок
  //
  //
- //orderSupplyService.AddOrder();
-            orderSupplyService.OutputSupplyOrders();
+ //         orderSupplyService.AddOrder();
+            //orderSupplyService.OutputSupplyOrders();
 
             //Додавання нового продукту та вивід повного списка продуктів
             productsService.CountChecker(); // extension method
