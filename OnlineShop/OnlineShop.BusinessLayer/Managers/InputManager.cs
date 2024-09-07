@@ -112,5 +112,23 @@ namespace OnlineShop.BusinessLayer.Managers
             } while (!inputValidator.IsValidDiscount(discount));
             return Double.Parse(discount);
         }
+        public int MenuChoice()
+        {
+            int choice = 0;
+            while (true)
+            {
+                Console.Write("Make your choice: ");
+                try
+                {
+                    choice = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                if (choice > 0)
+                    return choice;
+            }
+        }
     }
 }
