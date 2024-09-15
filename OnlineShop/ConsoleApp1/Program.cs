@@ -11,7 +11,7 @@ namespace ConsoleApp1
 {
     public static class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             ManufacturersService ManufacturersService = new();
             InputManager inputManager = new();
@@ -26,10 +26,16 @@ namespace ConsoleApp1
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("appsettings.SvitlanaL.json")
+//                .AddJsonFile("appsettings.Nazar.json")
                 .Build();
 
             var connectionString = configuration.GetConnectionString("Master");
-
+            if (connectionString == null)
+            {
+                Console.WriteLine("Something went wrong with connection");
+                return;
+            }
+         
             var datAssembly = AppDomain.CurrentDomain.GetAssemblies()
                 .FirstOrDefault(x => x.GetName().Name == "OnlineShop.Data");
 
@@ -58,7 +64,9 @@ namespace ConsoleApp1
                 Console.WriteLine("M: Manufacturer");
                 Console.WriteLine("P: Product");
 
-                string mainChoice = Console.ReadLine();
+
+
+                string? mainChoice = Console.ReadLine();
                 switch (mainChoice)
                 {
                     case "S":
@@ -75,33 +83,33 @@ namespace ConsoleApp1
                             Console.WriteLine("9. Exit");
                             Console.Write("Please, make your choice: ");
 
-                            string choice = Console.ReadLine();
+                            string? choice = Console.ReadLine();
 
                             switch (choice)
                             {
                                 case "1":
-                                    supplierFlow.CreateNewSupplier(connectionString);
+                                    await supplierFlow.CreateNewSupplier(connectionString);
                                     break;
                                 case "2":
-                                    supplierFlow.OutputAllSuppliers(connectionString);
+                                    await supplierFlow.OutputAllSuppliers(connectionString);
                                     break;
                                 case "3":
-                                    supplierFlow.GetSupplierByID(connectionString);
+                                    await supplierFlow.GetSupplierByID(connectionString);
                                     break;
                                 case "4":
-                                    supplierFlow.GetSupplierByName(connectionString);
+                                    await supplierFlow.GetSupplierByName(connectionString);
                                     break;
                                 case "5":
-                                    supplierFlow.GetSupplierByCode(connectionString);
+                                    await supplierFlow.GetSupplierByCode(connectionString);
                                     break;
                                 case "6":
-                                    supplierFlow.UpdateSupplierNameByID(connectionString);
+                                    await supplierFlow.UpdateSupplierNameByID(connectionString);
                                     break;
                                 case "7":
-                                    supplierFlow.UpdateSupplierCodeByID(connectionString);
+                                    await supplierFlow.UpdateSupplierCodeByID(connectionString);
                                     break;
                                 case "8":
-                                    supplierFlow.DeleteSupplierByID(connectionString);
+                                    await supplierFlow.DeleteSupplierByID(connectionString);
                                     break;
                                 case "9":
                                     exit = true;
@@ -134,28 +142,28 @@ namespace ConsoleApp1
                             switch (choice)
                             {
                                 case "1":
-                                    manufacturerFlow.CreateNewManufacturer(connectionString);
+                                    await manufacturerFlow.CreateNewManufacturer(connectionString);
                                     break;
                                 case "2":
-                                    manufacturerFlow.OutputAllManufacturers(connectionString);
+                                    await manufacturerFlow.OutputAllManufacturers(connectionString);
                                     break;
                                 case "3":
-                                    manufacturerFlow.GetManufacturerByID(connectionString);
+                                    await manufacturerFlow.GetManufacturerByID(connectionString);
                                     break;
                                 case "4":
-                                    manufacturerFlow.GetManufacturerByName(connectionString);
+                                    await manufacturerFlow.GetManufacturerByName(connectionString);
                                     break;
                                 case "5":
-                                    manufacturerFlow.GetManufacturerByCode(connectionString);
+                                    await manufacturerFlow.GetManufacturerByCode(connectionString);
                                     break;
                                 case "6":
-                                    manufacturerFlow.UpdateManufacturerNameByID(connectionString);
+                                    await manufacturerFlow.UpdateManufacturerNameByID(connectionString);
                                     break;
                                 case "7":
-                                    manufacturerFlow.UpdateManufacturerCodeByID(connectionString);
+                                    await manufacturerFlow.UpdateManufacturerCodeByID(connectionString);
                                     break;
                                 case "8":
-                                    manufacturerFlow.DeleteManufacturerByID(connectionString);
+                                    await manufacturerFlow.DeleteManufacturerByID(connectionString);
                                     break;
                                 case "9":
                                     exit = true;
@@ -190,34 +198,34 @@ namespace ConsoleApp1
                             switch (choice)
                             {
                                 case "1":
-                                    productFlow.CreateNewProduct(connectionString);
+                                    await productFlow.CreateNewProduct(connectionString);
                                     break;
                                 case "2":
-                                    productFlow.OutputAllProducts(connectionString);
+                                    await productFlow.OutputAllProducts(connectionString);
                                     break;
                                 case "3":
-                                    productFlow.GetProductByID(connectionString);
+                                    await productFlow.GetProductByID(connectionString);
                                     break;
                                 case "4":
-                                    productFlow.GetProductByName(connectionString);
+                                    await productFlow.GetProductByName(connectionString);
                                     break;
                                 case "5":
-                                    productFlow.UpdateProductNameByID(connectionString);
+                                    await productFlow.UpdateProductNameByID(connectionString);
                                     break;
                                 case "6":
-                                    productFlow.UpdateProductCategoryByID(connectionString);
+                                    await productFlow.UpdateProductCategoryByID(connectionString);
                                     break;
                                 case "7":
-                                    productFlow.UpdateProductManufacturerByID(connectionString);
+                                    await productFlow.UpdateProductManufacturerByID(connectionString);
                                     break;
                                 case "8":
-                                    productFlow.UpdateProductSupplierByID(connectionString);
+                                    await productFlow.UpdateProductSupplierByID(connectionString);
                                     break;
                                 case "9":
-                                    productFlow.UpdateProductPrice(connectionString);
+                                    await productFlow.UpdateProductPrice(connectionString);
                                     break;
                                 case "10":
-                                    productFlow.DeleteProductByID(connectionString);
+                                    await productFlow.DeleteProductByID(connectionString);
                                     break;
                                 case "11":
                                     exit = true;

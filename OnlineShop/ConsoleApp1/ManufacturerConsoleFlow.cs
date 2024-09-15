@@ -3,6 +3,7 @@ using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Services;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Entities;
+using OnlineShop.Records;
 
 namespace ConsoleApp1
 {
@@ -11,26 +12,28 @@ namespace ConsoleApp1
         ManufacturersService manufacturersService = new();
         InputManager inputManager = new();
         InputValidator inputValidator = new();
-        CommonEntityService<Manufacturer> commonEntityServiceS = new();
+        OutputManager outputManager = new();
+        CommonEntityService<Manufacturer> commonEntityService = new();
         Manufacturer manufacturer = new();
 
         //Menu 1
         public async Task CreateNewManufacturer(string connectionString)
         {
-            await manufacturersService.CreateManufacturer(inputManager.InputName(inputValidator,     commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            await manufacturersService.CreateManufacturer(inputManager.InputName(inputValidator, commonEntityService.GetListType()),
+                inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType()), connectionString);
         }
 
         //Menu 2
         public async Task OutputAllManufacturers(string connectionString)
         {
             var manufacturers = await manufacturersService.GetAllManufacturers(connectionString);
-            await manufacturersService.OutputManufacturers(manufacturers);
+            outputManager.OutputToConsole(commonEntityService.OutputList(manufacturers), commonEntityService.GetListType()); ;
         }
 
         //Menu 3
         public async Task GetManufacturerByID(string connectionString)
         {
-             manufacturer = await manufacturersService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            manufacturer = await manufacturersService.GetManufacturerByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString);
             if (manufacturer != null)
             {
                 Console.WriteLine(manufacturer.ToString());
@@ -117,7 +120,7 @@ namespace ConsoleApp1
         //Menu 8
         public async Task DeleteManufacturerByID(string connectionString)
         {
-            Console.WriteLine(await manufacturersService.DeleteManufacturerByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await manufacturersService.DeleteManufacturerByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString));
         }
     }
 }

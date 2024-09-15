@@ -73,7 +73,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var product = await connection.QueryAsync<Product>("UpdateProductName", new { ProductID = id, ProductName = name });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var product = await connection.QueryAsync<Product>("UpdateProductCategory", new { ProductID = id, ProductCategoryID = category });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var product = await connection.QueryAsync<Product>("UpdateProductManufacturer", new { ProductID = id, ManufacturerID = manufacturerID });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -124,7 +124,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var product = await connection.QueryAsync<Product>("UpdateProductSupplier", new { ProductID = id, SupplierID = supplierID });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var product = await connection.QueryAsync<Product>("UpdateProductPrice", new { ProductID = id, ProductPrice = price});
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 return product.FirstOrDefault();
             }
             catch (Exception ex)
@@ -159,7 +159,7 @@ namespace OnlineShop.BusinessLayer.Services
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var result = await connection.ExecuteAsync("DeleteProductByID", new { ProductID = id });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.DELETED, commonEntityService.GetListType()); // create log record
-                logService.OutputLog(log);// output result to log
+                await logService.OutputLog(log);// output result to log
                 if (result > 0)
                 {
                     return "The Product has been successfully deleted";
@@ -187,14 +187,7 @@ namespace OnlineShop.BusinessLayer.Services
             return products.AsList();
         }
 
-        public async Task OutputProducts(List<Product> products)
-        {
-            outputManager.OutputToConsole(commonEntityService.OutputList(products), commonEntityService.GetListType());
-            ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-            logService.OutputLog(log);// output result to log
-        }
-
-        public int GetProductsAmount()
+       public int GetProductsAmount()
         {
             return commonEntityService.ListAmount(products);
         }

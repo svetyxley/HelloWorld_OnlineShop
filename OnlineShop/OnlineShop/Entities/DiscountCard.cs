@@ -9,9 +9,9 @@
         {
 
         }
-        public DiscountCard(int discountCard_ID, double percanatageDiscount)
+        public DiscountCard(int _buyerID, double percanatageDiscount)
         {
-            DiscountCard_ID = discountCard_ID;
+            buyerID = _buyerID;
             PercanatageDiscount = percanatageDiscount;
         }
         public DiscountCard(int discountCard_ID, int _buyerID, double percanatageDiscount)

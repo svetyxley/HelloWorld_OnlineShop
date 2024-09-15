@@ -4,33 +4,35 @@ using OnlineShop.BusinessLayer.Services;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Entities;
 
+
 namespace ConsoleApp1
 {
     internal class SupplierConsoleFlow
     {
         SuppliersService suppliersService = new();
         InputManager inputManager = new();
+        OutputManager outputManager = new();
         InputValidator inputValidator = new();
-        CommonEntityService<Supplier> commonEntityServiceS = new();
+        CommonEntityService<Supplier> commonEntityService = new();
         Supplier supplier = new();
 
         //Menu 1
         public async Task CreateNewSupplier(string connectionString)
         {
-           await suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityServiceS.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+           await suppliersService.CreateSupplier(inputManager.InputName(inputValidator, commonEntityService.GetListType()), inputManager.InputEDRPU(inputValidator, commonEntityService.GetListType()), connectionString);
         }
 
         //Menu 2
         public async Task OutputAllSuppliers(string connectionString)
         {
             var suppliers = await suppliersService.GetAllSuppliers(connectionString);
-            await suppliersService.OutputSuppliers(suppliers);
+            outputManager.OutputToConsole(commonEntityService.OutputList(suppliers), commonEntityService.GetListType());
         }
 
         //Menu 3
         public async Task GetSupplierByID(string connectionString)
         {
-            supplier = await suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString);
+            supplier = await suppliersService.GetSupplierByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString);
             if (supplier != null)
             {
                 Console.WriteLine(supplier.ToString());
@@ -117,7 +119,7 @@ namespace ConsoleApp1
         //Menu 8
         public async Task DeleteSupplierByID(string connectionString)
         {
-            Console.WriteLine(await suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityServiceS.GetListType()), connectionString));
+            Console.WriteLine(await suppliersService.DeleteSupplierByID(inputManager.InputID(inputValidator, commonEntityService.GetListType()), connectionString));
         }
     }
 }

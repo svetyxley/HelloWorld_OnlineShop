@@ -4,7 +4,7 @@
     {
         public Product? product { get; set; }
         public int ProductAmount { get; set; }
-        //public int StockID { get; set; }
+        public int StockItemID { get; set; }
         public ProductStocks()
         {
 
@@ -18,9 +18,15 @@
             product = _product;
             ProductAmount = productAmount;
         }
+        public ProductStocks(Product _product, int productAmount, int stockItemID)
+        {
+            product = _product;
+            ProductAmount = productAmount;
+            StockItemID = stockItemID;
+        }
         public override string ToString()
         {
-            return $"Product: {product}, Product Amount: {ProductAmount}";
+            return $"Product: {product}, Product Amount: {ProductAmount}, Stock Item ID: {StockItemID}";
         }
     }
 }
