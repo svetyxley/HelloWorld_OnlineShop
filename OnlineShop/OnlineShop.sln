@@ -11,37 +11,54 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.BusinessLayer", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{420E34F3-31A2-43B5-9C89-CB2A9F959996}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop.WebApi", "OnlineShop.WebApi\OnlineShop.WebApi.csproj", "{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 		Nazar|Any CPU = Nazar|Any CPU
 		SvitlanaL|Any CPU = SvitlanaL|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Release|Any CPU.Build.0 = Release|Any CPU
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Nazar|Any CPU.ActiveCfg = Nazar|Any CPU
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.Nazar|Any CPU.Build.0 = Nazar|Any CPU
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.SvitlanaL|Any CPU.ActiveCfg = SvitlanaL|Any CPU
 		{21E97F87-644D-4100-9D3F-D46D9A48C605}.SvitlanaL|Any CPU.Build.0 = SvitlanaL|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Nazar|Any CPU.ActiveCfg = Nazar|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.Nazar|Any CPU.Build.0 = Nazar|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.SvitlanaL|Any CPU.ActiveCfg = SvitlanaL|Any CPU
 		{3388C9EC-9414-43C0-BDAA-7BA9855AACAC}.SvitlanaL|Any CPU.Build.0 = SvitlanaL|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Nazar|Any CPU.ActiveCfg = Nazar|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.Nazar|Any CPU.Build.0 = Nazar|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.SvitlanaL|Any CPU.ActiveCfg = SvitlanaL|Any CPU
 		{074BB4B0-A589-4A35-8429-DC20737F15B1}.SvitlanaL|Any CPU.Build.0 = SvitlanaL|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Release|Any CPU.Build.0 = Release|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Nazar|Any CPU.ActiveCfg = Nazar|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.Nazar|Any CPU.Build.0 = Nazar|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.SvitlanaL|Any CPU.ActiveCfg = SvitlanaL|Any CPU
 		{420E34F3-31A2-43B5-9C89-CB2A9F959996}.SvitlanaL|Any CPU.Build.0 = SvitlanaL|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.SvitlanaL|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F95FF0A-F191-44B6-9F1A-1E20AA3EE8E8}.SvitlanaL|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

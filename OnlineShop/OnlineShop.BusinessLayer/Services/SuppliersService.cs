@@ -5,6 +5,7 @@ using OnlineShop.Entities;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
 using Microsoft.Data.SqlClient;
+using OnlineShop.BusinessLayer.DTOs;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -37,15 +38,24 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public async Task<Supplier> GetSupplierByID(int id, string connectionStr)
+        public async Task<GetSupplierDto> GetSupplierByID(int id, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var suppliers = await connection.QueryAsync<Supplier>("GetSupplierByID", new { SupplierID = id });
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
-                await logService.OutputLog(log);
-                return suppliers.FirstOrDefault();
+                Task.Run(() => logService.OutputLog(log));
+                var supplier = suppliers.FirstOrDefault();
+
+                var getSupplierDto = new GetSupplierDto
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierID = supplier.SupplierID,
+                    SupplierName = supplier.SupplierName
+                };
+
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
