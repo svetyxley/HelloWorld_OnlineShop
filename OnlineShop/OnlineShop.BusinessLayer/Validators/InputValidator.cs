@@ -51,7 +51,7 @@ namespace OnlineShop.BusinessLayer.Validators
         }
         public bool IsValidDiscount(string percentage)
         {
-            string pattern = @"^(100|[1-9]?[0-9])$";
+            string pattern = @"^(100(\.0{1,2})?|[0-9]?[0-9](\.[0-9]{1,2})?)$";
             return Regex.IsMatch(percentage, pattern);
         }
     }

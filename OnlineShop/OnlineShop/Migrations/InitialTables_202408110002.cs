@@ -30,7 +30,7 @@ namespace OnlineShop.Data.Migrations
               );
 
               INSERT INTO Product (ProductName, ProductCategoryID, ManufacturerID, SupplierID, ProductPrice)
-              OUTPUT INSERTED.ProductID, INSERTED.ProductCategoryID, INSERTED.ManufacturerID, INSERTED.SupplierID, INSERTED.ProductPrice
+              OUTPUT INSERTED.ProductName, INSERTED.ProductCategoryID, INSERTED.ManufacturerID, INSERTED.SupplierID, INSERTED.ProductPrice
               INTO @InsertedProduct
               VALUES (@ProductName, @ProductCategoryID, @ManufacturerID, @SupplierID, @ProductPrice);
 

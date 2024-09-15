@@ -3,6 +3,7 @@ using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.EntityServices;
+using Dapper;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -16,14 +17,16 @@ namespace OnlineShop.BusinessLayer.Services
         private ProductsService productsService = new();
         private OrderSupplyService orderSupplyService = new();
         private List<ProductStocks> productStocksList = new List<ProductStocks>();
+        private DapperContext dapperContext = new();
 
-        public async Task<ProductStocks> CreateProduct(Product _product, int productAmount, int stockItemID)
+        public async Task<ProductStocks> CreateProductOnStock(int productID, int productAmount, int stockItemID, string connectionStr)
         {
             try
             {
-                _product = await productsService.GetProductByID(1, "connectionStr");
-                productAmount = inputManager.InputAmount(inputValidator, commonEntityService.GetListType());
-                return new ProductStocks(_product, productAmount, stockItemID);
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var product = await connection.QueryAsync<ProductStocks>("CreateProductOnStock", new { ProductName = productsService.GetProductByID(productID, connectionStr),
+                ProductAmount = productAmount, StockItemID = stockItemID });
+                return product.FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -36,20 +39,13 @@ namespace OnlineShop.BusinessLayer.Services
         //    productStocksList.Add(await CreateProduct(_product, productAmount));
         //    outputManager.OutputToConsole(NotificationConstants.PRODUCT_IS_SUCESSFULLY_ADDED, commonEntityService.GetListType());
         //}
-        public async Task<int> GetAmountByID(int productID, string connectionStr)
+        public async Task<int> GetAmountByStockItemID(int _stockItemID, string connectionStr)
         {
             try
             {
-                var product = productsService.GetProductByID(productID, connectionStr);
-                if (product != null)
-                {
-                    var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
-                    if (productStock != null)
-                    {
-                        return productStock.ProductAmount;
-                    }
-                }
-                return 0;
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var stock = await connection.QueryAsync<ProductStocks>("GetAmountByStockItemID", new { StockItemID = _stockItemID });
+                return stock.FirstOrDefault().ProductAmount;
             }
             catch (Exception ex)
             {
@@ -57,21 +53,14 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        public ProductStocks UpdateOfAmount(int productID, int productAmount, string connectionStr)
+        public async Task<ProductStocks> UpdateOfAmount(int productID, int productAmount, int stockItemID, string connectionStr)
         {
             try
             {
-                var product = productsService.GetProductByID(productID, connectionStr);
-                if (product != null)
-                {
-                    var productStock = productStocksList.FirstOrDefault(ps => ps.product != null && ps.product.ProductID == productID);
-                    if (productStock != null)
-                    {
-                        productStock.ProductAmount = productAmount;
-                        return productStock;
-                    }
-                }
-                return null;
+                var connection = dapperContext.OpenConnection(connectionStr);
+                var amount = await connection.QueryAsync<ProductStocks>("UpdateOfAmount", new { product = productsService.GetProductByID(productID, connectionStr),
+                ProductAmount = productAmount, StockItemID = stockItemID });
+                return amount.FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -79,36 +68,15 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task<ProductStocks> BuyProducts(int productID, int productAmount, string connectionStr)
+        public async Task BuyProducts(int productID, int productAmount, int stockItemID, string connectionStr)
         {
             try
             {
-                int AmountOnStock = await GetAmountByID(productID, connectionStr);
-                if (productAmount <= AmountOnStock)
+                int amountOnStock = await GetAmountByStockItemID(stockItemID, connectionStr);
+                if (productAmount <= amountOnStock)
                 {
-                    AmountOnStock -= productAmount;
-                    var productStock = UpdateOfAmount(productID, AmountOnStock, connectionStr);
-                    return productStock;
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                outputManager.OutputException(ex);
-                throw;
-            }
-        }
-        public async Task ShowProductStock(ProductStocks productStock)
-        {
-            try
-            {
-                if (productStock.IsInStock())
-                {
-                    Console.WriteLine(productStock.GetStockSummary());
-                }
-                else
-                {
-                    Console.WriteLine("Product is out of stock.");
+                    amountOnStock -= productAmount;
+                    var productStock = UpdateOfAmount(productID, amountOnStock, stockItemID, connectionStr);
                 }
             }
             catch (Exception ex)
@@ -117,5 +85,24 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
+        //public async Task ShowProductStock(ProductStocks productStock)
+        //{
+        //    try
+        //    {
+        //        if (productStock.IsInStock())
+        //        {
+        //            Console.WriteLine(productStock.GetStockSummary());
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Product is out of stock.");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        outputManager.OutputException(ex);
+        //        throw;
+        //    }
+        //}
     }
 }

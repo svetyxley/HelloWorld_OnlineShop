@@ -7,7 +7,14 @@
             Console.WriteLine($"{type} {message}");
             Console.WriteLine();
         }
-
+        public void OutputToConsoleWrite(string message)
+        {
+            Console.Write($"{message}");
+        }
+        public void OutputToConsoleWriteLn(string message)
+        {
+            Console.WriteLine($"{message}");
+        }
         public void OutputDBException(Exception ex)
         {
             Console.WriteLine($"Something went wrong with the database"); //зробити запис в лог

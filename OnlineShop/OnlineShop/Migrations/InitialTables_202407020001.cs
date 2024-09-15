@@ -7,17 +7,25 @@ namespace OnlineShop.Data.Migrations
     {
         public override void Down()
         {
+            Delete.Table("Buyer");
             Delete.Table("DiscountCards");
             Delete.Table("Manufacturer");
             Delete.Table("Supplier");
             Delete.Table("Product");
+            Delete.Table("Stocks");
+            Delete.Table("OrderSupply");
         }
         public override void Up()
         {
             Execute.Sql(@"USE OnlineShop;");
+            Create.Table("Buyer")
+                .WithColumn("BuyerID").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("BuyerEmail").AsString(75);
+
             Create.Table("DiscountCards")
-                .WithColumn("Id").AsInt64().Identity().NotNullable().PrimaryKey()
-                .WithColumn("PecantageDiscount").AsFloat();
+                .WithColumn("CardId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("PercantageDiscount").AsFloat()
+                .WithColumn("BuyerID").AsInt64().ForeignKey("FK_Product_Buyer", "Buyer", "BuyerID");
 
             Create.Table("Manufacturer")
                 .WithColumn("ManufacturerID").AsInt64().Identity().NotNullable().PrimaryKey()
@@ -38,15 +46,17 @@ namespace OnlineShop.Data.Migrations
                 .WithColumn("ProductPrice").AsDecimal(10, 2);
 
             Create.Table("Stocks")
-                .WithColumn("StockId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("StockItemId").AsInt64().Identity().NotNullable().PrimaryKey()
                 .WithColumn("ProductAmount").AsInt64()
                 .WithColumn("ProductID").AsInt64().ForeignKey("FK_Stocks_Product", "Product", "ProductID");
 
             Create.Table("OrderSupply")
-                .WithColumn("OrderId").AsInt64().Identity().NotNullable().PrimaryKey()
-                .WithColumn("ProductAmount").AsInt64()
+                .WithColumn("SupplyOrderId").AsInt64().Identity().NotNullable().PrimaryKey()
+                .WithColumn("SupplierID").AsInt64().ForeignKey("FK_OrderSupply_Supplier", "Supplier", "SupplierID")
                 .WithColumn("ProductId").AsInt64().ForeignKey("FK_OrderSupply_Product", "Product", "ProductID")
+                .WithColumn("ProductAmount").AsInt64()
                 .WithColumn("OrderTime").AsDateTime();
+                //.WithColumn("EmployeeId").AsInt64().ForeignKey("FK_OrderSupply_Employee", "Employee", "EmployeeID");
         }
     }
 }

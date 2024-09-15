@@ -21,12 +21,14 @@ namespace ConsoleApp1
             SupplierConsoleFlow supplierFlow = new SupplierConsoleFlow();
             ManufacturerConsoleFlow manufacturerFlow = new ManufacturerConsoleFlow();
             ProductConsoleFlow productFlow = new ProductConsoleFlow();
+            DiscountCardConsoleFlow discountCardConsoleFlow = new DiscountCardConsoleFlow();
+            OutputManager outputManager = new OutputManager();
 
             // Configurations
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile("appsettings.SvitlanaL.json")
-//                .AddJsonFile("appsettings.Nazar.json")
+                .AddJsonFile("appsettings.Nazar.json")
                 .Build();
 
             var connectionString = configuration.GetConnectionString("Master");
@@ -58,11 +60,12 @@ namespace ConsoleApp1
 
             while (!exit)
             {
-                Console.WriteLine("What do you want to work with? Please, make your choice: ");
-                Console.WriteLine("Main Menu:");
-                Console.WriteLine("S: Supplier");
-                Console.WriteLine("M: Manufacturer");
-                Console.WriteLine("P: Product");
+                outputManager.OutputToConsoleWriteLn("What do you want to work with? Please, make your choice: ");
+                outputManager.OutputToConsoleWriteLn("Main Menu:");
+                outputManager.OutputToConsoleWriteLn("S: Supplier");
+                outputManager.OutputToConsoleWriteLn("M: Manufacturer");
+                outputManager.OutputToConsoleWriteLn("P: Product");
+                outputManager.OutputToConsoleWriteLn("DC: Discount Card");
 
 
 
@@ -238,6 +241,37 @@ namespace ConsoleApp1
                             Console.WriteLine();
                             break;
                         }
+                    case "DC":
+                        outputManager.OutputToConsoleWriteLn("1. Create Discount card");
+                        outputManager.OutputToConsoleWriteLn("2. Update Discount card percantage");
+                        outputManager.OutputToConsoleWriteLn("3. Get all Discount cards list");
+                        outputManager.OutputToConsoleWriteLn("4. Get Discount card by ID");
+                        outputManager.OutputToConsoleWriteLn("5. Exit");
+                        outputManager.OutputToConsoleWriteLn("");
+                        int choiceDC = inputManager.MenuChoice();
+                        switch (choiceDC)
+                        {
+                            case 1:
+                                discountCardConsoleFlow.CreateCard(connectionString);
+                                break;
+                            case 2:
+                                discountCardConsoleFlow.updateCardPercantage(connectionString);
+                                break;
+                            case 3:
+                                discountCardConsoleFlow.GetAllDiscountCards(connectionString);
+                                break;
+                            case 4:
+                                discountCardConsoleFlow.GetDiscountCardById(connectionString);
+                                break;
+                            case 5:
+                                outputManager.OutputToConsoleWriteLn("Exit...");
+                                break;
+                            default:
+                                outputManager.OutputToConsoleWriteLn("Wrong choice. Try again.");
+                                break;
+                        }
+                        outputManager.OutputToConsoleWriteLn("");
+                        break;
                 }
             }
         }
