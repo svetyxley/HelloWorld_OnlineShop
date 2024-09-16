@@ -24,5 +24,15 @@ namespace WebApplication1.Controllers
             var amount = await _productStocksService.GetAmountByStockItemID(id, connectionStr);
             return amount;
         }
+
+
+        [HttpPost]
+        [Route("productStocks")]
+        public async Task<int> CreateProductOnStock([FromBody])
+        {
+            var connectionStr = _configuration.GetConnectionString("Master");
+            var product = await _productStocksService.CreateProductOnStock(productId, productAmount, stockItemId, connectionStr);
+            return amount;
+        }
     }
 }
