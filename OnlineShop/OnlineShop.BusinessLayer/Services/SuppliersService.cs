@@ -5,6 +5,7 @@ using OnlineShop.Entities;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Records;
 using Microsoft.Data.SqlClient;
+using OnlineShop.BusinessLayer.DTOs;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -18,16 +19,25 @@ namespace OnlineShop.BusinessLayer.Services
         private List<Supplier> suppliers = new List<Supplier>();
         private DapperContext dapperContext = new();
 
-        public async Task<Supplier> CreateSupplier(string name, string code, string connectionStr)
+        public async Task<GetSupplierDto> CreateSupplier(string name, string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supplier = await connection.QueryAsync<Supplier>("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code });
+                var supplier = (await connection.QueryAsync<Supplier>("CreateSupplier", new { SupplierName = name, SupplierEDRPOU = code })).FirstOrDefault();
 
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.ADDED, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);
-                return supplier.FirstOrDefault();
+
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                      SupplierID =  supplier.SupplierID,
+                      SupplierName = supplier.SupplierName,
+                      SupplierEDRPOU = supplier.SupplierEDRPOU,
+                };
+
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -37,15 +47,26 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public async Task<Supplier> GetSupplierByID(int id, string connectionStr)
+        public async Task<GetSupplierDto> GetSupplierByID(int id, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var suppliers = await connection.QueryAsync<Supplier>("GetSupplierByID", new { SupplierID = id });
+                var supplier = (await connection.QueryAsync<Supplier>("GetSupplierByID", new { SupplierID = id })).FirstOrDefault();
+                if (supplier == null)
+                {
+                    throw new KeyNotFoundException($"Supplier with ID {id} not found.");
+                }
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);
-                return suppliers.FirstOrDefault();
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierName = supplier.SupplierName,
+                    SupplierID = supplier.SupplierID,
+                };
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -54,17 +75,24 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public async Task<Supplier> GetSupplierByName(string name, string connectionStr)
+        public async Task<GetSupplierDto> GetSupplierByName(string name, string connectionStr)
 
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var suppliers = await connection.QueryAsync<Supplier>("GetSupplierByName", new { SupplierName = name });
+                var supplier = (await connection.QueryAsync<Supplier>("GetSupplierByName", new { SupplierName = name })).FirstOrDefault();
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);// output result to log
                 await logService.OutputLog(log);
-                return suppliers.FirstOrDefault();
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierName = supplier.SupplierName,
+                    SupplierID = supplier.SupplierID,
+                };
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -74,15 +102,22 @@ namespace OnlineShop.BusinessLayer.Services
         }
 
 
-        public async Task<Supplier> GetSupplierByCode(string code, string connectionStr)
+        public async Task<GetSupplierDto> GetSupplierByCode(string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supplier = await connection.QueryAsync<Supplier>("GetSupplierByCode", new { SupplierEDRPOU = code });
+                var supplier = (await connection.QueryAsync<Supplier>("GetSupplierByCode", new { SupplierEDRPOU = code })).FirstOrDefault();
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.GET, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);
-                return supplier.FirstOrDefault();
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierName = supplier.SupplierName,
+                    SupplierID = supplier.SupplierID,
+                };
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -91,15 +126,23 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public async Task<Supplier> UpdateSupplierNameByID(int id, string name, string connectionStr)
+        public async Task<GetSupplierDto> UpdateSupplierNameByID(int id, string name, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supplier = await connection.QueryAsync<Supplier>("UpdateSupplierName", new { SupplierID = id, SupplierName = name });
+                var supplier = (await connection.QueryAsync<Supplier>("UpdateSupplierName", new { SupplierID = id, SupplierName = name })).FirstOrDefault();
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);
-                return supplier.FirstOrDefault();
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierName = supplier.SupplierName,
+                    SupplierID = supplier.SupplierID,
+                };
+
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -108,15 +151,28 @@ namespace OnlineShop.BusinessLayer.Services
             };
         }
 
-        public async Task<Supplier> UpdateSupplierCodeByID(int id, string code, string connectionStr)
+        public async Task<GetSupplierDto> UpdateSupplierCodeByID(int id, string code, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supplier = await connection.QueryAsync<Supplier>("UpdateSupplierEDRPOU", new { SupplierID = id, SupplierEDRPOU = code });
+                var supplier = (await connection.QueryAsync<Supplier>("UpdateSupplierEDRPOU", new { SupplierID = id, SupplierEDRPOU = code })).FirstOrDefault();
                 ActivityLog log = new ActivityLog(DateTime.Now, NotificationConstants.UPDATE, commonEntityService.GetListType()); // create log record
                 await logService.OutputLog(log);
-                return supplier.FirstOrDefault();
+
+                if (supplier == null)
+                {
+                    throw new Exception("Supplier not found.");
+                }
+
+                var getSupplierDto = new GetSupplierDto()
+                {
+                    SupplierEDRPOU = supplier.SupplierEDRPOU,
+                    SupplierName = supplier.SupplierName,
+                    SupplierID = supplier.SupplierID,
+                };
+
+                return getSupplierDto;
             }
             catch (Exception ex)
             {
@@ -153,12 +209,21 @@ namespace OnlineShop.BusinessLayer.Services
             }
         }
 
-        public async Task<List<Supplier>> GetAllSuppliers(string connectionStr)
+        public async Task<GetAllSuppliersDto> GetAllSuppliers(string connectionStr)
         {
             var connection = dapperContext.OpenConnection(connectionStr);
             var sql = "SELECT * FROM Supplier";
             var suppliers = await connection.QueryAsync<Supplier>(sql);
-            return suppliers.ToList();
+
+            var getAllsuppliersDto = suppliers.Select(s => new GetSupplierDto
+            {
+                SupplierID = s.SupplierID,
+                SupplierName = s.SupplierName,
+                SupplierEDRPOU = s.SupplierEDRPOU
+            }).ToList();
+
+
+            return new GetAllSuppliersDto { Suppliers = getAllsuppliersDto };
         }
     }
 }
