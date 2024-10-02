@@ -4,6 +4,7 @@ using OnlineShop.Constants;
 using OnlineShop.Entities;
 using OnlineShop.EntityServices;
 using Dapper;
+using OnlineShop.BusinessLayer.DTOs;
 
 namespace OnlineShop.BusinessLayer.Services
 {
@@ -19,14 +20,23 @@ namespace OnlineShop.BusinessLayer.Services
         private List<ProductStocks> productStocksList = new List<ProductStocks>();
         private DapperContext dapperContext = new();
 
-        public async Task<ProductStocks> CreateProductOnStock(int productID, int productAmount, int stockItemID, string connectionStr)
+        public async Task<GetStockDTO> CreateProductOnStock(int productID, int productAmount, int stockItemID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var product = await connection.QueryAsync<ProductStocks>("CreateProductOnStock", new { ProductName = productsService.GetProductByID(productID, connectionStr),
-                ProductAmount = productAmount, StockItemID = stockItemID });
-                return product.FirstOrDefault();
+                var prod = (await connection.QueryAsync<ProductStocks>("CreateProductOnStock", new { product = productsService.GetProductByID(productID, connectionStr),
+                ProductAmount = productAmount, StockItemID = stockItemID })).FirstOrDefault();
+
+
+
+                var getStockDto = new GetStockDTO()
+                {
+                    productDTO = prod.product,
+                    ProductAmount = prod.ProductAmount,
+                    StockItemID = prod.StockItemID
+                };
+                return getStockDto;
             }
             catch (Exception ex)
             {
@@ -53,14 +63,22 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task<ProductStocks> UpdateOfAmount(int productID, int productAmount, int stockItemID, string connectionStr)
+        public async Task<GetStockDTO> UpdateOfAmount(int productID, int productAmount, int stockItemID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var amount = await connection.QueryAsync<ProductStocks>("UpdateOfAmount", new { product = productsService.GetProductByID(productID, connectionStr),
-                ProductAmount = productAmount, StockItemID = stockItemID });
-                return amount.FirstOrDefault();
+                var amount = (await connection.QueryAsync<ProductStocks>("UpdateOfAmount", new { product = productsService.GetProductByID(productID, connectionStr),
+                ProductAmount = productAmount, StockItemID = stockItemID })).FirstOrDefault();
+
+
+                var getStockDto = new GetStockDTO()
+                {
+                    productDTO = amount.product,
+                    ProductAmount = amount.ProductAmount,
+                    StockItemID = amount.StockItemID
+                };
+                return getStockDto;
             }
             catch (Exception ex)
             {

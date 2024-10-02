@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using OnlineShop.BusinessLayer.DTOs;
 using OnlineShop.BusinessLayer.Managers;
 using OnlineShop.BusinessLayer.Validators;
 using OnlineShop.Constants;
@@ -20,19 +21,30 @@ namespace OnlineShop.BusinessLayer.Services
         private List<OrderSupply> orderSupply = new List<OrderSupply>();
         private DapperContext dapperContext = new();
 
-        public async Task<OrderSupply> MakeOrderOfSupply(int supplierID, int productID, int productAmount, DateTime orderTime, string connectionStr)
+        public async Task<OrderSupplyDto> MakeOrderOfSupply(int supplierID, int productID, int productAmount, DateTime orderTime, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supply = await connection.QueryAsync<OrderSupply>("MakeOrderOfSupply", new {  
+                var supply = (await connection.QueryAsync<OrderSupply>("MakeOrderOfSupply", new {  
                     _supplier = suppliersService.GetSupplierByID(supplierID, connectionStr),
                     _product = productsService.GetProductByID(productID, connectionStr),
                     ProductAmount = productAmount,
                     OrderTime = orderTime,
                     _employee = employeeService.GetEmployeeByID()
-                });
-                return supply.FirstOrDefault();
+                })).FirstOrDefault();
+
+
+
+                var sup = new OrderSupplyDto()
+                {
+                    _supplier = supply._supplier,
+                    _product = supply._product,
+                    ProductAmount = supply.ProductAmount,
+                    OrderTime = supply.OrderTime,
+                    _employee = supply._employee
+                };
+                return sup;
             }
             catch (Exception ex)
             {
@@ -40,13 +52,23 @@ namespace OnlineShop.BusinessLayer.Services
                 throw;
             }
         }
-        public async Task<OrderSupply> GetSupplyOrderByID(int supplyID, string connectionStr)
+        public async Task<OrderSupplyDto> GetSupplyOrderByID(int supplyID, string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
-                var supply = await connection.QueryAsync<OrderSupply>("GetSupplyOrderByID", new { OrderSupplyID = supplyID });
-                return supply.FirstOrDefault();
+                var supply = (await connection.QueryAsync<OrderSupply>("GetSupplyOrderByID", new { OrderSupplyID = supplyID })).FirstOrDefault();
+
+
+                var sup = new OrderSupplyDto()
+                {
+                    _supplier = supply._supplier,
+                    _product = supply._product,
+                    ProductAmount = supply.ProductAmount,
+                    OrderTime = supply.OrderTime,
+                    _employee = supply._employee
+                };
+                return sup;
             }
             catch (Exception ex)
             {
@@ -76,14 +98,27 @@ namespace OnlineShop.BusinessLayer.Services
         //        throw;
         //    }
         //}
-        public async Task<List<OrderSupply>> OutputSupplyOrders(string connectionStr)
+        public async Task<GetAllSuppliesDto> OutputSupplyOrders(string connectionStr)
         {
             try
             {
                 var connection = dapperContext.OpenConnection(connectionStr);
                 var sql = $"select * FROM OrderSupply";
                 var supplies = await connection.QueryAsync<OrderSupply>(sql);
-                return supplies.AsList();
+
+
+
+                var getAllsupplies = supplies.Select(s => new OrderSupplyDto()
+                {
+                    _supplier = s._supplier,
+                    _product = s._product,
+                    ProductAmount = s.ProductAmount,
+                    OrderTime = s.OrderTime,
+                    _employee = s._employee
+                }).ToList();
+
+
+                return new GetAllSuppliesDto { Supplies = getAllsupplies };
             }
             catch (Exception ex)
             {
